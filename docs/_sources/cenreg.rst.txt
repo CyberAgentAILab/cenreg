@@ -1,0 +1,21 @@
+cenreg package
+==============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   cenreg.distribution
+   cenreg.metric
+   cenreg.model
+   cenreg.pytorch
+
+Module contents
+---------------
+
+.. automodule:: cenreg
+   :members:
+   :show-inheritance:
+   :undoc-members:

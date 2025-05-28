@@ -1,0 +1,382 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cenreg.metric package &mdash; cenreg 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cenreg
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">cenreg.metric package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-cenreg.metric.cdf">cenreg.metric.cdf module</a><ul>
+<li><a class="reference internal" href="#cenreg.metric.cdf.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
+<li><a class="reference internal" href="#cenreg.metric.cdf.km_calibration"><code class="docutils literal notranslate"><span class="pre">km_calibration()</span></code></a></li>
+<li><a class="reference internal" href="#cenreg.metric.cdf.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
+<li><a class="reference internal" href="#cenreg.metric.cdf.nll_sc"><code class="docutils literal notranslate"><span class="pre">nll_sc()</span></code></a></li>
+<li><a class="reference internal" href="#cenreg.metric.cdf.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cenreg.metric.cjd">cenreg.metric.cjd module</a><ul>
+<li><a class="reference internal" href="#cenreg.metric.cjd.Brier_jd"><code class="docutils literal notranslate"><span class="pre">Brier_jd()</span></code></a></li>
+<li><a class="reference internal" href="#cenreg.metric.cjd.KS_jd"><code class="docutils literal notranslate"><span class="pre">KS_jd()</span></code></a></li>
+<li><a class="reference internal" href="#cenreg.metric.cjd.NLL_jd"><code class="docutils literal notranslate"><span class="pre">NLL_jd()</span></code></a></li>
+<li><a class="reference internal" href="#cenreg.metric.cjd.RPS_jd"><code class="docutils literal notranslate"><span class="pre">RPS_jd()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cenreg.metric.quantile">cenreg.metric.quantile module</a><ul>
+<li><a class="reference internal" href="#cenreg.metric.quantile.d_calibration"><code class="docutils literal notranslate"><span class="pre">d_calibration()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-cenreg.metric">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cenreg</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">cenreg.metric package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cenreg.metric.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cenreg-metric-package">
+<h1>cenreg.metric package<a class="headerlink" href="#cenreg-metric-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-cenreg.metric.cdf">
+<span id="cenreg-metric-cdf-module"></span><h2>cenreg.metric.cdf module<a class="headerlink" href="#module-cenreg.metric.cdf" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cdf.brier">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cdf.</span></span><span class="sig-name descname"><span class="pre">brier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.metric.cdf.brier" title="Link to this definition"></a></dt>
+<dd><p>Compute the (original) Brier score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<em>predicted distribution</em>)</p></li>
+<li><p><strong>y</strong> (<em>Array</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>]</em>)</p></li>
+<li><p><strong>y_bins</strong> (<em>Array</em><em> of </em><em>shape</em><em> [</em><em>num_bins+1</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>loss</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array of shape [batch_size]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cdf.km_calibration">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cdf.</span></span><span class="sig-name descname"><span class="pre">km_calibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cdf.km_calibration" title="Link to this definition"></a></dt>
+<dd><p>Compute KM-Calibration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<em>distribution object</em>) – Prediction results.</p></li>
+<li><p><strong>observed_times</strong> (<em>ndarray</em>) – Observation time (event time or censored time)
+Array shape is [batch_size].</p></li>
+<li><p><strong>uncensored</strong> (<em>ndarray</em>) – Censored (False) or uncensored (True)
+Array shape is [batch_size].</p></li>
+<li><p><strong>boundaries</strong> (<em>ndarray</em>) – Boundaries of F_pred
+Each element in z must be STRICTLY smaller than boundaries[-1]</p></li>
+<li><p><strong>EPS</strong> (<em>float</em>) – Small positive value for numerical stability</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KM-Calibration</strong> – A non-negative float number.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cdf.negative_loglikelihood">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cdf.</span></span><span class="sig-name descname"><span class="pre">negative_loglikelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simplified</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.metric.cdf.negative_loglikelihood" title="Link to this definition"></a></dt>
+<dd><p>Compute negative log-likelihood (NLL).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<em>distribution object</em>) – Prediction results.</p></li>
+<li><p><strong>observed_times</strong> (<em>ndarray</em>) – Observed times (event times or censoring times).
+Array shape is [batch_size].</p></li>
+<li><p><strong>uncensored</strong> (<em>ndarray</em><em>(</em><em>bool</em><em>) or </em><em>None</em>) – Indicator (censored (False) or uncensored (True))
+Array shape is [batch_size].</p></li>
+<li><p><strong>boundaries</strong> (<em>ndarray</em><em> or </em><em>None</em>) – Boundaries of the prediction to be evaluated.
+The first element must be at most the smallest observed time.
+The last element must be strictly larger than the largest observed time.
+If None, dist.boundaries is used.</p></li>
+<li><p><strong>simplified</strong> (<em>bool</em>) – Use simplified version for censored data points.</p></li>
+<li><p><strong>EPS</strong> (<em>float</em>) – Small positive value for numerical stability.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NLL</strong> – Value of negative log-likelihood.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cdf.nll_sc">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cdf.</span></span><span class="sig-name descname"><span class="pre">nll_sc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">survival_copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.metric.cdf.nll_sc" title="Link to this definition"></a></dt>
+<dd><p>Compute Negative Log-Likelihood based on Survival Copula (NLL-SC).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cdf.ranked_probability_score">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cdf.</span></span><span class="sig-name descname"><span class="pre">ranked_probability_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.metric.cdf.ranked_probability_score" title="Link to this definition"></a></dt>
+<dd><p>Compute the ranked probability score.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<em>predicted distribution</em>)</p></li>
+<li><p><strong>y</strong> (<em>Array</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>]</em>)</p></li>
+<li><p><strong>y_bins</strong> (<em>Array</em><em> of </em><em>shape</em><em> [</em><em>num_col</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>loss</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Array of shape [batch_size]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cenreg.metric.cjd">
+<span id="cenreg-metric-cjd-module"></span><h2>cenreg.metric.cjd module<a class="headerlink" href="#module-cenreg.metric.cjd" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cjd.Brier_jd">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">Brier_jd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.Brier_jd" title="Link to this definition"></a></dt>
+<dd><p>Compute Brier score for censoree joint distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observed_times</strong> (<em>ndarray</em>) – Observed times (event times or censoring times).
+Array shape is [batch_size].</p></li>
+<li><p><strong>events</strong> (<em>ndarray</em>) – Event index (0 usually corresponds to censoring)
+Array shape is [batch_size].</p></li>
+<li><p><strong>num_events</strong> (<em>int</em>) – Number of events.</p></li>
+<li><p><strong>f_pred</strong> (<em>ndarray</em>) – Estimated joint distribution.
+Array shape is [batch_size, num_bin*num_events].</p></li>
+<li><p><strong>boundaries</strong> (<em>ndarray</em>) – Bin boundaries used to represent f_pred.
+boundaries[0] = 0.0 and boundaries[-1] = max_time.
+Array shape is [num_bin+1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Brier</strong> – Value of Brier score.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cjd.KS_jd">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">KS_jd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.KS_jd" title="Link to this definition"></a></dt>
+<dd><p>Sum of Kolmogorov-Sminov calibration error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observed_times</strong> (<em>ndarray</em>) – Observed times (event times or censoring times).
+Array shape is [batch_size].</p></li>
+<li><p><strong>events</strong> (<em>ndarray</em>) – Event index (0 usually corresponds to censoring)
+Array shape is [batch_size].</p></li>
+<li><p><strong>f_pred</strong> (<em>ndarray</em>) – Estimated joint distribution.
+Array shape is [batch_size, num_bin*num_risks].</p></li>
+<li><p><strong>boundaries</strong> (<em>ndarray</em>) – Bin boundaries used to represent f_pred.
+boundaries[0] = 0.0 and boundaries[-1] = max_time.
+Array shape is [num_bin+1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KS</strong> – Sum of Kolmogorov-Sminov calibration error.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cjd.NLL_jd">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">NLL_jd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.NLL_jd" title="Link to this definition"></a></dt>
+<dd><p>Compute negative log-likelihood (NLL).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observed_times</strong> (<em>ndarray</em>) – Observed times (event times or censoring times).
+Array shape is [batch_size].</p></li>
+<li><p><strong>events</strong> (<em>ndarray</em>) – Event index (0 usually corresponds to censoring)
+Array shape is [batch_size].</p></li>
+<li><p><strong>num_risks</strong> (<em>int</em>) – Number of events.</p></li>
+<li><p><strong>f_pred</strong> (<em>ndarray</em>) – Estimated joint distribution.
+Array shape is [batch_size, num_bin*num_risks].</p></li>
+<li><p><strong>boundaries</strong> (<em>ndarray</em>) – Bin boundaries used to represent f_pred.
+boundaries[0] = 0.0 and boundaries[-1] = max_time.
+Array shape is [num_bin+1].</p></li>
+<li><p><strong>epsilon</strong> (<em>float</em>) – Small value to avoid log(0).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NLL</strong> – Value of negative log-likelihood.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.cjd.RPS_jd">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">RPS_jd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.RPS_jd" title="Link to this definition"></a></dt>
+<dd><p>Ranked probability score (RPS).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observed_times</strong> (<em>ndarray</em>) – Observed times (event times or censoring times).
+Array shape is [batch_size].</p></li>
+<li><p><strong>events</strong> (<em>ndarray</em>) – Event index (0 usually corresponds to censoring)
+Array shape is [batch_size].</p></li>
+<li><p><strong>num_events</strong> (<em>int</em>) – Number of events.</p></li>
+<li><p><strong>f_pred</strong> (<em>ndarray</em>) – Estimated joint distribution.
+Array shape is [batch_size, num_bin*num_events].</p></li>
+<li><p><strong>boundaries</strong> (<em>ndarray</em>) – Bin boundaries used to represent f_pred.
+boundaries[0] = 0.0 and boundaries[-1] = max_time.
+Array shape is [num_bin+1].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>RPS</strong> – Value of ranked probability score.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cenreg.metric.quantile">
+<span id="cenreg-metric-quantile-module"></span><h2>cenreg.metric.quantile module<a class="headerlink" href="#module-cenreg.metric.quantile" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.metric.quantile.d_calibration">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.quantile.</span></span><span class="sig-name descname"><span class="pre">d_calibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.quantile.d_calibration" title="Link to this definition"></a></dt>
+<dd><p>Compute D-Calibration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dist</strong> (<em>distribution object</em>) – Predicted distribution.</p></li>
+<li><p><strong>observed_times</strong> (<em>ndarray</em><em> (</em><em>float</em><em>) of </em><em>shape</em><em> [</em><em>batch_size</em><em>]</em>) – Observation time (event time or censored time)</p></li>
+<li><p><strong>uncensored</strong> (<em>ndarray</em><em> (</em><em>bool</em><em>) of </em><em>shape</em><em> [</em><em>batch_size</em><em>]</em>) – Indicator (censored (False) or uncensored (True))</p></li>
+<li><p><strong>boundaries</strong> (<em>ndarray</em><em> (</em><em>float</em><em>) of </em><em>shape</em><em> [</em><em>num_bin+1</em><em>] or </em><em>int</em><em> or </em><em>None</em>) – Bin boundaries used to compute D-calibration.
+boundaries[0] = 0.0 and boundaries[-1] = 1.0.
+If boundaries is int, then boundaries = np.linspace(0.0, 1.0, boundaries + 1).
+If boundaries is None, then boundaries = np.linspace(0.0, 1.0, 11).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>D-Calibration</strong> – Value of D-Calibration.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cenreg.metric">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cenreg.metric" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Hiroki Yanagisawa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

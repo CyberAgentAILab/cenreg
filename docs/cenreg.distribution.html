@@ -1,0 +1,434 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cenreg.distribution package &mdash; cenreg 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cenreg.metric package" href="cenreg.metric.html" />
+    <link rel="prev" title="cenreg package" href="cenreg.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cenreg
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cenreg.html">cenreg package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">cenreg.distribution package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.distribution.empirical">cenreg.distribution.empirical module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.distribution.empirical.EmpiricalCDF"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.empirical.EmpiricalCDF.average_cdf"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF.average_cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.empirical.EmpiricalCDF.cdf"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF.cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.empirical.EmpiricalCDF.icdf"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF.icdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.empirical.EmpiricalCDF.set"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF.set()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.distribution.linear">cenreg.distribution.linear module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.distribution.linear.LinearCDF"><code class="docutils literal notranslate"><span class="pre">LinearCDF</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearCDF.average_cdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.average_cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearCDF.cdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearCDF.get_boundary_lengths"><code class="docutils literal notranslate"><span class="pre">LinearCDF.get_boundary_lengths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearCDF.icdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.icdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearCDF.set_knot_values"><code class="docutils literal notranslate"><span class="pre">LinearCDF.set_knot_values()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.distribution.linear.LinearQuantileFunction"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearQuantileFunction.average_cdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.average_cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearQuantileFunction.cdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearQuantileFunction.get_qk_lengths"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.get_qk_lengths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearQuantileFunction.icdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.icdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.distribution.linear.LinearQuantileFunction.set_knot_values"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.set_knot_values()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.distribution">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.metric.html">cenreg.metric package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.pytorch.html">cenreg.pytorch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">cenreg</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cenreg</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="cenreg.html">cenreg package</a></li>
+      <li class="breadcrumb-item active">cenreg.distribution package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cenreg.distribution.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cenreg-distribution-package">
+<h1>cenreg.distribution package<a class="headerlink" href="#cenreg-distribution-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-cenreg.distribution.empirical">
+<span id="cenreg-distribution-empirical-module"></span><h2>cenreg.distribution.empirical module<a class="headerlink" href="#module-cenreg.distribution.empirical" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cenreg.distribution.empirical.EmpiricalCDF">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.distribution.empirical.</span></span><span class="sig-name descname"><span class="pre">EmpiricalCDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.empirical.EmpiricalCDF" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Empirical Cumulative distribution functions (CDF).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.empirical.EmpiricalCDF.average_cdf">
+<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.distribution.empirical.EmpiricalCDF.average_cdf" title="Link to this definition"></a></dt>
+<dd><p>Compute the average CDF values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>y</strong> (<em>np.ndarray</em>) – CDF values are computed for values y.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cdf_values</strong> – Compute CDF values for each value in y.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.empirical.EmpiricalCDF.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.empirical.EmpiricalCDF.cdf" title="Link to this definition"></a></dt>
+<dd><p>Cumulative distribution function (i.e., inverse of quantile function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>y</strong> (<em>np.ndarray</em>) – CDF values are computed for values y.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cdf_values</strong> – Compute CDF values for each value in y.
+Array shape is equal to the shape of y.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.empirical.EmpiricalCDF.icdf">
+<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.distribution.empirical.EmpiricalCDF.icdf" title="Link to this definition"></a></dt>
+<dd><p>Inverse cumulative distribution function (i.e., quantile function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>quantiles</strong> (<em>float</em><em> | </em><em>np.ndarray</em>) – Quantiles for which the inverse CDF is computed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>icdf_values</strong> – Compute inverse CDF values for each value in quantiles.
+Array shape is equal to the shape of quantiles.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.empirical.EmpiricalCDF.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.empirical.EmpiricalCDF.set" title="Link to this definition"></a></dt>
+<dd><p>Compute CDF based on y and sample_weight.
+The observed values y are weightd by sample_weight.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – One-dimensional ndarray containing observed values.</p></li>
+<li><p><strong>sample_weight</strong> (<em>np.ndarray</em>) – One or two-dimensional ndarray containing weight for each value.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cenreg.distribution.linear">
+<span id="cenreg-distribution-linear-module"></span><h2>cenreg.distribution.linear module<a class="headerlink" href="#module-cenreg.distribution.linear" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearCDF">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.distribution.linear.</span></span><span class="sig-name descname"><span class="pre">LinearCDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearCDF" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Cumulative distribution functions (CDF) with linear interpolation.</p>
+<p>CDF values are stored for pre-defined boundaries,
+and the values between the boundaries are linear interpolated.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearCDF.average_cdf">
+<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.distribution.linear.LinearCDF.average_cdf" title="Link to this definition"></a></dt>
+<dd><p>Compute the average CDF values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – CDF values are computed for values y.
+If dimension of y is one, then cdf(y) is computed for all CDFs.
+If dimension of y is two, then cdf(y) is computed for each corresponding CDF.</p></li>
+<li><p><strong>mask</strong> (<em>np.ndarray</em>) – Mask to compute CDF for a subset of CDFs.</p></li>
+<li><p><strong>add_edge</strong> (<em>bool</em>) – If True, then the output is ensured to have output[0]=0.0 and output[-1]=1.0.
+If you need output satisfies this condition, it is better to set add_edges to True and remove the first and last elements from y.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cdf_values</strong> – Compute CDF values for each value in y.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearCDF.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearCDF.cdf" title="Link to this definition"></a></dt>
+<dd><p>Cumulative distribution function (i.e., inverse of quantile function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – CDF values are computed for values y.
+If dimension of y is one, then cdf(y) is computed for all CDFs.
+If dimension of y is two, then cdf(y) is computed for each corresponding CDF.</p></li>
+<li><p><strong>mask</strong> (<em>np.ndarray</em>) – Mask to compute CDF for a subset of CDFs.
+Array must be one-dimensional and its length must be equal to
+the number of CDFs.</p></li>
+<li><p><strong>add_edges</strong> (<em>bool</em>) – If True, then the output is ensured to have output[0]=0.0 and output[-1]=1.0.
+If you need output satisfies this condition, it is better to set add_edges to True and remove the first and last elements from y.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cdf_values</strong> – Compute CDF values for each value in y.
+Array shape is equal to the shape of y.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearCDF.get_boundary_lengths">
+<span class="sig-name descname"><span class="pre">get_boundary_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearCDF.get_boundary_lengths" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearCDF.icdf">
+<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.distribution.linear.LinearCDF.icdf" title="Link to this definition"></a></dt>
+<dd><p>Quantile function (i.e., inverse of cumulative distribution function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>np.ndarray</em><em> or </em><em>float</em>) – Quantile values are computed for quantile levels alpha.
+If dimension of alpha is one, then icdf(alpha) is computed for all CDFs.
+If dimension of alpha is two, then icdf(alpha) is computed for each corresponding CDF.</p></li>
+<li><p><strong>mask</strong> (<em>np.ndarray</em>) – Mask to compute CDF for a subset of CDFs.
+Array must be one-dimensional and its length must be equal to
+the number of CDFs.</p></li>
+<li><p><strong>add_edges</strong> (<em>bool</em>) – If True, then the inverse of the CDF values at quantiles 0.0 and 1.0 are added.
+If you need quantiles at 0.0 and 1.0, it is better to set add_edges to True and remove 0.0 and 1.0 from alpha.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>y</strong> – Compute y.
+Array shape is equal to the shape of alpha.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearCDF.set_knot_values">
+<span class="sig-name descname"><span class="pre">set_knot_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearCDF.set_knot_values" title="Link to this definition"></a></dt>
+<dd><p>Set CDF values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>np.ndarray</em>) – Array containing the CDF values.
+The length of the last dimension must be equal to the length of boundaries.</p></li>
+<li><p><strong>apply_cumsum</strong> (<em>bool</em>) – If True, then values is assumed to be the probablity distribution functions (PDFs) and
+the cumulative sum of values is computed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearQuantileFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.distribution.linear.</span></span><span class="sig-name descname"><span class="pre">LinearQuantileFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qk_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qk_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearQuantileFunction" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Quantile functions with linear interpolation.</p>
+<p>A quantile function is defined by a set of quantile values (qk_values)
+at pre-defined quantile levels (qk_levels).
+The values between quantile values are computed by using linear interpolation.</p>
+<p>If qk_values are two-dimensional array, then each row corresponds
+to a quantile function.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearQuantileFunction.average_cdf">
+<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edge</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearQuantileFunction.average_cdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearQuantileFunction.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearQuantileFunction.cdf" title="Link to this definition"></a></dt>
+<dd><p>Cumulative distribution function (i.e., inverse of quantile function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>y</strong> (<em>np.ndarray</em>) – Quantile levels are computed for quantile values y.
+If dimension of y is one, then cdf(y) is computed for all quantile functions.
+If dimension of y is two, then cdf(y) is computed for each corresponding quantile function.</p></li>
+<li><p><strong>mask</strong> (<em>np.ndarray</em>) – Mask to compute quantile function for a subset of quantile functions.
+Array must be one-dimensional and its length must be equal to
+the number of quantile functions.</p></li>
+<li><p><strong>add_edges</strong> (<em>bool</em>) – If True, then the CDF values at the boundaries are added.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>q_levels</strong> – Compute quantile levels for each value in y.
+Array shape is equal to the shape of y.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearQuantileFunction.get_qk_lengths">
+<span class="sig-name descname"><span class="pre">get_qk_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearQuantileFunction.get_qk_lengths" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearQuantileFunction.icdf">
+<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearQuantileFunction.icdf" title="Link to this definition"></a></dt>
+<dd><p>Quantile function (i.e., inverse of cumulative distribution function).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>alpha</strong> (<em>np.ndarray</em><em> or </em><em>float</em>) – Quantile values are computed for quantile levels alpha.
+If dimension of alpha is one, then quantile values in alpha are computed for all quantile functions.
+If dimension of alpha is two, then quantile values in alpha are computed for each corresponding quantile function.</p></li>
+<li><p><strong>mask</strong> (<em>np.ndarray</em>) – Mask to compute quantile function for a subset of quantile functions.
+Array must be one-dimensional and its length must be equal to
+the number of quantile functions.</p></li>
+<li><p><strong>add_edges</strong> (<em>bool</em>) – If True, then the inverse of the CDF values at the boundaries are added.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>y</strong> – Array shape is equal to the shape of alpha.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.distribution.linear.LinearQuantileFunction.set_knot_values">
+<span class="sig-name descname"><span class="pre">set_knot_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qk_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.distribution.linear.LinearQuantileFunction.set_knot_values" title="Link to this definition"></a></dt>
+<dd><p>Set values of quantile knots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>qk_values</strong> (<em>np.ndarray</em>) – One or two-dimensional array containing the values of quantile knots.
+If qk_values is two-dimensional array, then each row corresponds to a quantile function
+and qk_values[:,j] stores the value of quantile function at qk_levels[j].
+Array shape must be [num_quantile_function, len(qk_levels)].</p></li>
+<li><p><strong>apply_cumsum</strong> (<em>bool</em>) – If True, then qk_values is assumed to be the differences of quantile values and
+the cumulative sum of qk_values is computed.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-cenreg.distribution">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cenreg.distribution" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cenreg.html" class="btn btn-neutral float-left" title="cenreg package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cenreg.metric.html" class="btn btn-neutral float-right" title="cenreg.metric package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Hiroki Yanagisawa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

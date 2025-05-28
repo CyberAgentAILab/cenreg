@@ -1,0 +1,7 @@
+*.csv
+*.log
+*.pyc
+.pytest_cache/
+.vscode/
+__pycache__/
+docs_src/

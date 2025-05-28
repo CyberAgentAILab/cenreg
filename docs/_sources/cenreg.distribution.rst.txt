@@ -1,0 +1,29 @@
+cenreg.distribution package
+===========================
+
+Submodules
+----------
+
+cenreg.distribution.empirical module
+------------------------------------
+
+.. automodule:: cenreg.distribution.empirical
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cenreg.distribution.linear module
+---------------------------------
+
+.. automodule:: cenreg.distribution.linear
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+Module contents
+---------------
+
+.. automodule:: cenreg.distribution
+   :members:
+   :show-inheritance:
+   :undoc-members:

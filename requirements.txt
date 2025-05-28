@@ -1,0 +1,7 @@
+###### Requirements without Version Specifiers ######
+matplotlib
+numpy
+pandas
+scikit-learn
+scipy
+SurvSet

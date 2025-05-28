@@ -1,0 +1,607 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cenreg.model package &mdash; cenreg 0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cenreg.pytorch package" href="cenreg.pytorch.html" />
+    <link rel="prev" title="cenreg.metric package" href="cenreg.metric.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            cenreg
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cenreg.html">cenreg package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.metric.html">cenreg.metric package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">cenreg.model package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.model.copula">cenreg.model.copula module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula.FrankCopula"><code class="docutils literal notranslate"><span class="pre">FrankCopula</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.copula.FrankCopula.cdf"><code class="docutils literal notranslate"><span class="pre">FrankCopula.cdf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula.IndependenceCopula"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.copula.IndependenceCopula.cdf"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula.cdf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula.SurvivalCopula"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.copula.SurvivalCopula.cdf"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula.cdf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula.create"><code class="docutils literal notranslate"><span class="pre">create()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.model.copula_graphic">cenreg.model.copula_graphic module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution.average_cdf"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution.average_cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution.cdf"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution.cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution.icdf"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution.icdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution.survival_function"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution.survival_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula_graphic.estimate_curve"><code class="docutils literal notranslate"><span class="pre">estimate_curve()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula_graphic.estimate_curve_Archimedean"><code class="docutils literal notranslate"><span class="pre">estimate_curve_Archimedean()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula_graphic.independence_generator"><code class="docutils literal notranslate"><span class="pre">independence_generator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.copula_graphic.independence_generator_inv"><code class="docutils literal notranslate"><span class="pre">independence_generator_inv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.model.jd2marginal_np">cenreg.model.jd2marginal_np module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.jd2marginal_np.Fpred2jdpred"><code class="docutils literal notranslate"><span class="pre">Fpred2jdpred()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.jd2marginal_np.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.jd2marginal_np.evaluate_F_pred"><code class="docutils literal notranslate"><span class="pre">evaluate_F_pred()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.jd2marginal_np.hazard"><code class="docutils literal notranslate"><span class="pre">hazard()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.jd2marginal_np.sequential_allocation"><code class="docutils literal notranslate"><span class="pre">sequential_allocation()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.model.kaplan_meier">cenreg.model.kaplan_meier module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.average_cdf"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution.average_cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.cdf"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution.cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.fit"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.icdf"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution.icdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.survival_function"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution.survival_function()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.kaplan_meier.createCdfLinear"><code class="docutils literal notranslate"><span class="pre">createCdfLinear()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.model.kaplan_meier.createQuantilesLinear"><code class="docutils literal notranslate"><span class="pre">createQuantilesLinear()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.model">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.pytorch.html">cenreg.pytorch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">cenreg</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">cenreg</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="cenreg.html">cenreg package</a></li>
+      <li class="breadcrumb-item active">cenreg.model package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/cenreg.model.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cenreg-model-package">
+<h1>cenreg.model package<a class="headerlink" href="#cenreg-model-package" title="Link to this heading"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
+</section>
+<section id="module-cenreg.model.copula">
+<span id="cenreg-model-copula-module"></span><h2>cenreg.model.copula module<a class="headerlink" href="#module-cenreg.model.copula" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cenreg.model.copula.FrankCopula">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.model.copula.</span></span><span class="sig-name descname"><span class="pre">FrankCopula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula.FrankCopula" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Frank copula implemented with numpy.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.copula.FrankCopula.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.model.copula.FrankCopula.cdf" title="Link to this definition"></a></dt>
+<dd><p>Compute cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>u</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – ndarray of shape [batch_size, 2].
+Each element should be in [0, 1].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cumulative probability</strong> – ndarray of shape [batch_size].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cenreg.model.copula.IndependenceCopula">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.model.copula.</span></span><span class="sig-name descname"><span class="pre">IndependenceCopula</span></span><a class="headerlink" href="#cenreg.model.copula.IndependenceCopula" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Independence copula implemented with numpy.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.copula.IndependenceCopula.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.model.copula.IndependenceCopula.cdf" title="Link to this definition"></a></dt>
+<dd><p>Compute cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>u</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – ndarray of shape [batch_size, 2]. Each element should be in [0, 1].</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>probability</strong> – ndarray of shape [batch_size].</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cenreg.model.copula.SurvivalCopula">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.model.copula.</span></span><span class="sig-name descname"><span class="pre">SurvivalCopula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">copula</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula.SurvivalCopula" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Survival copula implemented with pytorch.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.copula.SurvivalCopula.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.model.copula.SurvivalCopula.cdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.copula.create">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.copula.</span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula.create" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cenreg.model.copula_graphic">
+<span id="cenreg-model-copula-graphic-module"></span><h2>cenreg.model.copula_graphic module<a class="headerlink" href="#module-cenreg.model.copula_graphic" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.CopulaGraphicDistribution">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.model.copula_graphic.</span></span><span class="sig-name descname"><span class="pre">CopulaGraphicDistribution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Distribution class of Copula-Graphic estimator.</p>
+<p class="rubric">Notes</p>
+<p>The first observation time must be strictly greater than 0.
+At least one data point is uncensored.
+CDF values can be strictly less than 1.0 after the last uncensored data point.
+Survival rates can be strictly greater than 0.0 after the last uncensored data point.
+Inverse CDF values may not be correct for large quantiles (due to the above notes).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.CopulaGraphicDistribution.average_cdf">
+<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution.average_cdf" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.CopulaGraphicDistribution.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution.cdf" title="Link to this definition"></a></dt>
+<dd><p>Compute cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – ndarray of shape [batch_size] containing time points.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cumulative probability</strong> – ndarray of shape [batch_size] containing cumulative probability of event occurrence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.CopulaGraphicDistribution.icdf">
+<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution.icdf" title="Link to this definition"></a></dt>
+<dd><p>Compute cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>quantiles</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – ndarray of shape [batch_size] containing quantiles.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cumulative probability</strong> – ndarray of shape [batch_size] containing cumulative probability of event occurrence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.CopulaGraphicDistribution.survival_function">
+<span class="sig-name descname"><span class="pre">survival_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.CopulaGraphicDistribution.survival_function" title="Link to this definition"></a></dt>
+<dd><p>Compute survival function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – ndarray of shape [batch_size] containing time points.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>survival_rates</strong> – ndarray of shape [batch_size] containing survival rates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.estimate_curve">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.copula_graphic.</span></span><span class="sig-name descname"><span class="pre">estimate_curve</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.estimate_curve" title="Link to this definition"></a></dt>
+<dd><p>Copula-Graphic estimator.
+This method receives any copula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observed_times</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – One-dimensional ndarray containing observed times.</p></li>
+<li><p><strong>uncensored</strong> (<em>ndarray</em><em> (</em><em>bool</em><em>)</em>) – One-dimensional ndarray containing censored (False)
+or uncensored (True).</p></li>
+<li><p><strong>copula</strong> (<em>object</em>) – Copula function.</p></li>
+<li><p><strong>weights</strong> (<em>ndarray</em><em> (</em><em>float</em><em>) or </em><em>None</em>) – One-dimensional ndarray containing weights.
+If None, all weights are set to 1.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>ndarray (float)</em>) – One-dimensional ndarray containing time points.</p></li>
+<li><p><strong>values</strong> (<em>ndarray (float)</em>) – One-dimensional ndarray containing survival rates.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.estimate_curve_Archimedean">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.copula_graphic.</span></span><span class="sig-name descname"><span class="pre">estimate_curve_Archimedean</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator_inv</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.estimate_curve_Archimedean" title="Link to this definition"></a></dt>
+<dd><p>Simpler copula-graphic estimator proposed by [Rivest and Wells, 2001].
+This method assumes that the copula is Archimedean.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observed_times</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – One-dimensional ndarray containing observed times.</p></li>
+<li><p><strong>uncensored</strong> (<em>ndarray</em><em> (</em><em>bool</em><em>)</em>) – One-dimensional ndarray containing censored (False)
+or uncensored (True).</p></li>
+<li><p><strong>generator</strong> (<em>function</em>) – Generator function of the copula.</p></li>
+<li><p><strong>generator_inv</strong> (<em>function</em>) – Inverse generator function of the copula.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>times</strong> (<em>ndarray (float)</em>) – One-dimensional ndarray containing time points.</p></li>
+<li><p><strong>values</strong> (<em>ndarray (float)</em>) – One-dimensional ndarray containing survival rates.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.independence_generator">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.copula_graphic.</span></span><span class="sig-name descname"><span class="pre">independence_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.independence_generator" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.copula_graphic.independence_generator_inv">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.copula_graphic.</span></span><span class="sig-name descname"><span class="pre">independence_generator_inv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t_array</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.copula_graphic.independence_generator_inv" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-cenreg.model.jd2marginal_np">
+<span id="cenreg-model-jd2marginal-np-module"></span><h2>cenreg.model.jd2marginal_np module<a class="headerlink" href="#module-cenreg.model.jd2marginal_np" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.jd2marginal_np.Fpred2jdpred">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.jd2marginal_np.</span></span><span class="sig-name descname"><span class="pre">Fpred2jdpred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">w</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">list_K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.model.jd2marginal_np.Fpred2jdpred" title="Link to this definition"></a></dt>
+<dd><p>Convert F_pred into jd_pred.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>F_pred</strong> (<em>np.ndarray</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>num_risks</em><em>, </em><em>3</em><em>]</em>) – The three elements in the last axis are the lower bound, the current value, and the upper bound.</p></li>
+<li><p><strong>copula</strong> (<em>function</em>)</p></li>
+<li><p><strong>w</strong> (<em>list</em><em> of </em><em>weight parameters</em><em> (</em><em>between 0 and 1</em><em>)</em>)</p></li>
+<li><p><strong>num_risks</strong> (<em>int</em>) – The number of risks.</p></li>
+<li><p><strong>k</strong> (<em>int</em>) – The index of the risk.</p></li>
+<li><p><strong>list_K</strong> (<em>list</em><em> of </em><em>int</em>) – The list of indices of the risks.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>jd_pred</strong></p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray of shape [batch_size, num_risks]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.jd2marginal_np.estimate">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.jd2marginal_np.</span></span><span class="sig-name descname"><span class="pre">estimate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focal_risk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.model.jd2marginal_np.estimate" title="Link to this definition"></a></dt>
+<dd><p>Estimate marginal distribution from joint distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jd_pred</strong> (<em>np.ndarray</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>num_risks</em><em>, </em><em>num_bin_predictions</em><em>]</em>)</p></li>
+<li><p><strong>num_risks</strong> (<em>the number</em><em> of </em><em>risks</em>)</p></li>
+<li><p><strong>copula</strong> (<em>function</em>)</p></li>
+<li><p><strong>focal_risk</strong> (<em>int</em>)</p></li>
+<li><p><strong>evaluate_num_bin</strong> (<em>bool</em>) – Set True only if you want to evaluate the number of bins.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>F_pred</strong> – np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>estimated CDF.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.jd2marginal_np.evaluate_F_pred">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.jd2marginal_np.</span></span><span class="sig-name descname"><span class="pre">evaluate_F_pred</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focal_risk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.model.jd2marginal_np.evaluate_F_pred" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.jd2marginal_np.hazard">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.jd2marginal_np.</span></span><span class="sig-name descname"><span class="pre">hazard</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.model.jd2marginal_np.hazard" title="Link to this definition"></a></dt>
+<dd><p>Estimate marginal distribution from joint distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>jd_pred</strong> (<em>np.ndarray</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>num_risks</em><em>, </em><em>num_bin_predictions</em><em>]</em>)</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>F_pred</strong> – np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>estimated CDF.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.jd2marginal_np.sequential_allocation">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.jd2marginal_np.</span></span><span class="sig-name descname"><span class="pre">sequential_allocation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focal_risk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.model.jd2marginal_np.sequential_allocation" title="Link to this definition"></a></dt>
+<dd><p>Estimate marginal distribution from joint distribution.</p>
+<p>This algorithm works only if the number of risks is two.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jd_pred</strong> (<em>np.ndarray</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>num_risks</em><em>, </em><em>num_bin_predictions</em><em>]</em>)</p></li>
+<li><p><strong>focal_risk</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>F_pred</strong> – np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>estimated CDF.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cenreg.model.kaplan_meier">
+<span id="cenreg-model-kaplan-meier-module"></span><h2>cenreg.model.kaplan_meier module<a class="headerlink" href="#module-cenreg.model.kaplan_meier" title="Link to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="cenreg.model.kaplan_meier.KaplanMeierDistribution">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.model.kaplan_meier.</span></span><span class="sig-name descname"><span class="pre">KaplanMeierDistribution</span></span><a class="headerlink" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Distribution class of Kaplan-Meier estimator.
+This class does not use any interpolation.</p>
+<p class="rubric">Notes</p>
+<p>At least one data point must be uncensored.
+CDF values can be strictly less than 1.0 after the last uncensored data point.
+Survival rates can be strictly greater than 0.0 after the last uncensored data point.
+Inverse CDF values may not be correct for large quantiles (due to the above notes).
+While the original Kaplan-Meier estimator is defined for non-negative times,
+this implementation can handle negative times.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.kaplan_meier.KaplanMeierDistribution.average_cdf">
+<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.average_cdf" title="Link to this definition"></a></dt>
+<dd><p>Compute average cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – ndarray of shape [batch_size] containing time points.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>average cumulative probability</strong> – ndarray of shape [batch_size] containing average cumulative probability of event occurrence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.kaplan_meier.KaplanMeierDistribution.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.cdf" title="Link to this definition"></a></dt>
+<dd><p>Compute cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – ndarray of shape [num_bins] containing time points.</p></li>
+<li><p><strong>add_edges</strong> (<em>bool</em>) – If True, add 0.0 at the start time and 1.0 at the last observed time.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cumulative probability</strong> – ndarray of shape [num_bins] containing cumulative probability of event occurrence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.kaplan_meier.KaplanMeierDistribution.fit">
+<span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weights</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.fit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.kaplan_meier.KaplanMeierDistribution.icdf">
+<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.icdf" title="Link to this definition"></a></dt>
+<dd><p>Compute cumulative distribution function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>quantiles</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – ndarray of shape [batch_size] containing quantiles.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>cumulative probability</strong> – ndarray of shape [batch_size] containing cumulative probability of event occurrence.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cenreg.model.kaplan_meier.KaplanMeierDistribution.survival_function">
+<span class="sig-name descname"><span class="pre">survival_function</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.kaplan_meier.KaplanMeierDistribution.survival_function" title="Link to this definition"></a></dt>
+<dd><p>Compute survival function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – Survival rates are computed for values t.
+t must be one or two-dimensional ndarray.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>survival_rates</strong> – ndarray of the same shape as t containing survival rates.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>ndarray (float)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.kaplan_meier.createCdfLinear">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.kaplan_meier.</span></span><span class="sig-name descname"><span class="pre">createCdfLinear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.kaplan_meier.createCdfLinear" title="Link to this definition"></a></dt>
+<dd><p>Create CdfLinear object from Kaplan-Meier estimator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observed_times</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – One-dimensional ndarray containing observed times.</p></li>
+<li><p><strong>uncensored</strong> (<em>ndarray</em><em> (</em><em>bool</em><em>)</em>) – One-dimensional ndarray containing censored (False)
+or uncensored (True).</p></li>
+<li><p><strong>boundaries</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – One-dimensional sorted ndarray containing time boundaries.
+The first element must be 0.0.
+The last element must be larger than maximum time of observed_times.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>CdfLinear object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="cenreg.model.kaplan_meier.createQuantilesLinear">
+<span class="sig-prename descclassname"><span class="pre">cenreg.model.kaplan_meier.</span></span><span class="sig-name descname"><span class="pre">createQuantilesLinear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qk_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.model.kaplan_meier.createQuantilesLinear" title="Link to this definition"></a></dt>
+<dd><p>Create QuantilesLinear object from Kaplan-Meier estimator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>observed_times</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – One-dimensional ndarray containing observed times.</p></li>
+<li><p><strong>uncensored</strong> (<em>ndarray</em><em> (</em><em>bool</em><em>)</em>) – One-dimensional ndarray containing censored (False)
+or uncensored (True).</p></li>
+<li><p><strong>qk_levels</strong> (<em>ndarray</em><em> (</em><em>float</em><em>)</em>) – One-dimensional ndarray containing quantile levels.</p></li>
+<li><p><strong>max_time</strong> (<em>float</em>) – max_time must be larger than maximum time of observed_times.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>QuantilesLinear object</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-cenreg.model">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-cenreg.model" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cenreg.metric.html" class="btn btn-neutral float-left" title="cenreg.metric package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cenreg.pytorch.html" class="btn btn-neutral float-right" title="cenreg.pytorch package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Hiroki Yanagisawa.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
