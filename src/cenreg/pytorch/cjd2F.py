@@ -7,29 +7,26 @@ import torch.nn.functional as F
 import torch.optim
 from typing import List
 
-from src.cenreg.pytorch.copula_torch import create
-
 
 class MseModel(nn.Module):
     def __init__(
         self,
         jd_pred: np.array,
-        copula_name: str,
-        copula_theta: float,
-        focal_risk: int,
-        learning_rate: float,
+        copula,
+        learning_rate: float = 0.01,
+        focal_risk: int = -1,
         init_f: np.ndarray = None,
         optimizer=None,
     ):
         super().__init__()
         assert len(init_f.shape) == 3
+        assert len(jd_pred.shape) == 3
 
         self.jd_pred = torch.tensor(jd_pred, dtype=torch.float32).detach()
         self.focal_risk = focal_risk
         self.fc = nn.Linear(1, jd_pred.size, bias=False)
         self.shape = init_f.shape
-        self.theta = torch.tensor(copula_theta)
-        self.copula = create(copula_name, self.theta)
+        self.copula = copula
         self.learning_rate = learning_rate
         if init_f is not None:
             logf = np.log(init_f + 1e-9).reshape(jd_pred.size, 1)

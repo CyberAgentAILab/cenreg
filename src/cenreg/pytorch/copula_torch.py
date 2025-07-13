@@ -119,10 +119,24 @@ class SurvivalCopula:
         return u[:, 0] + u[:, 1] - 1 + self.copula.cdf(u)
 
 
-def create(name: str, theta):
+def create(name: str, theta: float = 0.0):
+    """
+    Create a copula object based on the name and theta parameter.
+    Parameters
+    ----------
+    name : str
+        Name of the copula. Options are "independence" and "frank".
+    theta : float
+        Parameter for the copula. Default is 0.0.
+    Returns
+    -------
+    copula
+        An instance of the Copula class.
+    """
+
     if name == "independence":
         return IndependenceCopula()
     elif name == "frank":
-        return FrankCopula(theta)
+        return FrankCopula(torch.tensor(theta))
     else:
         raise ValueError(f"Invalid copula name: {name}")

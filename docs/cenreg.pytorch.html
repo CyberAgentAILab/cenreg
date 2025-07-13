@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cenreg.pytorch package &mdash; cenreg 0.1 documentation</title>
+  <title>cenreg.pytorch package &mdash; cenreg 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/documentation_options.js?v=e3a6060d"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -40,163 +40,15 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">cenreg.pytorch package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.copula">cenreg.pytorch.copula module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.ClaytonCopula"><code class="docutils literal notranslate"><span class="pre">ClaytonCopula</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.ClaytonCopula.cdf"><code class="docutils literal notranslate"><span class="pre">ClaytonCopula.cdf()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="two_step_algorithm.html">Two-Step Algorithm</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.FrankCopula"><code class="docutils literal notranslate"><span class="pre">FrankCopula</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.FrankCopula.cdf"><code class="docutils literal notranslate"><span class="pre">FrankCopula.cdf()</span></code></a></li>
+<p class="caption" role="heading"><span class="caption-text">Additional Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">API Reference</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.GumbelCopula"><code class="docutils literal notranslate"><span class="pre">GumbelCopula</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.GumbelCopula.cdf"><code class="docutils literal notranslate"><span class="pre">GumbelCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.IndependenceCopula"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.IndependenceCopula.cdf"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.SurvivalCopula"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.SurvivalCopula.cdf"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.copula.create"><code class="docutils literal notranslate"><span class="pre">create()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.distribution">cenreg.pytorch.distribution module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.CdfLinear"><code class="docutils literal notranslate"><span class="pre">CdfLinear</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.CdfLinear.average_cdf"><code class="docutils literal notranslate"><span class="pre">CdfLinear.average_cdf()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.CdfLinear.cdf"><code class="docutils literal notranslate"><span class="pre">CdfLinear.cdf()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.CdfLinear.get_boundary_lengths"><code class="docutils literal notranslate"><span class="pre">CdfLinear.get_boundary_lengths()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.CdfLinear.icdf"><code class="docutils literal notranslate"><span class="pre">CdfLinear.icdf()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.CdfLinear.set_knot_values"><code class="docutils literal notranslate"><span class="pre">CdfLinear.set_knot_values()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.QuantilesLinear"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.QuantilesLinear.average_cdf"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.average_cdf()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.QuantilesLinear.cdf"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.cdf()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.QuantilesLinear.get_qk_lengths"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.get_qk_lengths()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.QuantilesLinear.icdf"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.icdf()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.distribution.QuantilesLinear.set_knot_values"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.set_knot_values()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.jd2marginal">cenreg.pytorch.jd2marginal module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.jd2marginal.SimultaneousEquations"><code class="docutils literal notranslate"><span class="pre">SimultaneousEquations</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.jd2marginal.SimultaneousEquations.configure_optimizers"><code class="docutils literal notranslate"><span class="pre">SimultaneousEquations.configure_optimizers()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.jd2marginal.SimultaneousEquations.forward"><code class="docutils literal notranslate"><span class="pre">SimultaneousEquations.forward()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.jd2marginal.diff_eq"><code class="docutils literal notranslate"><span class="pre">diff_eq()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.loss_function_cont">cenreg.pytorch.loss_function_cont module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_cont.CRPS"><code class="docutils literal notranslate"><span class="pre">CRPS</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_cont.CRPS.loss"><code class="docutils literal notranslate"><span class="pre">CRPS.loss()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_cont.CopulaNegativeLogLikelihood"><code class="docutils literal notranslate"><span class="pre">CopulaNegativeLogLikelihood</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_cont.CopulaNegativeLogLikelihood.loss"><code class="docutils literal notranslate"><span class="pre">CopulaNegativeLogLikelihood.loss()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_cont.NegativeLogLikelihood"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihood</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_cont.NegativeLogLikelihood.loss"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihood.loss()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.loss_function_dr">cenreg.pytorch.loss_function_dr module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.Brier"><code class="docutils literal notranslate"><span class="pre">Brier</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.Brier.loss"><code class="docutils literal notranslate"><span class="pre">Brier.loss()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.CNLL_CR"><code class="docutils literal notranslate"><span class="pre">CNLL_CR</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.CNLL_CR.loss"><code class="docutils literal notranslate"><span class="pre">CNLL_CR.loss()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.NegativeLogLikelihood"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihood</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.NegativeLogLikelihood.loss"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihood.loss()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.RankedProbabilityScore"><code class="docutils literal notranslate"><span class="pre">RankedProbabilityScore</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.RankedProbabilityScore.loss"><code class="docutils literal notranslate"><span class="pre">RankedProbabilityScore.loss()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.negative_log_likelihood"><code class="docutils literal notranslate"><span class="pre">negative_log_likelihood()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_dr.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.loss_function_jd">cenreg.pytorch.loss_function_jd module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_jd.JD_Brier"><code class="docutils literal notranslate"><span class="pre">JD_Brier</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_jd.JD_Brier.loss"><code class="docutils literal notranslate"><span class="pre">JD_Brier.loss()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_jd.JD_Logarithmic"><code class="docutils literal notranslate"><span class="pre">JD_Logarithmic</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_jd.JD_Logarithmic.loss"><code class="docutils literal notranslate"><span class="pre">JD_Logarithmic.loss()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_jd.JD_RPS"><code class="docutils literal notranslate"><span class="pre">JD_RPS</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_jd.JD_RPS.loss"><code class="docutils literal notranslate"><span class="pre">JD_RPS.loss()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.loss_function_jd2m">cenreg.pytorch.loss_function_jd2m module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.loss_function_jd2m.mean_squared_error"><code class="docutils literal notranslate"><span class="pre">mean_squared_error()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.mlp">cenreg.pytorch.mlp module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.Linear"><code class="docutils literal notranslate"><span class="pre">Linear</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.Linear.forward"><code class="docutils literal notranslate"><span class="pre">Linear.forward()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MLP"><code class="docutils literal notranslate"><span class="pre">MLP</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MLP.forward"><code class="docutils literal notranslate"><span class="pre">MLP.forward()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MLP_MultiHead"><code class="docutils literal notranslate"><span class="pre">MLP_MultiHead</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MLP_MultiHead.forward"><code class="docutils literal notranslate"><span class="pre">MLP_MultiHead.forward()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MonotoneLayer"><code class="docutils literal notranslate"><span class="pre">MonotoneLayer</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MonotoneLayer.forward"><code class="docutils literal notranslate"><span class="pre">MonotoneLayer.forward()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MonotoneMLP"><code class="docutils literal notranslate"><span class="pre">MonotoneMLP</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MonotoneMLP.forward"><code class="docutils literal notranslate"><span class="pre">MonotoneMLP.forward()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MonotoneMLP_MultiHead"><code class="docutils literal notranslate"><span class="pre">MonotoneMLP_MultiHead</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.MonotoneMLP_MultiHead.forward"><code class="docutils literal notranslate"><span class="pre">MonotoneMLP_MultiHead.forward()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.SMM"><code class="docutils literal notranslate"><span class="pre">SMM</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.SMM.forward"><code class="docutils literal notranslate"><span class="pre">SMM.forward()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.SMM_MultiHead"><code class="docutils literal notranslate"><span class="pre">SMM_MultiHead</span></code></a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.mlp.SMM_MultiHead.forward"><code class="docutils literal notranslate"><span class="pre">SMM_MultiHead.forward()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch.util">cenreg.pytorch.util module</a><ul>
-<li><a class="reference internal" href="#cenreg.pytorch.util.denormalize_pred"><code class="docutils literal notranslate"><span class="pre">denormalize_pred()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.pytorch.util.normalize_y"><code class="docutils literal notranslate"><span class="pre">normalize_y()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#module-cenreg.pytorch">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -226,101 +78,14 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
-<section id="module-cenreg.pytorch.copula">
-<span id="cenreg-pytorch-copula-module"></span><h2>cenreg.pytorch.copula module<a class="headerlink" href="#module-cenreg.pytorch.copula" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.ClaytonCopula">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.copula.</span></span><span class="sig-name descname"><span class="pre">ClaytonCopula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.copula.ClaytonCopula" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Clayton copula implemented with pytorch.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.ClaytonCopula.cdf">
-<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.copula.ClaytonCopula.cdf" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>u</strong> (<em>torch.tensor</em><em> (</em><em>float</em><em>)</em>) – Each element should be in [0, 1].</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>probability</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>torch.tensor (float)</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.FrankCopula">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.copula.</span></span><span class="sig-name descname"><span class="pre">FrankCopula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.copula.FrankCopula" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Frank copula implemented with pytorch.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.FrankCopula.cdf">
-<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.copula.FrankCopula.cdf" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.GumbelCopula">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.copula.</span></span><span class="sig-name descname"><span class="pre">GumbelCopula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.copula.GumbelCopula" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Gumbel copula implemented with pytorch.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.GumbelCopula.cdf">
-<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.copula.GumbelCopula.cdf" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.IndependenceCopula">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.copula.</span></span><span class="sig-name descname"><span class="pre">IndependenceCopula</span></span><a class="headerlink" href="#cenreg.pytorch.copula.IndependenceCopula" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Independence copula implemented with pytorch.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.IndependenceCopula.cdf">
-<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.copula.IndependenceCopula.cdf" title="Link to this definition"></a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>u</strong> (<em>torch.tensor</em><em> (</em><em>float</em><em>)</em>) – tensor of shape [batch_size, 2]. Each element should be in [0, 1].</p>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>probability</strong> – tensor of shape [batch_size].</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>torch.tensor (float)</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.SurvivalCopula">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.copula.</span></span><span class="sig-name descname"><span class="pre">SurvivalCopula</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">copula</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.copula.SurvivalCopula" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Survival copula implemented with pytorch.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.SurvivalCopula.cdf">
-<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.copula.SurvivalCopula.cdf" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cenreg.pytorch.copula.create">
-<span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.copula.</span></span><span class="sig-name descname"><span class="pre">create</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.copula.create" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
+<section id="cenreg-pytorch-copula-module">
+<h2>cenreg.pytorch.copula module<a class="headerlink" href="#cenreg-pytorch-copula-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-cenreg.pytorch.distribution">
 <span id="cenreg-pytorch-distribution-module"></span><h2>cenreg.pytorch.distribution module<a class="headerlink" href="#module-cenreg.pytorch.distribution" title="Link to this heading"></a></h2>
 <dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.CdfLinear">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.distribution.</span></span><span class="sig-name descname"><span class="pre">CdfLinear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.CdfLinear" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearCDF">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.distribution.</span></span><span class="sig-name descname"><span class="pre">LinearCDF</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearCDF" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Distribution functions with linear interpolation.</p>
 <p>A distribution function is represented as a discrete cumulative
@@ -328,13 +93,13 @@ distribution function (CDF) at pre-defined quantile levels (boundaries).
 The values between probabilities are computed by using linear interpolation.</p>
 <p>If qk_values are two-dimensional tensor, then each row corresponds to a CDF.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.CdfLinear.average_cdf">
-<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.CdfLinear.average_cdf" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearCDF.average_cdf">
+<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearCDF.average_cdf" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.CdfLinear.cdf">
-<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.CdfLinear.cdf" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearCDF.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearCDF.cdf" title="Link to this definition"></a></dt>
 <dd><p>Cumulative distribution function (i.e., inverse of quantile function).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -359,13 +124,13 @@ Tensor shape is equal to the shape of y.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.CdfLinear.get_boundary_lengths">
-<span class="sig-name descname"><span class="pre">get_boundary_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.CdfLinear.get_boundary_lengths" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearCDF.get_boundary_lengths">
+<span class="sig-name descname"><span class="pre">get_boundary_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearCDF.get_boundary_lengths" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.CdfLinear.icdf">
-<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.CdfLinear.icdf" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearCDF.icdf">
+<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearCDF.icdf" title="Link to this definition"></a></dt>
 <dd><p>Quantile function (i.e., inverse of cumulative distribution function).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -390,20 +155,16 @@ Tensor shape is equal to the shape of alpha.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.CdfLinear.set_knot_values">
-<span class="sig-name descname"><span class="pre">set_knot_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.CdfLinear.set_knot_values" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearCDF.set_knot_values">
+<span class="sig-name descname"><span class="pre">set_knot_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearCDF.set_knot_values" title="Link to this definition"></a></dt>
 <dd><p>Set values of CDF values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>values</strong> (<em>Tensor</em>) – <p>One or two-dimensional tensor containing the values of CDFs.
-If cdf_values is two-dimensional tensor, then</p>
-<blockquote>
-<div><p>each row corresponds to a CDF and
+<li><p><strong>values</strong> (<em>Tensor</em>) – One or two-dimensional tensor containing the values of CDFs.
+If cdf_values is two-dimensional tensor, then each row corresponds to a CDF and
 cdf_values[:,j] stores the value of CDF at boundries[j].
-Tensor shape must be [num_CDF, len(boundaries)].</p>
-</div></blockquote>
-</p></li>
+Tensor shape must be [num_CDF, len(boundaries)].</p></li>
 <li><p><strong>apply_cumsum</strong> (<em>bool</em>) – If True, then cdf_values is assumed to be the probablity distribution functions (PDFs) and
 the cumulative sum of cdf_values is computed.</p></li>
 </ul>
@@ -414,8 +175,8 @@ the cumulative sum of cdf_values is computed.</p></li>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.QuantilesLinear">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.distribution.</span></span><span class="sig-name descname"><span class="pre">QuantilesLinear</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qk_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qk_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.QuantilesLinear" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearQuantileFunction">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.distribution.</span></span><span class="sig-name descname"><span class="pre">LinearQuantileFunction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qk_levels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qk_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearQuantileFunction" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Quantile functions with linear interpolation.</p>
 <p>A quantile function is defined by a set of quantile values (qk_values)
@@ -424,13 +185,13 @@ The values between quantile values are computed by using linear interpolation.</
 <p>If qk_values are two-dimensional tensor, then each row corresponds
 to a quantile function.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.QuantilesLinear.average_cdf">
-<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.QuantilesLinear.average_cdf" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearQuantileFunction.average_cdf">
+<span class="sig-name descname"><span class="pre">average_cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearQuantileFunction.average_cdf" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.QuantilesLinear.cdf">
-<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.QuantilesLinear.cdf" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearQuantileFunction.cdf">
+<span class="sig-name descname"><span class="pre">cdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearQuantileFunction.cdf" title="Link to this definition"></a></dt>
 <dd><p>Cumulative distribution function (i.e., inverse of quantile function).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -455,13 +216,13 @@ Tensor shape is equal to the shape of y.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.QuantilesLinear.get_qk_lengths">
-<span class="sig-name descname"><span class="pre">get_qk_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.QuantilesLinear.get_qk_lengths" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearQuantileFunction.get_qk_lengths">
+<span class="sig-name descname"><span class="pre">get_qk_lengths</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearQuantileFunction.get_qk_lengths" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.QuantilesLinear.icdf">
-<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.QuantilesLinear.icdf" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearQuantileFunction.icdf">
+<span class="sig-name descname"><span class="pre">icdf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_edges</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearQuantileFunction.icdf" title="Link to this definition"></a></dt>
 <dd><p>Quantile function (i.e., inverse of cumulative distribution function).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -486,20 +247,17 @@ Tensor shape is equal to the shape of alpha.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.distribution.QuantilesLinear.set_knot_values">
-<span class="sig-name descname"><span class="pre">set_knot_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qk_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.QuantilesLinear.set_knot_values" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.pytorch.distribution.LinearQuantileFunction.set_knot_values">
+<span class="sig-name descname"><span class="pre">set_knot_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">qk_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.distribution.LinearQuantileFunction.set_knot_values" title="Link to this definition"></a></dt>
 <dd><p>Set values of quantile knots.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>qk_values</strong> (<em>Tensor</em>) – <p>One or two-dimensional tensor containing the values of quantile knots.
-If qk_values is two-dimensional tensor, then</p>
-<blockquote>
-<div><p>each row corresponds to a quantile function and
+<li><p><strong>qk_values</strong> (<em>Tensor</em>) – One or two-dimensional tensor containing the values of quantile knots.
+If qk_values is two-dimensional tensor, then
+each row corresponds to a quantile function and
 qk_values[:,j] stores the value of quantile function at qk_levels[j].
-Tensor shape must be [num_quantile_function, len(qk_levels)].</p>
-</div></blockquote>
-</p></li>
+Tensor shape must be [num_quantile_function, len(qk_levels)].</p></li>
 <li><p><strong>apply_cumsum</strong> (<em>bool</em>) – If True, then qk_values is assumed to be the differences of quantile values and
 the cumulative sum of qk_values is computed.</p></li>
 </ul>
@@ -510,272 +268,20 @@ the cumulative sum of qk_values is computed.</p></li>
 </dd></dl>
 
 </section>
-<section id="module-cenreg.pytorch.jd2marginal">
-<span id="cenreg-pytorch-jd2marginal-module"></span><h2>cenreg.pytorch.jd2marginal module<a class="headerlink" href="#module-cenreg.pytorch.jd2marginal" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.jd2marginal.SimultaneousEquations">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.jd2marginal.</span></span><span class="sig-name descname"><span class="pre">SimultaneousEquations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_only_shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.jd2marginal.SimultaneousEquations" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.jd2marginal.SimultaneousEquations.configure_optimizers">
-<span class="sig-name descname"><span class="pre">configure_optimizers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.jd2marginal.SimultaneousEquations.configure_optimizers" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.jd2marginal.SimultaneousEquations.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.jd2marginal.SimultaneousEquations.forward" title="Link to this definition"></a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cenreg.pytorch.jd2marginal.diff_eq">
-<span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.jd2marginal.</span></span><span class="sig-name descname"><span class="pre">diff_eq</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">jd_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">survival_copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_f</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_epochs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1000</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#cenreg.pytorch.jd2marginal.diff_eq" title="Link to this definition"></a></dt>
-<dd><p>Estimate marginal distribution from joint distribution by solving differential equation as presented in [Carrier, 1995].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>jd_pred</strong> (<em>np.ndarray</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>num_risks</em><em>, </em><em>num_bin_predictions</em><em>]</em>)</p></li>
-<li><p><strong>survival_copula</strong> (<em>function</em>)</p></li>
-<li><p><strong>num_epochs</strong> (<em>int</em>) – The number of epochs.</p></li>
-<li><p><strong>init_f</strong> (<em>np.ndarray</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>num_risks</em><em>, </em><em>num_bin_predictions</em><em>]</em>) – The initial value of the marginal distribution.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>F_pred</strong> – np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>estimated CDF.</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="cenreg-pytorch-jd2marginal-module">
+<h2>cenreg.pytorch.jd2marginal module<a class="headerlink" href="#cenreg-pytorch-jd2marginal-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-cenreg.pytorch.loss_function_cont">
-<span id="cenreg-pytorch-loss-function-cont-module"></span><h2>cenreg.pytorch.loss_function_cont module<a class="headerlink" href="#module-cenreg.pytorch.loss_function_cont" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_cont.CRPS">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_cont.</span></span><span class="sig-name descname"><span class="pre">CRPS</span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_cont.CRPS" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Continuous Ranked Probability Score</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_cont.CRPS.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_cont.CRPS.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_cont.CopulaNegativeLogLikelihood">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_cont.</span></span><span class="sig-name descname"><span class="pre">CopulaNegativeLogLikelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">copula</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">survival_copula</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_cont.CopulaNegativeLogLikelihood" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Negative Log Likelihood with survival copula</p>
-<p>return -log ((dC/dF) (dF/dt))</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_cont.CopulaNegativeLogLikelihood.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_cont.CopulaNegativeLogLikelihood.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_cont.NegativeLogLikelihood">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_cont.</span></span><span class="sig-name descname"><span class="pre">NegativeLogLikelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_cont.NegativeLogLikelihood" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Negative Log-Likelihood</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_cont.NegativeLogLikelihood.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_cont.NegativeLogLikelihood.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<section id="cenreg-pytorch-loss-function-cont-module">
+<h2>cenreg.pytorch.loss_function_cont module<a class="headerlink" href="#cenreg-pytorch-loss-function-cont-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-cenreg.pytorch.loss_function_dr">
-<span id="cenreg-pytorch-loss-function-dr-module"></span><h2>cenreg.pytorch.loss_function_dr module<a class="headerlink" href="#module-cenreg.pytorch.loss_function_dr" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.Brier">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_dr.</span></span><span class="sig-name descname"><span class="pre">Brier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.Brier" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Loss class for the Brier score.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.Brier.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.Brier.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.CNLL_CR">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_dr.</span></span><span class="sig-name descname"><span class="pre">CNLL_CR</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.CNLL_CR" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Censored Negative Log Likelihood for Competing Risks</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.CNLL_CR.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.CNLL_CR.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.NegativeLogLikelihood">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_dr.</span></span><span class="sig-name descname"><span class="pre">NegativeLogLikelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.NegativeLogLikelihood" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Loss class for negative log-likelihood.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.NegativeLogLikelihood.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.NegativeLogLikelihood.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.RankedProbabilityScore">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_dr.</span></span><span class="sig-name descname"><span class="pre">RankedProbabilityScore</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cumsum</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.RankedProbabilityScore" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Loss class for the ranked probability score.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.RankedProbabilityScore.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.RankedProbabilityScore.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.brier">
-<span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_dr.</span></span><span class="sig-name descname"><span class="pre">brier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.brier" title="Link to this definition"></a></dt>
-<dd><p>Compute the Brier score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dist</strong> (<em>predicted distribution</em>)</p></li>
-<li><p><strong>y</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>]</em>)</p></li>
-<li><p><strong>y_bins</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>num_bin+1</em><em>]</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>loss</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tensor of shape [batch_size]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.negative_log_likelihood">
-<span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_dr.</span></span><span class="sig-name descname"><span class="pre">negative_log_likelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.negative_log_likelihood" title="Link to this definition"></a></dt>
-<dd><p>Compute Negative log-likelihood.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dist</strong> (<em>predicted distribution</em>)</p></li>
-<li><p><strong>y</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>1</em><em>]</em>)</p></li>
-<li><p><strong>y_bins</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>num_bins+1</em><em>]</em>)</p></li>
-<li><p><strong>uncensored</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>]</em>)</p></li>
-<li><p><strong>EPS</strong> (<em>float</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>loss</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tensor of shape [batch_size]</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_dr.ranked_probability_score">
-<span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_dr.</span></span><span class="sig-name descname"><span class="pre">ranked_probability_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_dr.ranked_probability_score" title="Link to this definition"></a></dt>
-<dd><p>Compute the ranked probability score.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>dist</strong> (<em>predicted distribution</em>)</p></li>
-<li><p><strong>y</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>]</em>)</p></li>
-<li><p><strong>y_bins</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>num_bins+1</em><em>]</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>loss</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tensor of shape [batch_size]</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="cenreg-pytorch-loss-function-dr-module">
+<h2>cenreg.pytorch.loss_function_dr module<a class="headerlink" href="#cenreg-pytorch-loss-function-dr-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-cenreg.pytorch.loss_function_jd">
-<span id="cenreg-pytorch-loss-function-jd-module"></span><h2>cenreg.pytorch.loss_function_jd module<a class="headerlink" href="#module-cenreg.pytorch.loss_function_jd" title="Link to this heading"></a></h2>
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_jd.JD_Brier">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_jd.</span></span><span class="sig-name descname"><span class="pre">JD_Brier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_jd.JD_Brier" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_jd.JD_Brier.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_jd.JD_Brier.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_jd.JD_Logarithmic">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_jd.</span></span><span class="sig-name descname"><span class="pre">JD_Logarithmic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_jd.JD_Logarithmic" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_jd.JD_Logarithmic.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_jd.JD_Logarithmic.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_jd.JD_RPS">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_jd.</span></span><span class="sig-name descname"><span class="pre">JD_RPS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_jd.JD_RPS" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_jd.JD_RPS.loss">
-<span class="sig-name descname"><span class="pre">loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tensor</span></span></span><a class="headerlink" href="#cenreg.pytorch.loss_function_jd.JD_RPS.loss" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<section id="cenreg-pytorch-loss-function-jd-module">
+<h2>cenreg.pytorch.loss_function_jd module<a class="headerlink" href="#cenreg-pytorch-loss-function-jd-module" title="Link to this heading"></a></h2>
 </section>
-<section id="module-cenreg.pytorch.loss_function_jd2m">
-<span id="cenreg-pytorch-loss-function-jd2m-module"></span><h2>cenreg.pytorch.loss_function_jd2m module<a class="headerlink" href="#module-cenreg.pytorch.loss_function_jd2m" title="Link to this heading"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="cenreg.pytorch.loss_function_jd2m.mean_squared_error">
-<span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.loss_function_jd2m.</span></span><span class="sig-name descname"><span class="pre">mean_squared_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jd_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">copula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">focal_risk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">-1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.loss_function_jd2m.mean_squared_error" title="Link to this definition"></a></dt>
-<dd><p>Loss function to estimate marginal distribution from joint distribution.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>F_pred</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>num_risks</em><em>, </em><em>num_bin_predictions+1</em><em>]</em>)</p></li>
-<li><p><strong>jd_pred</strong> (<em>Tensor</em><em> of </em><em>shape</em><em> [</em><em>batch_size</em><em>, </em><em>num_risks</em><em>, </em><em>num_bin_predictions</em><em>]</em>)</p></li>
-<li><p><strong>copula</strong> (<em>function</em>)</p></li>
-<li><p><strong>focal_risk</strong> (<em>int</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>loss</strong></p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Tensor of shape [batch_size]</p>
-</dd>
-</dl>
-</dd></dl>
-
+<section id="cenreg-pytorch-loss-function-jd2m-module">
+<h2>cenreg.pytorch.loss_function_jd2m module<a class="headerlink" href="#cenreg-pytorch-loss-function-jd2m-module" title="Link to this heading"></a></h2>
 </section>
 <section id="module-cenreg.pytorch.mlp">
 <span id="cenreg-pytorch-mlp-module"></span><h2>cenreg.pytorch.mlp module<a class="headerlink" href="#module-cenreg.pytorch.mlp" title="Link to this heading"></a></h2>
@@ -786,7 +292,7 @@ registered hooks while the latter silently ignores them.</p>
 <p>Single Layer Perceptron</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cenreg.pytorch.mlp.Linear.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.Linear.forward" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.Linear.forward" title="Link to this definition"></a></dt>
 <dd><p>Defines the computation performed at every call.</p>
 <p>Should be overridden by all subclasses.</p>
 <div class="admonition note">
@@ -807,7 +313,7 @@ registered hooks while the latter silently ignores them.</p>
 <p>Multi Layer Perceptron</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cenreg.pytorch.mlp.MLP.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MLP.forward" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MLP.forward" title="Link to this definition"></a></dt>
 <dd><p>Defines the computation performed at every call.</p>
 <p>Should be overridden by all subclasses.</p>
 <div class="admonition note">
@@ -828,67 +334,7 @@ registered hooks while the latter silently ignores them.</p>
 <p>Multi Layer Perceptron with Multiple Outputs</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cenreg.pytorch.mlp.MLP_MultiHead.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MLP_MultiHead.forward" title="Link to this definition"></a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.mlp.MonotoneLayer">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.mlp.</span></span><span class="sig-name descname"><span class="pre">MonotoneLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MonotoneLayer" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.mlp.MonotoneLayer.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MonotoneLayer.forward" title="Link to this definition"></a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.mlp.MonotoneMLP">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.mlp.</span></span><span class="sig-name descname"><span class="pre">MonotoneMLP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">embed_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MonotoneMLP" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.mlp.MonotoneMLP.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MonotoneMLP.forward" title="Link to this definition"></a></dt>
-<dd><p>Defines the computation performed at every call.</p>
-<p>Should be overridden by all subclasses.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Although the recipe for forward pass needs to be defined within
-this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
-instead of this since the former takes care of running the
-registered hooks while the latter silently ignores them.</p>
-</div>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="cenreg.pytorch.mlp.MonotoneMLP_MultiHead">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cenreg.pytorch.mlp.</span></span><span class="sig-name descname"><span class="pre">MonotoneMLP_MultiHead</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_len</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_num</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neuron</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MonotoneMLP_MultiHead" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="cenreg.pytorch.mlp.MonotoneMLP_MultiHead.forward">
-<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MonotoneMLP_MultiHead.forward" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Tensor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cenreg.pytorch.mlp.MLP_MultiHead.forward" title="Link to this definition"></a></dt>
 <dd><p>Defines the computation performed at every call.</p>
 <p>Should be overridden by all subclasses.</p>
 <div class="admonition note">

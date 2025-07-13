@@ -23,15 +23,13 @@ You can install `cenreg` via pip:
 pip install cenreg
 ```
 
-If you want to install from the source code, after you download the source codes, you can install by using the following commands:
-```
-cd <PATH_SOURCE_CODES>
-pip install -e .
-```
-
 ### Run Sample Code
 
 You can find our sample codes in the `notebooks` directory.
+
+### Documentation
+
+Read the [documentation](https://cyberagentailab.github.io/cenreg/) to get started.
 
 
 ## Citation

@@ -6,19 +6,21 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cenreg.metric package &mdash; cenreg 0.1 documentation</title>
+  <title>cenreg.metric package &mdash; cenreg 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/documentation_options.js?v=e3a6060d"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="cenreg.model package" href="cenreg.model.html" />
+    <link rel="prev" title="cenreg.distribution package" href="cenreg.distribution.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,34 +42,39 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">cenreg.metric package</a><ul>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#module-cenreg.metric.cdf">cenreg.metric.cdf module</a><ul>
-<li><a class="reference internal" href="#cenreg.metric.cdf.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.metric.cdf.km_calibration"><code class="docutils literal notranslate"><span class="pre">km_calibration()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.metric.cdf.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.metric.cdf.nll_sc"><code class="docutils literal notranslate"><span class="pre">nll_sc()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.metric.cdf.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="cenreg.html">cenreg package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">cenreg.metric package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.metric.cdf">cenreg.metric.cdf module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.km_calibration"><code class="docutils literal notranslate"><span class="pre">km_calibration()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.nll_sc"><code class="docutils literal notranslate"><span class="pre">nll_sc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-cenreg.metric.cjd">cenreg.metric.cjd module</a><ul>
-<li><a class="reference internal" href="#cenreg.metric.cjd.Brier_jd"><code class="docutils literal notranslate"><span class="pre">Brier_jd()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.metric.cjd.KS_jd"><code class="docutils literal notranslate"><span class="pre">KS_jd()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.metric.cjd.NLL_jd"><code class="docutils literal notranslate"><span class="pre">NLL_jd()</span></code></a></li>
-<li><a class="reference internal" href="#cenreg.metric.cjd.RPS_jd"><code class="docutils literal notranslate"><span class="pre">RPS_jd()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.metric.cjd">cenreg.metric.cjd module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cjd.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cjd.kolmogorov_smirnov_calibration_error"><code class="docutils literal notranslate"><span class="pre">kolmogorov_smirnov_calibration_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cjd.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cjd.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-cenreg.metric.quantile">cenreg.metric.quantile module</a><ul>
-<li><a class="reference internal" href="#cenreg.metric.quantile.d_calibration"><code class="docutils literal notranslate"><span class="pre">d_calibration()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.metric.quantile">cenreg.metric.quantile module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.quantile.d_calibration"><code class="docutils literal notranslate"><span class="pre">d_calibration()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-cenreg.metric">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.metric">Module contents</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cenreg.pytorch.html">cenreg.pytorch package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">cenreg</a></li>
 </ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -82,6 +89,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="cenreg.html">cenreg package</a></li>
       <li class="breadcrumb-item active">cenreg.metric package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/cenreg.metric.rst.txt" rel="nofollow"> View page source</a>
@@ -206,8 +214,8 @@ If None, dist.boundaries is used.</p></li>
 <section id="module-cenreg.metric.cjd">
 <span id="cenreg-metric-cjd-module"></span><h2>cenreg.metric.cjd module<a class="headerlink" href="#module-cenreg.metric.cjd" title="Link to this heading"></a></h2>
 <dl class="py function">
-<dt class="sig sig-object py" id="cenreg.metric.cjd.Brier_jd">
-<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">Brier_jd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.Brier_jd" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.metric.cjd.brier">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">brier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.brier" title="Link to this definition"></a></dt>
 <dd><p>Compute Brier score for censoree joint distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -216,9 +224,9 @@ If None, dist.boundaries is used.</p></li>
 Array shape is [batch_size].</p></li>
 <li><p><strong>events</strong> (<em>ndarray</em>) – Event index (0 usually corresponds to censoring)
 Array shape is [batch_size].</p></li>
-<li><p><strong>num_events</strong> (<em>int</em>) – Number of events.</p></li>
+<li><p><strong>num_risks</strong> (<em>int</em>) – Number of risks.</p></li>
 <li><p><strong>f_pred</strong> (<em>ndarray</em>) – Estimated joint distribution.
-Array shape is [batch_size, num_bin*num_events].</p></li>
+Array shape is [batch_size, num_bin*num_risks].</p></li>
 <li><p><strong>boundaries</strong> (<em>ndarray</em>) – Bin boundaries used to represent f_pred.
 boundaries[0] = 0.0 and boundaries[-1] = max_time.
 Array shape is [num_bin+1].</p></li>
@@ -234,8 +242,8 @@ Array shape is [num_bin+1].</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cenreg.metric.cjd.KS_jd">
-<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">KS_jd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.KS_jd" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.metric.cjd.kolmogorov_smirnov_calibration_error">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">kolmogorov_smirnov_calibration_error</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.kolmogorov_smirnov_calibration_error" title="Link to this definition"></a></dt>
 <dd><p>Sum of Kolmogorov-Sminov calibration error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -261,8 +269,8 @@ Array shape is [num_bin+1].</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cenreg.metric.cjd.NLL_jd">
-<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">NLL_jd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.NLL_jd" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.metric.cjd.negative_loglikelihood">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">negative_loglikelihood</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">epsilon</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.negative_loglikelihood" title="Link to this definition"></a></dt>
 <dd><p>Compute negative log-likelihood (NLL).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -271,7 +279,6 @@ Array shape is [num_bin+1].</p></li>
 Array shape is [batch_size].</p></li>
 <li><p><strong>events</strong> (<em>ndarray</em>) – Event index (0 usually corresponds to censoring)
 Array shape is [batch_size].</p></li>
-<li><p><strong>num_risks</strong> (<em>int</em>) – Number of events.</p></li>
 <li><p><strong>f_pred</strong> (<em>ndarray</em>) – Estimated joint distribution.
 Array shape is [batch_size, num_bin*num_risks].</p></li>
 <li><p><strong>boundaries</strong> (<em>ndarray</em>) – Bin boundaries used to represent f_pred.
@@ -290,8 +297,8 @@ Array shape is [num_bin+1].</p></li>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="cenreg.metric.cjd.RPS_jd">
-<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">RPS_jd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.RPS_jd" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="cenreg.metric.cjd.ranked_probability_score">
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cjd.</span></span><span class="sig-name descname"><span class="pre">ranked_probability_score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">events</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_risks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">f_pred</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cjd.ranked_probability_score" title="Link to this definition"></a></dt>
 <dd><p>Ranked probability score (RPS).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -300,9 +307,9 @@ Array shape is [num_bin+1].</p></li>
 Array shape is [batch_size].</p></li>
 <li><p><strong>events</strong> (<em>ndarray</em>) – Event index (0 usually corresponds to censoring)
 Array shape is [batch_size].</p></li>
-<li><p><strong>num_events</strong> (<em>int</em>) – Number of events.</p></li>
+<li><p><strong>num_risks</strong> (<em>int</em>) – Number of risks.</p></li>
 <li><p><strong>f_pred</strong> (<em>ndarray</em>) – Estimated joint distribution.
-Array shape is [batch_size, num_bin*num_events].</p></li>
+Array shape is [batch_size, num_bin*num_risks].</p></li>
 <li><p><strong>boundaries</strong> (<em>ndarray</em>) – Bin boundaries used to represent f_pred.
 boundaries[0] = 0.0 and boundaries[-1] = max_time.
 Array shape is [num_bin+1].</p></li>
@@ -354,7 +361,10 @@ If boundaries is None, then boundaries = np.linspace(0.0, 1.0, 11).</p></li>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="cenreg.distribution.html" class="btn btn-neutral float-left" title="cenreg.distribution package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cenreg.model.html" class="btn btn-neutral float-right" title="cenreg.model package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

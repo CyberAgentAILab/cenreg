@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def integral(jd_pred: np.ndarray) -> np.ndarray:
+def _integral(jd_pred: np.ndarray) -> np.ndarray:
     """
     Calculate the integral of the joint distribution predictions to estimate the cumulative distribution function (CDF).
     This function is based on this paper: A. Tsiatis, A nonidentifiability aspect of the problem of competing risks, 1975.
@@ -28,3 +28,25 @@ def integral(jd_pred: np.ndarray) -> np.ndarray:
     ret = np.concatenate([np.zeros((H.shape[0], H.shape[1], 1)), 1.0 - H], axis=2)
     ret[:, :, -1] = 1.0
     return ret
+
+
+def cjd2surv(jd_pred: np.ndarray, algorithm: str = "integral") -> np.ndarray:
+    """
+    Estimate the survival function from the CJD representation.
+
+    Parameters
+    ----------
+    jd_pred: np.ndarray of shape [batch_size, num_risks, num_bin_predictions]
+    algorithm: str, optional
+        Algorithm to use for estimation. Currently only "integral" is supported.
+
+    Returns
+    -------
+    F_pred: estimated CDF.
+        np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]
+    """
+
+    if algorithm == "integral":
+        return _integral(jd_pred)
+    else:
+        raise ValueError(f"Unknown algorithm: {algorithm}. Supported: 'integral'.")

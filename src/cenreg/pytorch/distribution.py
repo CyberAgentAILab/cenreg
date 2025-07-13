@@ -165,10 +165,9 @@ class LinearCDF:
         ----------
         values : Tensor
             One or two-dimensional tensor containing the values of CDFs.
-            If cdf_values is two-dimensional tensor, then
-                each row corresponds to a CDF and
-                cdf_values[:,j] stores the value of CDF at boundries[j].
-                Tensor shape must be [num_CDF, len(boundaries)].
+            If cdf_values is two-dimensional tensor, then each row corresponds to a CDF and
+            cdf_values[:,j] stores the value of CDF at boundries[j].
+            Tensor shape must be [num_CDF, len(boundaries)].
         apply_cumsum : bool
             If True, then cdf_values is assumed to be the probablity distribution functions (PDFs) and
             the cumulative sum of cdf_values is computed.
@@ -344,9 +343,9 @@ class LinearQuantileFunction:
         qk_values : Tensor
             One or two-dimensional tensor containing the values of quantile knots.
             If qk_values is two-dimensional tensor, then
-                each row corresponds to a quantile function and
-                qk_values[:,j] stores the value of quantile function at qk_levels[j].
-                Tensor shape must be [num_quantile_function, len(qk_levels)].
+            each row corresponds to a quantile function and
+            qk_values[:,j] stores the value of quantile function at qk_levels[j].
+            Tensor shape must be [num_quantile_function, len(qk_levels)].
         apply_cumsum : bool
             If True, then qk_values is assumed to be the differences of quantile values and
             the cumulative sum of qk_values is computed.

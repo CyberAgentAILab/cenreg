@@ -17,6 +17,12 @@ class NegativeLogLikelihood:
         assert len(pred.shape) == 2
         assert len(observed_times.shape) == 1
         assert len(events.shape) == 1
+        assert observed_times.max() < self.y_bins[-1], (
+            "Observed times exceed y_bins range."
+        )
+        assert observed_times.min() >= self.y_bins[0], (
+            "Observed times below y_bins range."
+        )
 
         events = events.long().view(-1, 1)
         idx = torch.searchsorted(self.y_bins, observed_times.view(-1, 1), right=True)
@@ -40,6 +46,12 @@ class Brier:
         assert len(pred.shape) == 2
         assert len(observed_times.shape) == 1
         assert len(events.shape) == 1
+        assert observed_times.max() < self.y_bins[-1], (
+            "Observed times exceed y_bins range."
+        )
+        assert observed_times.min() >= self.y_bins[0], (
+            "Observed times below y_bins range."
+        )
 
         events = events.long().view(-1, 1)
         idx = torch.searchsorted(self.y_bins, observed_times.view(-1, 1), right=True)

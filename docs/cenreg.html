@@ -6,21 +6,19 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cenreg package &mdash; cenreg 0.1 documentation</title>
+  <title>cenreg package &mdash; cenreg 0.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=2709fde1"></script>
+      <script src="_static/documentation_options.js?v=e3a6060d"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="cenreg.distribution package" href="cenreg.distribution.html" />
-    <link rel="prev" title="cenreg documentation" href="index.html" /> 
+    <link rel="search" title="Search" href="search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,37 +40,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">cenreg package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html">cenreg.metric package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html">cenreg.pytorch package</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="two_step_algorithm.html">Two-Step Algorithm</a></li>
 </ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cenreg">Module contents</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cenreg.metric.html">cenreg.metric package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cenreg.pytorch.html">cenreg.pytorch package</a></li>
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">cenreg</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">cenreg package</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.metric.html">cenreg.metric package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html">cenreg.pytorch package</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#module-cenreg">Module contents</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<p class="caption" role="heading"><span class="caption-text">Additional Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="references.html">API Reference</a></li>
 </ul>
 
         </div>
@@ -150,10 +124,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.metric.html#module-cenreg.metric.cjd">cenreg.metric.cjd module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html#cenreg.metric.cjd.Brier_jd"><code class="docutils literal notranslate"><span class="pre">Brier_jd()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html#cenreg.metric.cjd.KS_jd"><code class="docutils literal notranslate"><span class="pre">KS_jd()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html#cenreg.metric.cjd.NLL_jd"><code class="docutils literal notranslate"><span class="pre">NLL_jd()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html#cenreg.metric.cjd.RPS_jd"><code class="docutils literal notranslate"><span class="pre">RPS_jd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html#cenreg.metric.cjd.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html#cenreg.metric.cjd.kolmogorov_smirnov_calibration_error"><code class="docutils literal notranslate"><span class="pre">kolmogorov_smirnov_calibration_error()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html#cenreg.metric.cjd.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.metric.html#cenreg.metric.cjd.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.metric.html#module-cenreg.metric.quantile">cenreg.metric.quantile module</a><ul>
@@ -165,22 +139,7 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.copula">cenreg.model.copula module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula.FrankCopula"><code class="docutils literal notranslate"><span class="pre">FrankCopula</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula.FrankCopula.cdf"><code class="docutils literal notranslate"><span class="pre">FrankCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula.IndependenceCopula"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula.IndependenceCopula.cdf"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula.SurvivalCopula"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula.SurvivalCopula.cdf"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula.create"><code class="docutils literal notranslate"><span class="pre">create()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#cenreg-model-copula-module">cenreg.model.copula module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.copula_graphic">cenreg.model.copula_graphic module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.CopulaGraphicDistribution"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.CopulaGraphicDistribution.average_cdf"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution.average_cdf()</span></code></a></li>
@@ -189,20 +148,10 @@
 <li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.CopulaGraphicDistribution.survival_function"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution.survival_function()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.estimate_curve"><code class="docutils literal notranslate"><span class="pre">estimate_curve()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.estimate_curve_Archimedean"><code class="docutils literal notranslate"><span class="pre">estimate_curve_Archimedean()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.independence_generator"><code class="docutils literal notranslate"><span class="pre">independence_generator()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.independence_generator_inv"><code class="docutils literal notranslate"><span class="pre">independence_generator_inv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.jd2marginal_np">cenreg.model.jd2marginal_np module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.jd2marginal_np.Fpred2jdpred"><code class="docutils literal notranslate"><span class="pre">Fpred2jdpred()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.jd2marginal_np.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.jd2marginal_np.evaluate_F_pred"><code class="docutils literal notranslate"><span class="pre">evaluate_F_pred()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.jd2marginal_np.hazard"><code class="docutils literal notranslate"><span class="pre">hazard()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.jd2marginal_np.sequential_allocation"><code class="docutils literal notranslate"><span class="pre">sequential_allocation()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#cenreg-model-jd2marginal-np-module">cenreg.model.jd2marginal_np module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.kaplan_meier">cenreg.model.kaplan_meier module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.kaplan_meier.KaplanMeierDistribution"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.kaplan_meier.KaplanMeierDistribution.average_cdf"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution.average_cdf()</span></code></a></li>
@@ -216,119 +165,39 @@
 <li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.kaplan_meier.createQuantilesLinear"><code class="docutils literal notranslate"><span class="pre">createQuantilesLinear()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model">Module contents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.cjd2surv"><code class="docutils literal notranslate"><span class="pre">cjd2surv()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cenreg.pytorch.html">cenreg.pytorch package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#module-cenreg.pytorch.copula">cenreg.pytorch.copula module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.ClaytonCopula"><code class="docutils literal notranslate"><span class="pre">ClaytonCopula</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.ClaytonCopula.cdf"><code class="docutils literal notranslate"><span class="pre">ClaytonCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.FrankCopula"><code class="docutils literal notranslate"><span class="pre">FrankCopula</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.FrankCopula.cdf"><code class="docutils literal notranslate"><span class="pre">FrankCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.GumbelCopula"><code class="docutils literal notranslate"><span class="pre">GumbelCopula</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.GumbelCopula.cdf"><code class="docutils literal notranslate"><span class="pre">GumbelCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.IndependenceCopula"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.IndependenceCopula.cdf"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.SurvivalCopula"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.SurvivalCopula.cdf"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula.cdf()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.copula.create"><code class="docutils literal notranslate"><span class="pre">create()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#cenreg-pytorch-copula-module">cenreg.pytorch.copula module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#module-cenreg.pytorch.distribution">cenreg.pytorch.distribution module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.CdfLinear"><code class="docutils literal notranslate"><span class="pre">CdfLinear</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.CdfLinear.average_cdf"><code class="docutils literal notranslate"><span class="pre">CdfLinear.average_cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.CdfLinear.cdf"><code class="docutils literal notranslate"><span class="pre">CdfLinear.cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.CdfLinear.get_boundary_lengths"><code class="docutils literal notranslate"><span class="pre">CdfLinear.get_boundary_lengths()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.CdfLinear.icdf"><code class="docutils literal notranslate"><span class="pre">CdfLinear.icdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.CdfLinear.set_knot_values"><code class="docutils literal notranslate"><span class="pre">CdfLinear.set_knot_values()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearCDF"><code class="docutils literal notranslate"><span class="pre">LinearCDF</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearCDF.average_cdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.average_cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearCDF.cdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearCDF.get_boundary_lengths"><code class="docutils literal notranslate"><span class="pre">LinearCDF.get_boundary_lengths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearCDF.icdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.icdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearCDF.set_knot_values"><code class="docutils literal notranslate"><span class="pre">LinearCDF.set_knot_values()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.QuantilesLinear"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.QuantilesLinear.average_cdf"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.average_cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.QuantilesLinear.cdf"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.QuantilesLinear.get_qk_lengths"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.get_qk_lengths()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.QuantilesLinear.icdf"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.icdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.QuantilesLinear.set_knot_values"><code class="docutils literal notranslate"><span class="pre">QuantilesLinear.set_knot_values()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#module-cenreg.pytorch.jd2marginal">cenreg.pytorch.jd2marginal module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.jd2marginal.SimultaneousEquations"><code class="docutils literal notranslate"><span class="pre">SimultaneousEquations</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.jd2marginal.SimultaneousEquations.configure_optimizers"><code class="docutils literal notranslate"><span class="pre">SimultaneousEquations.configure_optimizers()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.jd2marginal.SimultaneousEquations.forward"><code class="docutils literal notranslate"><span class="pre">SimultaneousEquations.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.jd2marginal.diff_eq"><code class="docutils literal notranslate"><span class="pre">diff_eq()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#module-cenreg.pytorch.loss_function_cont">cenreg.pytorch.loss_function_cont module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_cont.CRPS"><code class="docutils literal notranslate"><span class="pre">CRPS</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_cont.CRPS.loss"><code class="docutils literal notranslate"><span class="pre">CRPS.loss()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_cont.CopulaNegativeLogLikelihood"><code class="docutils literal notranslate"><span class="pre">CopulaNegativeLogLikelihood</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_cont.CopulaNegativeLogLikelihood.loss"><code class="docutils literal notranslate"><span class="pre">CopulaNegativeLogLikelihood.loss()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_cont.NegativeLogLikelihood"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihood</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_cont.NegativeLogLikelihood.loss"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihood.loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction.average_cdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.average_cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction.cdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.cdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction.get_qk_lengths"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.get_qk_lengths()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction.icdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.icdf()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction.set_knot_values"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.set_knot_values()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#module-cenreg.pytorch.loss_function_dr">cenreg.pytorch.loss_function_dr module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.Brier"><code class="docutils literal notranslate"><span class="pre">Brier</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.Brier.loss"><code class="docutils literal notranslate"><span class="pre">Brier.loss()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.CNLL_CR"><code class="docutils literal notranslate"><span class="pre">CNLL_CR</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.CNLL_CR.loss"><code class="docutils literal notranslate"><span class="pre">CNLL_CR.loss()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.NegativeLogLikelihood"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihood</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.NegativeLogLikelihood.loss"><code class="docutils literal notranslate"><span class="pre">NegativeLogLikelihood.loss()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.RankedProbabilityScore"><code class="docutils literal notranslate"><span class="pre">RankedProbabilityScore</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.RankedProbabilityScore.loss"><code class="docutils literal notranslate"><span class="pre">RankedProbabilityScore.loss()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.negative_log_likelihood"><code class="docutils literal notranslate"><span class="pre">negative_log_likelihood()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_dr.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#module-cenreg.pytorch.loss_function_jd">cenreg.pytorch.loss_function_jd module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_jd.JD_Brier"><code class="docutils literal notranslate"><span class="pre">JD_Brier</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_jd.JD_Brier.loss"><code class="docutils literal notranslate"><span class="pre">JD_Brier.loss()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_jd.JD_Logarithmic"><code class="docutils literal notranslate"><span class="pre">JD_Logarithmic</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_jd.JD_Logarithmic.loss"><code class="docutils literal notranslate"><span class="pre">JD_Logarithmic.loss()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_jd.JD_RPS"><code class="docutils literal notranslate"><span class="pre">JD_RPS</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_jd.JD_RPS.loss"><code class="docutils literal notranslate"><span class="pre">JD_RPS.loss()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#module-cenreg.pytorch.loss_function_jd2m">cenreg.pytorch.loss_function_jd2m module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.loss_function_jd2m.mean_squared_error"><code class="docutils literal notranslate"><span class="pre">mean_squared_error()</span></code></a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#cenreg-pytorch-jd2marginal-module">cenreg.pytorch.jd2marginal module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#cenreg-pytorch-loss-function-cont-module">cenreg.pytorch.loss_function_cont module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#cenreg-pytorch-loss-function-dr-module">cenreg.pytorch.loss_function_dr module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#cenreg-pytorch-loss-function-jd-module">cenreg.pytorch.loss_function_jd module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#cenreg-pytorch-loss-function-jd2m-module">cenreg.pytorch.loss_function_jd2m module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.pytorch.html#module-cenreg.pytorch.mlp">cenreg.pytorch.mlp module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.Linear"><code class="docutils literal notranslate"><span class="pre">Linear</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.Linear.forward"><code class="docutils literal notranslate"><span class="pre">Linear.forward()</span></code></a></li>
@@ -340,18 +209,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.MLP_MultiHead"><code class="docutils literal notranslate"><span class="pre">MLP_MultiHead</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.MLP_MultiHead.forward"><code class="docutils literal notranslate"><span class="pre">MLP_MultiHead.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.MonotoneLayer"><code class="docutils literal notranslate"><span class="pre">MonotoneLayer</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.MonotoneLayer.forward"><code class="docutils literal notranslate"><span class="pre">MonotoneLayer.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.MonotoneMLP"><code class="docutils literal notranslate"><span class="pre">MonotoneMLP</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.MonotoneMLP.forward"><code class="docutils literal notranslate"><span class="pre">MonotoneMLP.forward()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.MonotoneMLP_MultiHead"><code class="docutils literal notranslate"><span class="pre">MonotoneMLP_MultiHead</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.MonotoneMLP_MultiHead.forward"><code class="docutils literal notranslate"><span class="pre">MonotoneMLP_MultiHead.forward()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="cenreg.pytorch.html#cenreg.pytorch.mlp.SMM"><code class="docutils literal notranslate"><span class="pre">SMM</span></code></a><ul>
@@ -383,10 +240,7 @@
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="index.html" class="btn btn-neutral float-left" title="cenreg documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="cenreg.distribution.html" class="btn btn-neutral float-right" title="cenreg.distribution package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-    </div>
+          <footer>
 
   <hr/>
 
