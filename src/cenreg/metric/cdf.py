@@ -197,7 +197,7 @@ def km_calibration(
     dist,
     observed_times: np.ndarray,
     uncensored: np.ndarray | None = None,
-    boundaries: np.ndarray | None = None,
+    y_bins: np.ndarray | None = None,
     EPS: float = 0.0001,
 ) -> float:
     """
@@ -213,9 +213,9 @@ def km_calibration(
     uncensored : ndarray
         Censored (False) or uncensored (True)
         Array shape is [batch_size].
-    boundaries : ndarray
-        Boundaries of F_pred
-        Each element in z must be STRICTLY smaller than boundaries[-1]
+    y_bins: ndarray
+        Bins for the prediction to be evaluated.
+        Each element in observed_times must be STRICTLY smaller than y_bins[-1]
     EPS : float
         Small positive value for numerical stability
 
@@ -230,22 +230,20 @@ def km_calibration(
         uncensored = np.ones(observed_times.shape, dtype=bool)
     else:
         uncensored = uncensored.astype(bool)
-    if boundaries is None:
+    if y_bins is None:
         try:
-            boundaries = dist.boundaries
+            y_bins = dist.y_bins
         except AttributeError:
-            raise ValueError(
-                "boundaries must be provided if pred does not have boundaries."
-            )
+            raise ValueError("y_bins must be provided if pred does not have y_bins.")
 
     # compute Kaplan-Meier distribution and prediction distribution
     km = kaplan_meier.KaplanMeierDistribution()
     km.fit(observed_times, uncensored)
-    last_idx = np.searchsorted(boundaries, km.last_uncensored_time, side="right") - 1
-    F_km = km.cdf(boundaries)
+    last_idx = np.searchsorted(y_bins, km.last_uncensored_time, side="right") - 1
+    F_km = km.cdf(y_bins)
     F_km[-1] = 1.0
     f_km = F_km[1:] - F_km[:-1]
-    F_pred = dist.cdf(boundaries.reshape(1, -1))
+    F_pred = dist.cdf(y_bins.reshape(1, -1))
     f_pred_mean = np.mean(F_pred[:, 1:] - F_pred[:, :-1], 0)
 
     # compute logarithmic loss for KM valid region

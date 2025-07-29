@@ -1,6 +1,6 @@
 import torch
 
-from src.cenreg.pytorch.copula_torch import IndependenceCopula, SurvivalCopula
+from cenreg.pytorch.copula_torch import IndependenceCopula, SurvivalCopula
 
 
 class NegativeLogLikelihood:

@@ -34,7 +34,7 @@ Read the [documentation](https://cyberagentailab.github.io/cenreg/) to get start
 
 ## Citation
 
-[1] [H. Yanagisawa and S. Akiyama, Survival Analysis via Density Estimation, ICML 2025](https://icml.cc/virtual/2025/poster/43491)
+[1] [H. Yanagisawa and S. Akiyama, Survival Analysis via Density Estimation, ICML 2025](https://icml.cc/virtual/2025/poster/43491) [OpenReview](https://openreview.net/forum?id=z9SRjXPf8T)
 
 ```
   @InProceedings{yanagisawa2025survival,

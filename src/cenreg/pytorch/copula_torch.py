@@ -116,7 +116,7 @@ class SurvivalCopula:
     def cdf(self, u: torch.Tensor) -> torch.Tensor:
         if u.dim() != 2:
             raise ValueError("u must be 2-dimensional tensor.")
-        return u[:, 0] + u[:, 1] - 1 + self.copula.cdf(u)
+        return u[:, 0] + u[:, 1] - 1 + self.copula.cdf(1.0 - u)
 
 
 def create(name: str, theta: float = 0.0):

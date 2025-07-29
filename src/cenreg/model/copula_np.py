@@ -24,6 +24,9 @@ class IndependenceCopula:
         probability : ndarray (float)
             ndarray of shape [batch_size].
         """
+        assert u.ndim == 2 and u.shape[1] == 2, (
+            "Input must be a 2D array with shape [batch_size, 2]"
+        )
 
         return np.prod(u, axis=1)
 
@@ -78,7 +81,7 @@ class SurvivalCopula:
     def cdf(self, u: np.ndarray) -> np.ndarray:
         if u.ndim != 2:
             raise ValueError("u must be 2-dimensional array.")
-        return u[:, 0] + u[:, 1] - 1 + self.copula.cdf(u)
+        return u[:, 0] + u[:, 1] - 1 + self.copula.cdf(1.0 - u)
 
 
 def create(name: str, theta: float):
