@@ -20,6 +20,7 @@ Installation
    :caption: Models
 
    two_step_algorithm
+   sc_net
 
 
 Citation

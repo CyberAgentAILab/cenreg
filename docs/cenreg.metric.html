@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cenreg.metric package &mdash; cenreg 0.0.2 documentation</title>
+  <title>cenreg.metric package &mdash; cenreg 0.0.3 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=e3a6060d"></script>
+      <script src="_static/documentation_options.js?v=47de8214"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -42,37 +42,42 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Models</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="two_step_algorithm.html">Two-Step Algorithm</a></li>
+<li class="toctree-l1"><a class="reference internal" href="sc_net.html">SC-Net Model</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Additional Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cenreg.html">cenreg package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">cenreg.metric package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.metric.cdf">cenreg.metric.cdf module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.km_calibration"><code class="docutils literal notranslate"><span class="pre">km_calibration()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.nll_sc"><code class="docutils literal notranslate"><span class="pre">nll_sc()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cdf.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="references.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">cenreg.metric package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cenreg.metric.cdf">cenreg.metric.cdf module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cdf.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cdf.km_calibration"><code class="docutils literal notranslate"><span class="pre">km_calibration()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cdf.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cdf.nll_sc"><code class="docutils literal notranslate"><span class="pre">nll_sc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cdf.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.metric.cjd">cenreg.metric.cjd module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cjd.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cjd.kolmogorov_smirnov_calibration_error"><code class="docutils literal notranslate"><span class="pre">kolmogorov_smirnov_calibration_error()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cjd.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.cjd.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cenreg.metric.cjd">cenreg.metric.cjd module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cjd.brier"><code class="docutils literal notranslate"><span class="pre">brier()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cjd.kolmogorov_smirnov_calibration_error"><code class="docutils literal notranslate"><span class="pre">kolmogorov_smirnov_calibration_error()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cjd.negative_loglikelihood"><code class="docutils literal notranslate"><span class="pre">negative_loglikelihood()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.cjd.ranked_probability_score"><code class="docutils literal notranslate"><span class="pre">ranked_probability_score()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.metric.quantile">cenreg.metric.quantile module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#cenreg.metric.quantile.d_calibration"><code class="docutils literal notranslate"><span class="pre">d_calibration()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cenreg.metric.quantile">cenreg.metric.quantile module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cenreg.metric.quantile.d_calibration"><code class="docutils literal notranslate"><span class="pre">d_calibration()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#module-cenreg.metric">Module contents</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-cenreg.metric">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cenreg.pytorch.html">cenreg.pytorch package</a></li>
-<li class="toctree-l1"><a class="reference internal" href="modules.html">cenreg</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -89,7 +94,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="cenreg.html">cenreg package</a></li>
+          <li class="breadcrumb-item"><a href="references.html">API Reference</a></li>
       <li class="breadcrumb-item active">cenreg.metric package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/cenreg.metric.rst.txt" rel="nofollow"> View page source</a>
@@ -130,7 +135,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="cenreg.metric.cdf.km_calibration">
-<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cdf.</span></span><span class="sig-name descname"><span class="pre">km_calibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundaries</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cdf.km_calibration" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">cenreg.metric.cdf.</span></span><span class="sig-name descname"><span class="pre">km_calibration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dist</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observed_times</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncensored</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y_bins</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">EPS</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#cenreg.metric.cdf.km_calibration" title="Link to this definition"></a></dt>
 <dd><p>Compute KM-Calibration</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -140,8 +145,8 @@
 Array shape is [batch_size].</p></li>
 <li><p><strong>uncensored</strong> (<em>ndarray</em>) – Censored (False) or uncensored (True)
 Array shape is [batch_size].</p></li>
-<li><p><strong>boundaries</strong> (<em>ndarray</em>) – Boundaries of F_pred
-Each element in z must be STRICTLY smaller than boundaries[-1]</p></li>
+<li><p><strong>y_bins</strong> (<em>ndarray</em>) – Bins for the prediction to be evaluated.
+Each element in observed_times must be STRICTLY smaller than y_bins[-1]</p></li>
 <li><p><strong>EPS</strong> (<em>float</em>) – Small positive value for numerical stability</p></li>
 </ul>
 </dd>
