@@ -3,6 +3,7 @@
 *.pyc
 .pypirc
 .pytest_cache/
+.venv/
 .vscode/
 __pycache__/
 docs_src/

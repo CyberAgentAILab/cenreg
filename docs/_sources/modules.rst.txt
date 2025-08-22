@@ -1,6 +1,7 @@
-cenreg
-======
+src
+===
 
 .. toctree::
    :maxdepth: 4
 
+   cenreg

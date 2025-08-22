@@ -4,10 +4,26 @@ cenreg.pytorch package
 Submodules
 ----------
 
-cenreg.pytorch.copula module
-----------------------------
+cenreg.pytorch.cjd2F module
+---------------------------
 
-.. automodule:: cenreg.pytorch.copula
+.. automodule:: cenreg.pytorch.cjd2F
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cenreg.pytorch.copula\_torch module
+-----------------------------------
+
+.. automodule:: cenreg.pytorch.copula_torch
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cenreg.pytorch.datamodule module
+--------------------------------
+
+.. automodule:: cenreg.pytorch.datamodule
    :members:
    :show-inheritance:
    :undoc-members:
@@ -20,42 +36,26 @@ cenreg.pytorch.distribution module
    :show-inheritance:
    :undoc-members:
 
-cenreg.pytorch.jd2marginal module
----------------------------------
+cenreg.pytorch.loss\_cdf module
+-------------------------------
 
-.. automodule:: cenreg.pytorch.jd2marginal
+.. automodule:: cenreg.pytorch.loss_cdf
    :members:
    :show-inheritance:
    :undoc-members:
 
-cenreg.pytorch.loss\_function\_cont module
-------------------------------------------
+cenreg.pytorch.loss\_cjd module
+-------------------------------
 
-.. automodule:: cenreg.pytorch.loss_function_cont
+.. automodule:: cenreg.pytorch.loss_cjd
    :members:
    :show-inheritance:
    :undoc-members:
 
-cenreg.pytorch.loss\_function\_dr module
-----------------------------------------
+cenreg.pytorch.loss\_cont module
+--------------------------------
 
-.. automodule:: cenreg.pytorch.loss_function_dr
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-cenreg.pytorch.loss\_function\_jd module
-----------------------------------------
-
-.. automodule:: cenreg.pytorch.loss_function_jd
-   :members:
-   :show-inheritance:
-   :undoc-members:
-
-cenreg.pytorch.loss\_function\_jd2m module
-------------------------------------------
-
-.. automodule:: cenreg.pytorch.loss_function_jd2m
+.. automodule:: cenreg.pytorch.loss_cont
    :members:
    :show-inheritance:
    :undoc-members:
@@ -68,10 +68,10 @@ cenreg.pytorch.mlp module
    :show-inheritance:
    :undoc-members:
 
-cenreg.pytorch.util module
---------------------------
+cenreg.pytorch.utils module
+---------------------------
 
-.. automodule:: cenreg.pytorch.util
+.. automodule:: cenreg.pytorch.utils
    :members:
    :show-inheritance:
    :undoc-members:

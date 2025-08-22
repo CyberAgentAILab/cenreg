@@ -19,6 +19,7 @@ Installation
    :maxdepth: 1
    :caption: Models
 
+   kaplan_meier
    two_step_algorithm
    sc_net
 

@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; cenreg 0.0.3 documentation</title>
+  <title>API Reference &mdash; cenreg 0.0.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=47de8214"></script>
+      <script src="_static/documentation_options.js?v=8c5712d9"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -44,6 +44,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Models</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="kaplan_meier.html">Kaplan-Meier Estimator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="two_step_algorithm.html">Two-Step Algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sc_net.html">SC-Net Model</a></li>
 </ul>
@@ -146,7 +147,14 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cenreg.model.html">cenreg.model package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#cenreg-model-copula-module">cenreg.model.copula module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.F2cjd_np">cenreg.model.F2cjd_np module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.F2cjd_np.convert"><code class="docutils literal notranslate"><span class="pre">convert()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.cjd2F_np">cenreg.model.cjd2F_np module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.cjd2F_np.cjd2surv"><code class="docutils literal notranslate"><span class="pre">cjd2surv()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.copula_graphic">cenreg.model.copula_graphic module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.CopulaGraphicDistribution"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.CopulaGraphicDistribution.average_cdf"><code class="docutils literal notranslate"><span class="pre">CopulaGraphicDistribution.average_cdf()</span></code></a></li>
@@ -158,7 +166,22 @@
 <li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_graphic.estimate"><code class="docutils literal notranslate"><span class="pre">estimate()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#cenreg-model-jd2marginal-np-module">cenreg.model.jd2marginal_np module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.copula_np">cenreg.model.copula_np module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_np.FrankCopula"><code class="docutils literal notranslate"><span class="pre">FrankCopula</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_np.FrankCopula.cdf"><code class="docutils literal notranslate"><span class="pre">FrankCopula.cdf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_np.IndependenceCopula"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_np.IndependenceCopula.cdf"><code class="docutils literal notranslate"><span class="pre">IndependenceCopula.cdf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_np.SurvivalCopula"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_np.SurvivalCopula.cdf"><code class="docutils literal notranslate"><span class="pre">SurvivalCopula.cdf()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.copula_np.create"><code class="docutils literal notranslate"><span class="pre">create()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.model.html#module-cenreg.model.kaplan_meier">cenreg.model.kaplan_meier module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="cenreg.model.html#cenreg.model.kaplan_meier.KaplanMeierDistribution"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="cenreg.model.html#cenreg.model.kaplan_meier.KaplanMeierDistribution.average_cdf"><code class="docutils literal notranslate"><span class="pre">KaplanMeierDistribution.average_cdf()</span></code></a></li>

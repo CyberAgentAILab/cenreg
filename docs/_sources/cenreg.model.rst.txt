@@ -4,10 +4,18 @@ cenreg.model package
 Submodules
 ----------
 
-cenreg.model.copula module
---------------------------
+cenreg.model.F2cjd\_np module
+-----------------------------
 
-.. automodule:: cenreg.model.copula
+.. automodule:: cenreg.model.F2cjd_np
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cenreg.model.cjd2F\_np module
+-----------------------------
+
+.. automodule:: cenreg.model.cjd2F_np
    :members:
    :show-inheritance:
    :undoc-members:
@@ -20,10 +28,10 @@ cenreg.model.copula\_graphic module
    :show-inheritance:
    :undoc-members:
 
-cenreg.model.jd2marginal\_np module
------------------------------------
+cenreg.model.copula\_np module
+------------------------------
 
-.. automodule:: cenreg.model.jd2marginal_np
+.. automodule:: cenreg.model.copula_np
    :members:
    :show-inheritance:
    :undoc-members:

@@ -12,6 +12,17 @@ Subpackages
    cenreg.model
    cenreg.pytorch
 
+Submodules
+----------
+
+cenreg.utils module
+-------------------
+
+.. automodule:: cenreg.utils
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 Module contents
 ---------------
 

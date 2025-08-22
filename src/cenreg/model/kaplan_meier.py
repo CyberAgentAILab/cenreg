@@ -7,7 +7,7 @@ from cenreg.distribution.linear import LinearCDF, LinearQuantileFunction
 def createCdfLinear(
     observed_times: np.ndarray,
     uncensored: np.ndarray,
-    boundaries: np.ndarray,
+    bins: np.ndarray,
 ):
     """
     Create CdfLinear object from Kaplan-Meier estimator.
@@ -21,8 +21,8 @@ def createCdfLinear(
         One-dimensional ndarray containing censored (False)
         or uncensored (True).
 
-    boundaries : ndarray (float)
-        One-dimensional sorted ndarray containing time boundaries.
+    bins : ndarray (float)
+        One-dimensional sorted ndarray containing time bins.
         The first element must be 0.0.
         The last element must be larger than maximum time of observed_times.
 
@@ -33,18 +33,18 @@ def createCdfLinear(
 
     km = KaplanMeierDistribution()
     km.fit(observed_times, uncensored)
-    cdf = km.cdf(boundaries)
+    cdf = km.cdf(bins)
 
-    # interpolate between km.boundaries[-1] and boundaries[-1]
-    diff = boundaries[-1] - km.boundaries[-1]
+    # interpolate between km.bins[-1] and bins[-1]
+    diff = bins[-1] - km.bins[-1]
     if diff <= 0.0:
         raise ValueError(
-            "boundaries must be larger than maximum time of observed_times."
+            "bins must be larger than maximum time of observed_times."
         )
-    mask = boundaries > km.boundaries[-1]
-    r = (boundaries[mask] - km.boundaries[-1]) / diff
+    mask = bins > km.bins[-1]
+    r = (bins[mask] - km.bins[-1]) / diff
     cdf[mask] = 1.0 - km.cure_rate + km.cure_rate * r
-    return LinearCDF(boundaries, cdf, apply_cumsum=False)
+    return LinearCDF(bins, cdf, apply_cumsum=False)
 
 
 def createQuantilesLinear(
@@ -78,15 +78,15 @@ def createQuantilesLinear(
 
     km = KaplanMeierDistribution()
     km.fit(observed_times, uncensored)
-    if max_time <= km.boundaries[-1]:
+    if max_time <= km.bins[-1]:
         raise ValueError("max_time must be larger than maximum time of observed_times.")
     times = km.icdf(qk_levels)
 
     # interpolate between km.max_observed_time and max_time
-    diff = max_time - km.boundaries[-1]
+    diff = max_time - km.bins[-1]
     mask = 1.0 - qk_levels < km.cure_rate
     r = (1.0 - qk_levels[mask]) / km.cure_rate
-    times[mask] = km.boundaries[-1] + diff * (1.0 - r)
+    times[mask] = km.bins[-1] + diff * (1.0 - r)
     return LinearQuantileFunction(qk_levels, times, apply_cumsum=False)
 
 
@@ -198,17 +198,17 @@ class KaplanMeierDistribution:
         else:
             print("WARNING: minimum observed time is negative {}".format(start_time))
         if start_time < self._time_points[0]:
-            self.boundaries = np.append(start_time, self._time_points)
+            self.bins = np.append(start_time, self._time_points)
             self.survival_rates = np.append(1.0, self.survival_rates)
             if alpha is not None:
                 self.survival_rates_lb = np.append(1.0, self.survival_rates_lb)
                 self.survival_rates_ub = np.append(1.0, self.survival_rates_ub)
         else:
-            self.boundaries = self._time_points
+            self.bins = self._time_points
 
         # add the survival rate 0.0 at the last observed time
         if self.cure_rate > 0.0:
-            self.boundaries = np.append(self.boundaries, np.max(observed_times))
+            self.bins = np.append(self.bins, np.max(observed_times))
             self.survival_rates = np.append(self.survival_rates, self.cure_rate)
             if alpha is not None:
                 self.survival_rates_lb = np.append(
@@ -278,8 +278,8 @@ class KaplanMeierDistribution:
 
         p = 1.0 - self.survival_rates
         idx = np.searchsorted(p, quantiles, side="left")
-        idx = np.clip(idx, 0, len(self.boundaries) - 1)
-        return self.boundaries[idx]
+        idx = np.clip(idx, 0, len(self.bins) - 1)
+        return self.bins[idx]
 
     def survival_function(self, t: np.ndarray):
         """
@@ -297,7 +297,7 @@ class KaplanMeierDistribution:
             ndarray of the same shape as t containing survival rates.
         """
         # TODO reimplement this function
-        idx = np.searchsorted(self.boundaries, t, side="right") - 1
+        idx = np.searchsorted(self.bins, t, side="right") - 1
 
         sr = np.zeros_like(t)
         sr[idx < 0] = 1.0

@@ -6,6 +6,6 @@ This section describes the SC-Net model for survival analysis using the `cenreg`
 Jupyter Notebooks
 ----------------------------
 
-We provide a Jupyter notebook that demonstrates the SC-Net model. You can find these notebooks in the `notebooks` directory of the `cenreg` repository.
+We provide a Jupyter notebook that demonstrates the SC-Net model.
 
 - `SC-Net <https://github.com/CyberAgentAILab/cenreg/blob/main/notebooks/sc_net.ipynb>`_: An implementation of the SC-Net model

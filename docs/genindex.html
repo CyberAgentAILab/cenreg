@@ -5,14 +5,14 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; cenreg 0.0.3 documentation</title>
+  <title>Index &mdash; cenreg 0.0.4 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=47de8214"></script>
+      <script src="_static/documentation_options.js?v=8c5712d9"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -41,6 +41,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Models</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="kaplan_meier.html">Kaplan-Meier Estimator</a></li>
 <li class="toctree-l1"><a class="reference internal" href="two_step_algorithm.html">Two-Step Algorithm</a></li>
 <li class="toctree-l1"><a class="reference internal" href="sc_net.html">SC-Net Model</a></li>
 </ul>
@@ -88,8 +89,11 @@
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
  | <a href="#N"><strong>N</strong></a>
+ | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#V"><strong>V</strong></a>
  
 </div>
 <h2 id="A">A</h2>
@@ -117,10 +121,20 @@
 <h2 id="B">B</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.Brier">Brier (class in cenreg.pytorch.loss_cdf)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cjd.Brier">(class in cenreg.pytorch.loss_cjd)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cenreg.metric.html#cenreg.metric.cdf.brier">brier() (in module cenreg.metric.cdf)</a>
 
       <ul>
         <li><a href="cenreg.metric.html#cenreg.metric.cjd.brier">(in module cenreg.metric.cjd)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.brier">(in module cenreg.pytorch.loss_cdf)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -138,7 +152,23 @@
 </li>
         <li><a href="cenreg.model.html#cenreg.model.copula_graphic.CopulaGraphicDistribution.cdf">(cenreg.model.copula_graphic.CopulaGraphicDistribution method)</a>
 </li>
+        <li><a href="cenreg.model.html#cenreg.model.copula_np.FrankCopula.cdf">(cenreg.model.copula_np.FrankCopula method)</a>
+</li>
+        <li><a href="cenreg.model.html#cenreg.model.copula_np.IndependenceCopula.cdf">(cenreg.model.copula_np.IndependenceCopula method)</a>
+</li>
+        <li><a href="cenreg.model.html#cenreg.model.copula_np.SurvivalCopula.cdf">(cenreg.model.copula_np.SurvivalCopula method)</a>
+</li>
         <li><a href="cenreg.model.html#cenreg.model.kaplan_meier.KaplanMeierDistribution.cdf">(cenreg.model.kaplan_meier.KaplanMeierDistribution method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.ClaytonCopula.cdf">(cenreg.pytorch.copula_torch.ClaytonCopula method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.FrankCopula.cdf">(cenreg.pytorch.copula_torch.FrankCopula method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.GumbelCopula.cdf">(cenreg.pytorch.copula_torch.GumbelCopula method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.IndependenceCopula.cdf">(cenreg.pytorch.copula_torch.IndependenceCopula method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.SurvivalCopula.cdf">(cenreg.pytorch.copula_torch.SurvivalCopula method)</a>
 </li>
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearCDF.cdf">(cenreg.pytorch.distribution.LinearCDF method)</a>
 </li>
@@ -187,8 +217,6 @@
         <li><a href="cenreg.metric.html#module-cenreg.metric.cdf">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     cenreg.metric.cjd
 
@@ -211,10 +239,33 @@
 </li>
       </ul></li>
       <li>
+    cenreg.model.cjd2F_np
+
+      <ul>
+        <li><a href="cenreg.model.html#module-cenreg.model.cjd2F_np">module</a>
+</li>
+      </ul></li>
+      <li>
     cenreg.model.copula_graphic
 
       <ul>
         <li><a href="cenreg.model.html#module-cenreg.model.copula_graphic">module</a>
+</li>
+      </ul></li>
+      <li>
+    cenreg.model.copula_np
+
+      <ul>
+        <li><a href="cenreg.model.html#module-cenreg.model.copula_np">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    cenreg.model.F2cjd_np
+
+      <ul>
+        <li><a href="cenreg.model.html#module-cenreg.model.F2cjd_np">module</a>
 </li>
       </ul></li>
       <li>
@@ -232,10 +283,52 @@
 </li>
       </ul></li>
       <li>
+    cenreg.pytorch.cjd2F
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.cjd2F">module</a>
+</li>
+      </ul></li>
+      <li>
+    cenreg.pytorch.copula_torch
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.copula_torch">module</a>
+</li>
+      </ul></li>
+      <li>
+    cenreg.pytorch.datamodule
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.datamodule">module</a>
+</li>
+      </ul></li>
+      <li>
     cenreg.pytorch.distribution
 
       <ul>
         <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.distribution">module</a>
+</li>
+      </ul></li>
+      <li>
+    cenreg.pytorch.loss_cdf
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.loss_cdf">module</a>
+</li>
+      </ul></li>
+      <li>
+    cenreg.pytorch.loss_cjd
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.loss_cjd">module</a>
+</li>
+      </ul></li>
+      <li>
+    cenreg.pytorch.loss_cont
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.loss_cont">module</a>
 </li>
       </ul></li>
       <li>
@@ -245,9 +338,47 @@
         <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.mlp">module</a>
 </li>
       </ul></li>
+      <li>
+    cenreg.pytorch.utils
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.utils">module</a>
+</li>
+      </ul></li>
+      <li>
+    cenreg.utils
+
+      <ul>
+        <li><a href="cenreg.html#module-cenreg.utils">module</a>
+</li>
+      </ul></li>
       <li><a href="cenreg.model.html#cenreg.model.cjd2surv">cjd2surv() (in module cenreg.model)</a>
+
+      <ul>
+        <li><a href="cenreg.model.html#cenreg.model.cjd2F_np.cjd2surv">(in module cenreg.model.cjd2F_np)</a>
+</li>
+      </ul></li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.ClaytonCopula">ClaytonCopula (class in cenreg.pytorch.copula_torch)</a>
+</li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.CNLL_CR">CNLL_CR (class in cenreg.pytorch.loss_cdf)</a>
+</li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.cjd2F.MseModel.configure_optimizers">configure_optimizers() (cenreg.pytorch.cjd2F.MseModel method)</a>
+</li>
+      <li><a href="cenreg.model.html#cenreg.model.F2cjd_np.convert">convert() (in module cenreg.model.F2cjd_np)</a>
 </li>
       <li><a href="cenreg.model.html#cenreg.model.copula_graphic.CopulaGraphicDistribution">CopulaGraphicDistribution (class in cenreg.model.copula_graphic)</a>
+</li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cont.CopulaNegativeLogLikelihood">CopulaNegativeLogLikelihood (class in cenreg.pytorch.loss_cont)</a>
+</li>
+      <li><a href="cenreg.model.html#cenreg.model.copula_np.create">create() (in module cenreg.model.copula_np)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.create">(in module cenreg.pytorch.copula_torch)</a>
+</li>
+      </ul></li>
+      <li><a href="cenreg.html#cenreg.utils.create_bins">create_bins() (in module cenreg.utils)</a>
+</li>
+      <li><a href="cenreg.html#cenreg.utils.create_discretized_labels">create_discretized_labels() (in module cenreg.utils)</a>
 </li>
       <li><a href="cenreg.model.html#cenreg.model.kaplan_meier.createCdfLinear">createCdfLinear() (in module cenreg.model.kaplan_meier)</a>
 </li>
@@ -260,6 +391,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cenreg.metric.html#cenreg.metric.quantile.d_calibration">d_calibration() (in module cenreg.metric.quantile)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.utils.denormalize_pred">denormalize_pred() (in module cenreg.pytorch.utils)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -281,9 +416,11 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cenreg.model.html#cenreg.model.kaplan_meier.KaplanMeierDistribution.fit">fit() (cenreg.model.kaplan_meier.KaplanMeierDistribution method)</a>
 </li>
-      <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.Linear.forward">forward() (cenreg.pytorch.mlp.Linear method)</a>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.cjd2F.MseModel.forward">forward() (cenreg.pytorch.cjd2F.MseModel method)</a>
 
       <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.Linear.forward">(cenreg.pytorch.mlp.Linear method)</a>
+</li>
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.MLP.forward">(cenreg.pytorch.mlp.MLP method)</a>
 </li>
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.MLP_MultiHead.forward">(cenreg.pytorch.mlp.MLP_MultiHead method)</a>
@@ -291,6 +428,14 @@
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.SMM.forward">(cenreg.pytorch.mlp.SMM method)</a>
 </li>
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.SMM_MultiHead.forward">(cenreg.pytorch.mlp.SMM_MultiHead method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.model.html#cenreg.model.copula_np.FrankCopula">FrankCopula (class in cenreg.model.copula_np)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.FrankCopula">(class in cenreg.pytorch.copula_torch)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -313,6 +458,8 @@
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction.get_qk_lengths">(cenreg.pytorch.distribution.LinearQuantileFunction method)</a>
 </li>
       </ul></li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.GumbelCopula">GumbelCopula (class in cenreg.pytorch.copula_torch)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -336,6 +483,14 @@
 </li>
       </ul></li>
   </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.model.html#cenreg.model.copula_np.IndependenceCopula">IndependenceCopula (class in cenreg.model.copula_np)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.IndependenceCopula">(class in cenreg.pytorch.copula_torch)</a>
+</li>
+      </ul></li>
+  </ul></td>
 </tr></table>
 
 <h2 id="K">K</h2>
@@ -355,6 +510,12 @@
 <h2 id="L">L</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.ProbDataset.len_feature">len_feature() (cenreg.pytorch.datamodule.ProbDataset method)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.SurvDataset.len_feature">(cenreg.pytorch.datamodule.SurvDataset method)</a>
+</li>
+      </ul></li>
       <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.Linear">Linear (class in cenreg.pytorch.mlp)</a>
 </li>
       <li><a href="cenreg.distribution.html#cenreg.distribution.linear.LinearCDF">LinearCDF (class in cenreg.distribution.linear)</a>
@@ -363,12 +524,32 @@
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearCDF">(class in cenreg.pytorch.distribution)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cenreg.distribution.html#cenreg.distribution.linear.LinearQuantileFunction">LinearQuantileFunction (class in cenreg.distribution.linear)</a>
 
       <ul>
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction">(class in cenreg.pytorch.distribution)</a>
+</li>
+      </ul></li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.cjd2F.MseModel.loss">loss() (cenreg.pytorch.cjd2F.MseModel method)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.Brier.loss">(cenreg.pytorch.loss_cdf.Brier method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.CNLL_CR.loss">(cenreg.pytorch.loss_cdf.CNLL_CR method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.NegativeLogLikelihood.loss">(cenreg.pytorch.loss_cdf.NegativeLogLikelihood method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.RankedProbabilityScore.loss">(cenreg.pytorch.loss_cdf.RankedProbabilityScore method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cjd.Brier.loss">(cenreg.pytorch.loss_cjd.Brier method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cjd.NegativeLogLikelihood.loss">(cenreg.pytorch.loss_cjd.NegativeLogLikelihood method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cjd.RankedProbabilityScore.loss">(cenreg.pytorch.loss_cjd.RankedProbabilityScore method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cont.CopulaNegativeLogLikelihood.loss">(cenreg.pytorch.loss_cont.CopulaNegativeLogLikelihood method)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cont.NegativeLogLikelihood.loss">(cenreg.pytorch.loss_cont.NegativeLogLikelihood method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -377,6 +558,8 @@
 <h2 id="M">M</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.cjd2F.minimize_mse">minimize_mse() (in module cenreg.pytorch.cjd2F)</a>
+</li>
       <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.MLP">MLP (class in cenreg.pytorch.mlp)</a>
 </li>
       <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.MLP_MultiHead">MLP_MultiHead (class in cenreg.pytorch.mlp)</a>
@@ -403,32 +586,82 @@
 </li>
         <li><a href="cenreg.model.html#module-cenreg.model">cenreg.model</a>
 </li>
+        <li><a href="cenreg.model.html#module-cenreg.model.cjd2F_np">cenreg.model.cjd2F_np</a>
+</li>
         <li><a href="cenreg.model.html#module-cenreg.model.copula_graphic">cenreg.model.copula_graphic</a>
+</li>
+        <li><a href="cenreg.model.html#module-cenreg.model.copula_np">cenreg.model.copula_np</a>
+</li>
+        <li><a href="cenreg.model.html#module-cenreg.model.F2cjd_np">cenreg.model.F2cjd_np</a>
 </li>
         <li><a href="cenreg.model.html#module-cenreg.model.kaplan_meier">cenreg.model.kaplan_meier</a>
 </li>
         <li><a href="cenreg.pytorch.html#module-cenreg.pytorch">cenreg.pytorch</a>
 </li>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.cjd2F">cenreg.pytorch.cjd2F</a>
+</li>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.copula_torch">cenreg.pytorch.copula_torch</a>
+</li>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.datamodule">cenreg.pytorch.datamodule</a>
+</li>
         <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.distribution">cenreg.pytorch.distribution</a>
+</li>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.loss_cdf">cenreg.pytorch.loss_cdf</a>
+</li>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.loss_cjd">cenreg.pytorch.loss_cjd</a>
+</li>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.loss_cont">cenreg.pytorch.loss_cont</a>
 </li>
         <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.mlp">cenreg.pytorch.mlp</a>
 </li>
+        <li><a href="cenreg.pytorch.html#module-cenreg.pytorch.utils">cenreg.pytorch.utils</a>
+</li>
+        <li><a href="cenreg.html#module-cenreg.utils">cenreg.utils</a>
+</li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.cjd2F.MseModel">MseModel (class in cenreg.pytorch.cjd2F)</a>
+</li>
   </ul></td>
 </tr></table>
 
 <h2 id="N">N</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.negative_log_likelihood">negative_log_likelihood() (in module cenreg.pytorch.loss_cdf)</a>
+</li>
       <li><a href="cenreg.metric.html#cenreg.metric.cdf.negative_loglikelihood">negative_loglikelihood() (in module cenreg.metric.cdf)</a>
 
       <ul>
         <li><a href="cenreg.metric.html#cenreg.metric.cjd.negative_loglikelihood">(in module cenreg.metric.cjd)</a>
 </li>
       </ul></li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.NegativeLogLikelihood">NegativeLogLikelihood (class in cenreg.pytorch.loss_cdf)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cjd.NegativeLogLikelihood">(class in cenreg.pytorch.loss_cjd)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cont.NegativeLogLikelihood">(class in cenreg.pytorch.loss_cont)</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cenreg.metric.html#cenreg.metric.cdf.nll_sc">nll_sc() (in module cenreg.metric.cdf)</a>
+</li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.utils.normalize_y">normalize_y() (in module cenreg.pytorch.utils)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.ProbDataModule">ProbDataModule (class in cenreg.pytorch.datamodule)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.ProbDataset">ProbDataset (class in cenreg.pytorch.datamodule)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -440,6 +673,16 @@
 
       <ul>
         <li><a href="cenreg.metric.html#cenreg.metric.cjd.ranked_probability_score">(in module cenreg.metric.cjd)</a>
+</li>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.ranked_probability_score">(in module cenreg.pytorch.loss_cdf)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cdf.RankedProbabilityScore">RankedProbabilityScore (class in cenreg.pytorch.loss_cdf)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.loss_cjd.RankedProbabilityScore">(class in cenreg.pytorch.loss_cjd)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -460,16 +703,58 @@
         <li><a href="cenreg.pytorch.html#cenreg.pytorch.distribution.LinearQuantileFunction.set_knot_values">(cenreg.pytorch.distribution.LinearQuantileFunction method)</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.SMM">SMM (class in cenreg.pytorch.mlp)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="cenreg.pytorch.html#cenreg.pytorch.mlp.SMM_MultiHead">SMM_MultiHead (class in cenreg.pytorch.mlp)</a>
+</li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.SurvDataModule">SurvDataModule (class in cenreg.pytorch.datamodule)</a>
+</li>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.SurvDataset">SurvDataset (class in cenreg.pytorch.datamodule)</a>
 </li>
       <li><a href="cenreg.model.html#cenreg.model.copula_graphic.CopulaGraphicDistribution.survival_function">survival_function() (cenreg.model.copula_graphic.CopulaGraphicDistribution method)</a>
 
       <ul>
         <li><a href="cenreg.model.html#cenreg.model.kaplan_meier.KaplanMeierDistribution.survival_function">(cenreg.model.kaplan_meier.KaplanMeierDistribution method)</a>
+</li>
+      </ul></li>
+      <li><a href="cenreg.model.html#cenreg.model.copula_np.SurvivalCopula">SurvivalCopula (class in cenreg.model.copula_np)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.copula_torch.SurvivalCopula">(class in cenreg.pytorch.copula_torch)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.ProbDataModule.test_dataloader">test_dataloader() (cenreg.pytorch.datamodule.ProbDataModule method)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.SurvDataModule.test_dataloader">(cenreg.pytorch.datamodule.SurvDataModule method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.ProbDataModule.train_dataloader">train_dataloader() (cenreg.pytorch.datamodule.ProbDataModule method)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.SurvDataModule.train_dataloader">(cenreg.pytorch.datamodule.SurvDataModule method)</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.ProbDataModule.val_dataloader">val_dataloader() (cenreg.pytorch.datamodule.ProbDataModule method)</a>
+
+      <ul>
+        <li><a href="cenreg.pytorch.html#cenreg.pytorch.datamodule.SurvDataModule.val_dataloader">(cenreg.pytorch.datamodule.SurvDataModule method)</a>
 </li>
       </ul></li>
   </ul></td>
