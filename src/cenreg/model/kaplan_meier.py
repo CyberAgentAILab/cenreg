@@ -38,9 +38,7 @@ def createCdfLinear(
     # interpolate between km.bins[-1] and bins[-1]
     diff = bins[-1] - km.bins[-1]
     if diff <= 0.0:
-        raise ValueError(
-            "bins must be larger than maximum time of observed_times."
-        )
+        raise ValueError("bins must be larger than maximum time of observed_times.")
     mask = bins > km.bins[-1]
     r = (bins[mask] - km.bins[-1]) / diff
     cdf[mask] = 1.0 - km.cure_rate + km.cure_rate * r

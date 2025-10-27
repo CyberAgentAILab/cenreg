@@ -44,6 +44,14 @@ cenreg.model.kaplan\_meier module
    :show-inheritance:
    :undoc-members:
 
+cenreg.model.nonparametric module
+---------------------------------
+
+.. automodule:: cenreg.model.nonparametric
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 Module contents
 ---------------
 

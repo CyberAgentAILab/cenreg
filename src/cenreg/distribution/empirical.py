@@ -7,74 +7,89 @@ class EmpiricalCDF:
     """
 
     def __init__(
-        self, y: np.ndarray | None = None, sample_weight: np.ndarray | None = None
+        self,
+        bins: np.ndarray,
+        cum_p: np.ndarray,
+        side: str = "left",
+        confidence_interval: np.ndarray | None = None,
     ):
         """
-        CDF initialization.
+        Initialization.
 
         Parameters
         -------
-        y : np.ndarray
-            Array containing observed values.
-        sample_weight : np.ndarray
-            Weight for each sample
+        bins : np.ndarray
+            Array containing distinct observed values.
+            bins must be strictly increasing.
+            bins[0] != -np.inf and bins[-1] != np.inf must hold.
+        cum_p : np.ndarray
+            Cumulative probability for each bin.
+            The probability corresponding to the i-th bin (between bins[i-1] and bins[i]) is computed as cum_p[i+1] - cum_p[i], where we implicitly assume bins[-1] = -inf and bins[len(bins)] = inf.
+            cum_p must be non-decreasing, starting from 0.0 to 1.0 (i.e., cum_p[0] == 0.0 and cum_p[-1] == 1.0).
+        side : str
+            'left' or 'right' indicating the side for CDF step function.
+        confidence_interval : np.ndarray | None
+            Confidence interval for the empirical CDF.
+            If not None, confidence_interval.shape == (len(cum_p), 2) must hold.
         """
 
-        if y is not None:
-            self.set(y, sample_weight)
+        assert len(bins.shape) == 1
+        assert len(cum_p.shape) == 1
+        assert bins.shape[0] + 1 == cum_p.shape[0]
+        assert cum_p[0] == 0.0
+        assert cum_p[-1] == 1.0
+        assert side in ("left", "right")
+        if confidence_interval is not None:
+            assert confidence_interval.shape == (len(cum_p), 2)
 
-    def average_cdf(self, y: np.ndarray) -> np.ndarray:
-        """
-        Compute the average CDF values.
+        self.bins = bins
+        self.cum_p = cum_p
+        self.side = side
+        self.confidence_interval = confidence_interval
 
-        Parameters
-        -------
-        y : np.ndarray
-            CDF values are computed for values y.
-
-        Returns
-        -------
-        cdf_values : np.ndarray
-            Compute CDF values for each value in y.
-        """
-        values = self.cdf(y)
-        if values.ndim > 1:
-            return np.mean(values, 0)
-        else:
-            return values
-
-    def cdf(self, y: np.ndarray):
+    def cdf(self, y: float | np.ndarray):
         """
         Cumulative distribution function (i.e., inverse of quantile function).
 
         Parameters
         -------
-        y : np.ndarray
-            CDF values are computed for values y.
+        y : np.ndarray | float
+            Values for which the CDF is computed.
 
         Returns
         -------
-        cdf_values : np.ndarray
-            Compute CDF values for each value in y.
+        cum_p : np.ndarray
+            CDF values for each value in y.
             Array shape is equal to the shape of y.
         """
+        if isinstance(y, float):
+            y = np.array([y])
 
-        if self.boundaries is None:
-            return np.zeros_like(y, dtype=float)
-
-        idx = np.searchsorted(self.boundaries, y, side="right")
-        idx_valid = idx > 0
-        if len(self.cdf_values.shape) == 1:
-            ret = np.zeros_like(y, dtype=float)
-            ret[idx_valid] = self.cdf_values[idx[idx_valid] - 1]
-        else:
-            ret = np.zeros((self.cdf_values.shape[0], y.shape[0]), dtype=float)
-            ret[:, idx_valid] = self.cdf_values[:, idx[idx_valid] - 1]
+        ret = np.zeros((len(y),), dtype=float)
+        if self.side == "left":
+            ret[y <= self.bins[0]] = 0.0
+            ret[y > self.bins[-1]] = 1.0
+            mask = (y > self.bins[0]) & (y <= self.bins[-1])
+        else:  # self.side == "right"
+            ret[y < self.bins[0]] = 0.0
+            ret[y >= self.bins[-1]] = 1.0
+            mask = (y >= self.bins[0]) & (y < self.bins[-1])
+        idx = np.searchsorted(self.bins, y, side=self.side)
+        idx = np.clip(idx, 1, len(self.bins) - 1)
+        ret[mask] = self.cum_p[idx[mask]]
         return ret
 
     def icdf(self, quantiles: float | np.ndarray) -> np.ndarray:
         """
         Inverse cumulative distribution function (i.e., quantile function).
+
+        If the input is 0.0, return self.bins[0].
+        If the input is 1.0, return self.bins[-1].
+        If the input is between 0.0 and 1.0, return the corresponding bin value.
+
+        Note:
+        For any alpha in [0.0, 1.0], we usually assume that self.cdf(self.icdf(alpha)) == alpha holds.
+        However, the inverse CDF of empirical distribution defined here does not always satisfy this property.
 
         Parameters
         -------
@@ -90,56 +105,16 @@ class EmpiricalCDF:
 
         if isinstance(quantiles, float):
             quantiles = np.array([quantiles])
+        if np.any(quantiles < 0.0):
+            raise ValueError("quantiles must be non-negative.")
+        if np.any(quantiles > 1.0):
+            raise ValueError("quantiles must be less than or equal to 1.0.")
 
-        idx = np.searchsorted(self.cdf_values, quantiles, side="right")
-        idx = np.clip(idx, 0, len(self.boundaries) - 1)
-        if len(self.cdf_values.shape) == 1:
-            ret = np.zeros((len(quantiles),), dtype=float)
-            for i in range(len(quantiles)):
-                ret[i] = self.boundaries[idx[i]]
-        else:
-            raise NotImplementedError("Multi-dimensional CDF is not implemented yet.")
+        ret = np.zeros((len(quantiles),), dtype=float)
+        ret[quantiles <= 0.0] = self.bins[0]
+        ret[quantiles >= 1.0] = self.bins[-1]
+        mask = (quantiles > 0.0) & (quantiles < 1.0)
+        idx = np.searchsorted(self.cum_p, quantiles, side=self.side)
+        idx = np.clip(idx - 1, 0, len(self.bins) - 1)
+        ret[mask] = self.bins[idx[mask]]
         return ret
-
-    def set(self, y: np.ndarray, sample_weight: np.ndarray | None = None):
-        """
-        Compute CDF based on y and sample_weight.
-        The observed values y are weightd by sample_weight.
-
-        Parameters
-        -------
-        y : np.ndarray
-            One-dimensional ndarray containing observed values.
-        sample_weight : np.ndarray
-            One or two-dimensional ndarray containing weight for each value.
-        """
-
-        if len(y.shape) != 1:
-            raise ValueError("y must be one-dimensional array.")
-
-        if y.size == 0:
-            self.boundaries = None
-            return
-        if sample_weight is None:
-            sample_weight = np.ones_like(y)
-        else:
-            assert len(sample_weight.shape) <= 2
-
-        unq, inv = np.unique(y, return_inverse=True)
-        self.boundaries = unq
-        if len(sample_weight.shape) == 1:
-            counts = np.bincount(inv, sample_weight)
-            s = sample_weight.sum()
-            s = np.clip(s, 0.0001, np.inf)
-            self.cdf_values = np.cumsum(counts) / s
-            self.cdf_values[-1] = 1.0
-        else:
-            list_counts = []
-            for i in range(sample_weight.shape[0]):
-                counts = np.bincount(inv, sample_weight[i, :])
-                list_counts.append(counts)
-            counts = np.stack(list_counts, 0)
-            s = np.sum(sample_weight, axis=1).reshape(-1, 1)
-            s = np.clip(s, 0.0001, np.inf)
-            self.cdf_values = np.cumsum(counts, axis=1) / s
-            self.cdf_values[:, -1] = 1.0
