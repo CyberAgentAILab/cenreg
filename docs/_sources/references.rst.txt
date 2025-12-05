@@ -8,4 +8,4 @@ This section provides detailed documentation of the `cenreg` package, including 
     cenreg.distribution
     cenreg.metric
     cenreg.model
-    cenret.pytorch
+    cenreg.pytorch

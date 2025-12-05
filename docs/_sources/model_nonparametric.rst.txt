@@ -1,0 +1,8 @@
+Nonparametric Models
+========================================
+
+.. toctree::
+    :caption: Nonparametric Models
+
+    kaplan_meier
+    zheng_klein

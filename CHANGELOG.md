@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.0.6] - 2025-12-05
+### Added
+- Hyperparameters for TS-LGB model
+
 ## [0.0.5] - 2025-10-27
 ### Added
 - Tutorial for Zheng-Klein estimator (a.k.a. copula-graphic estimator)
