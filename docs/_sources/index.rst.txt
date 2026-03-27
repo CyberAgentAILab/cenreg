@@ -33,6 +33,8 @@ H. Yanagisawa and S. Akiyama, `"Survival Analysis via Density Estimation," <http
    :maxdepth: 1
    :caption: Additional Documentation
 
+   class_cumulative_dist
+   class_quantile_dist
    references
 
 ..

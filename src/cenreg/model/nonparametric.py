@@ -1,22 +1,46 @@
 import numpy as np
-import scipy
 
-from cenreg.distribution.empirical import EmpiricalCDF
+from cenreg.distribution.cdf import CumulativeDist
 
 
-def compute_empirical_cdf(
+def _set_ymin_ymax(
+    y: np.ndarray,
+    y_min: float | None = None,
+    y_max: float | None = None,
+) -> tuple[float, float]:
+    y = y[np.isfinite(y)]
+    temp_min = np.min(y)
+    temp_max = np.max(y)
+    if temp_min == temp_max:
+        if temp_min == 0.0:
+            temp_min = -0.1
+            temp_max = 0.1
+        elif temp_min > 0.0:
+            temp_min *= 0.9
+            temp_max *= 1.1
+        else:
+            temp_min *= 1.1
+            temp_max *= 0.9
+    else:
+        width = temp_max - temp_min
+        temp_min -= 0.1 * width
+        temp_max += 0.1 * width
+    if y_min is not None:
+        temp_min = y_min
+    if y_max is not None:
+        temp_max = y_max
+    return temp_min, temp_max
+
+
+def empirical_cdf_estimator(
     y: np.ndarray,
     weights: np.ndarray | None = None,
-    min_y: float | None = None,
-    max_y: float | None = None,
-) -> EmpiricalCDF:
+    y_min: float | None = None,
+    y_max: float | None = None,
+) -> CumulativeDist:
     """
     Compute CDF based on y and weight.
     The observed values y are weighted by weight.
-
-    Note:
-    The created EmpiricalCDF object ecdf does not satisfy ecdf.cdf(ecdf.icdf(0.0)) == 0.0.
-    If this behavior is not desired, please consider setting some min_y such that min_y < y.min().
 
     Parameters
     -------
@@ -25,14 +49,14 @@ def compute_empirical_cdf(
     weights : np.ndarray | None
         One-dimensional ndarray containing non-negative weight for each value in y.
         If None, all weights are set to 1.0.
-    min_y : float | None
-        Minimum value for the EmpiricalCDF.  If None, min_y is set to y.min().
-    max_y : float | None
-        Maximum value for the EmpiricalCDF.  If None, max_y is set to y.max().
+    y_min : float | None
+        The lower bound for the CDF. If None, it is set to the minimum observed value.
+    y_max : float | None
+        The upper bound for the CDF. If None, it is set to the maximum observed value.
 
     Returns
     -------
-    empirical_cdf : EmpiricalCDF
+    dist : CumulativeDist
         Empirical CDF object.
     """
 
@@ -50,10 +74,13 @@ def compute_empirical_cdf(
             raise ValueError("weight and y must have the same length.")
         if np.any(weights < 0.0):
             raise ValueError("weight must be non-negative.")
-    if min_y is not None:
-        assert min_y <= np.min(y), "min_y must be less than or equal to min(y)."
-    if max_y is not None:
-        assert max_y >= np.max(y), "max_y must be greater than or equal to max(y)."
+    if y_min is not None:
+        assert y_min <= np.min(y), "y_min must be less than or equal to min(y)."
+    if y_max is not None:
+        assert y_max >= np.max(y), "y_max must be greater than or equal to max(y)."
+
+    # Set y_min and y_max if not provided
+    y_min, y_max = _set_ymin_ymax(y, y_min, y_max)
 
     # Compute empirical CDF
     bins, inv = np.unique(y, return_inverse=True)
@@ -65,87 +92,30 @@ def compute_empirical_cdf(
     cum_p = np.cumsum(p)
     cum_p = np.append(0.0, cum_p)  # CDF starts from 0.0
     cum_p[-1] = 1.0  # Ensure last value is exactly 1.0
-    if min_y is not None and min_y < bins[0]:
-        bins = np.append(min_y, bins)
-        cum_p = np.append(0.0, cum_p)
-    if max_y is not None and max_y > bins[-1]:
-        bins = np.append(bins, max_y)
-        cum_p = np.append(cum_p, 1.0)
-    return EmpiricalCDF(bins=bins, cum_p=cum_p, side="right")
-
-
-def _create_empirical_cdf(
-    time_points: np.ndarray,
-    survival_rates: np.ndarray,
-    observed_times: np.ndarray,
-    min_y: float | None,
-    max_y: float | None,
-    survival_rates_lb: np.ndarray | None = None,
-    survival_rates_ub: np.ndarray | None = None,
-):
-    assert len(time_points.shape) == 1
-    assert len(survival_rates.shape) == 1
-    assert time_points.shape[0] + 1 == survival_rates.shape[0]
-
-    # set survival rate 1.0 at min_y
-    if min_y is None:
-        min_y = 0.0
-    else:
-        if min_y > np.min(observed_times):
+    if y_min is not None:
+        if y_min > bins[0]:
             raise ValueError(
-                "WARNING: min_y {} is greater than the minimum observed time {}".format(
-                    min_y, np.min(observed_times)
-                )
+                "y_min must be less than or equal to the minimum observed value."
             )
-    if min_y < time_points[0]:
-        bins = np.append(min_y, time_points)
-        survival_rates = np.append(1.0, survival_rates)
-        if survival_rates_lb is not None:
-            survival_rates_lb = np.append(1.0, survival_rates_lb)
-            survival_rates_ub = np.append(1.0, survival_rates_ub)
-    else:
-        bins = time_points
-
-    # set survival rate 0.0 at max_y
-    if max_y is None:
-        max_y = np.max(observed_times)
-    else:
-        if max_y < np.max(observed_times):
+        elif y_min < bins[0]:
+            bins = np.append(y_min, bins)
+    if y_max is not None:
+        if y_max < bins[-1]:
             raise ValueError(
-                "WARNING: max_y {} is less than the maximum observed time {}".format(
-                    max_y, np.max(observed_times)
-                )
+                "y_max must be greater than or equal to the maximum observed value."
             )
-    if max_y > bins[-1]:
-        bins = np.append(bins, max_y)
-        survival_rates = np.append(survival_rates, 0.0)
-        if survival_rates_lb is not None:
-            survival_rates_lb = np.append(survival_rates_lb, 0.0)
-            survival_rates_ub = np.append(survival_rates_ub, 0.0)
-    else:
-        survival_rates[-1] = 0.0
-
-    # return empirical CDF
-    ecdf = EmpiricalCDF(bins=bins, cum_p=1.0 - survival_rates, side="right")
-    if survival_rates_lb is not None:
-        ecdf.confidence_interval = np.concatenate(
-            [
-                1.0 - survival_rates_ub.reshape(-1, 1),
-                1.0 - survival_rates_lb.reshape(-1, 1),
-            ],
-            axis=1,
-        )
-    return ecdf
+        elif y_max > bins[-1]:
+            bins = np.append(bins, y_max)
+    return CumulativeDist(b=bins, cum_p=cum_p, interpolate="right")
 
 
 def kaplan_meier_estimator(
     observed_times: np.ndarray,
     uncensored: np.ndarray,
     weights: np.ndarray | None = None,
-    conf_level: float | None = None,
-    min_y: float | None = None,
-    max_y: float | None = None,
-):
+    y_min: float | None = None,
+    y_max: float | None = None,
+) -> CumulativeDist:
     """
     Compute Kaplan-Meier estimator.
 
@@ -157,63 +127,16 @@ def kaplan_meier_estimator(
         Indicator for uncensored data (1: uncensored, 0: censored).
     weights : np.ndarray | None
         Weights for each data point.
-    conf_level : float
-        Significance level for confidence intervals (e.g., 0.95).
-    min_y : float | None
-        Minimum value for the EmpiricalCDF.  If None, min_y is set to 0.0.
-    max_y : float | None
-        Maximum value for the EmpiricalCDF.  If None, max_y is set to observed_times.max().
+    y_min : float | None
+        Minimum value for the EmpiricalCDF.  If None, y_min is set to 0.0.
+    y_max : float | None
+        Maximum value for the EmpiricalCDF.  If None, y_max is set to observed_times.max().
 
     Returns
     -------
-    empirical_cdf : EmpiricalCDF
-        Empirical CDF object.
+    dist : CumulativeDist
+        Cumulative distribution function.
     """
-
-    def _compute_variance(
-        survival_rates: np.ndarray,
-        num_alive: np.ndarray,
-        num_death: np.ndarray,
-        alpha: float,
-    ):
-        """
-        Compute confidence interval of the survival function using the exponential Greenwood formula (i.e., log-log transformation).
-
-        Parameters
-        ----------
-        survival_rates : np.ndarray
-            Survival rates at each time point.
-        num_alive : np.ndarray
-            Number of alive individuals at each time point.
-        num_death : np.ndarray
-            Number of death individuals at each time point.
-        alpha : float
-            Significance level for confidence intervals (e.g., 0.05 for 95% confidence interval).
-        """
-
-        last_rate_is_zero = survival_rates[-1] == 0.0
-        if last_rate_is_zero:
-            survival_rates = survival_rates[:-1]
-            num_alive = num_alive[:-1]
-            num_death = num_death[:-1]
-        else:
-            survival_rates = survival_rates
-            num_alive = num_alive
-            num_death = num_death
-
-        s = np.log(survival_rates)
-        z = np.log(-s)
-
-        rate = num_death / (num_alive * (num_alive - num_death))
-        std = np.sqrt(np.cumsum(rate) / (s * s))
-        std *= scipy.stats.norm.ppf(alpha)
-        survival_rates_lb = np.exp(-np.exp(z - std))
-        survival_rates_ub = np.exp(-np.exp(z + std))
-
-        if last_rate_is_zero:
-            survival_rates_lb = np.append(survival_rates_lb, 0.0)
-            survival_rates_ub = np.append(survival_rates_ub, 0.0)
-        return survival_rates_lb, survival_rates_ub
 
     assert len(observed_times.shape) == 1
     assert len(uncensored.shape) == 1
@@ -226,6 +149,14 @@ def kaplan_meier_estimator(
     else:
         assert len(weights.shape) == 1
         assert observed_times.shape[0] == weights.shape[0]
+    if y_min is not None:
+        assert y_min <= np.min(observed_times), (
+            "y_min must be less than or equal to min(observed_times)."
+        )
+    if y_max is not None:
+        assert y_max >= np.max(observed_times), (
+            "y_max must be greater than or equal to max(observed_times)."
+        )
 
     # sort based on uncensored and observed_times
     temp = np.concatenate(
@@ -251,31 +182,25 @@ def kaplan_meier_estimator(
     num_alive = dead[cut_index[:-1], 3]
     time_points = dead[cut_index[:-1], 0]
 
-    # compute survival rates
+    # create CDF
+    b = time_points
     rate = 1.0 - num_death / num_alive
     survival_rates = np.cumprod(rate)
-    survival_rates = np.append(1.0, survival_rates)
-
-    # compute variance
-    if conf_level is not None:
-        if conf_level <= 0.0 or conf_level >= 1.0:
-            raise ValueError("conf_level must be in (0.0, 1.0).")
-        survival_rates_lb, survival_rates_ub = _compute_variance(
-            survival_rates, num_alive, num_death, 1.0 - conf_level
-        )
+    if y_min is None:
+        y_min = 0.0
+    if y_min < b[0]:
+        b = np.append(y_min, b)
+        survival_rates = np.append(1.0, survival_rates)
+    if y_max is None:
+        y_max = np.max(observed_times)
+    if y_max > b[-1]:  # last observation is censored
+        b = np.append(b, y_max)
     else:
-        survival_rates_lb = None
-        survival_rates_ub = None
-
-    return _create_empirical_cdf(
-        time_points,
-        survival_rates,
-        observed_times,
-        min_y,
-        max_y,
-        survival_rates_lb,
-        survival_rates_ub,
-    )
+        survival_rates = survival_rates[:-1]
+    dist = CumulativeDist(b=b, cum_p=1.0 - survival_rates, interpolate="right")
+    dist.alive = num_alive
+    dist.dead = num_death
+    return dist
 
 
 def zheng_klein_estimator(
@@ -283,9 +208,9 @@ def zheng_klein_estimator(
     uncensored: np.ndarray,
     copula,
     weights: np.ndarray = None,
-    min_y: float | None = None,
-    max_y: float | None = None,
-):
+    y_min: float | None = None,
+    y_max: float | None = None,
+) -> CumulativeDist:
     """
     Compute copula-graphic estimator proposed by Zheng and Klein.
     This method receives any copula.
@@ -300,15 +225,15 @@ def zheng_klein_estimator(
         Copula function.
     weights : np.ndarray | None
         Weights for each data point.
-    min_y : float | None
-        Minimum value for the EmpiricalCDF.  If None, min_y is set to 0.0.
-    max_y : float | None
-        Maximum value for the EmpiricalCDF.  If None, max_y is set to observed_times.max().
+    y_min : float | None
+        Minimum value for the EmpiricalCDF.  If None, y_min is set to 0.0.
+    y_max : float | None
+        Maximum value for the EmpiricalCDF.  If None, y_max is set to observed_times.max().
 
     Returns
     -------
-    empirical_cdf : EmpiricalCDF
-        Empirical CDF object.
+    dist : CumulativeDist
+        Cumulative distribution function.
     """
 
     def _binary_search_F_single(
@@ -385,13 +310,115 @@ def zheng_klein_estimator(
             survival_rates.append(1.0 - f)
         else:
             g = _binary_search_G_single(g, 1.0, f, copula, target)
-    times = np.array(times)
-    survival_rates = np.append(1.0, np.array(survival_rates))
 
-    return _create_empirical_cdf(
-        times,
-        survival_rates,
-        observed_times,
-        min_y,
-        max_y,
-    )
+    # create CDF
+    b = np.array(times)
+    survival_rates = np.array(survival_rates)
+    if y_min is None:
+        y_min = 0.0
+    if y_min < b[0]:
+        b = np.append(y_min, b)
+        survival_rates = np.append(1.0, survival_rates)
+    if y_max is None:
+        y_max = np.max(observed_times)
+    if y_max > b[-1]:  # last observation is censored
+        b = np.append(b, y_max)
+    else:
+        survival_rates = survival_rates[:-1]
+    dist = CumulativeDist(b=b, cum_p=1.0 - survival_rates, interpolate="right")
+    return dist
+
+
+def turnbull_estimator(
+    lb: np.ndarray,
+    ub: np.ndarray,
+    y_min: float | None = None,
+    y_max: float | None = None,
+    weights: np.ndarray | None = None,
+    eps: float = 1e-8,
+    max_iter: int = 100,
+):
+    """
+    Compute Turnbull estimator for interval-censored data.
+
+    Parameters
+    ----------
+    lb : np.ndarray
+        Lower bounds of observed intervals.
+    ub : np.ndarray
+        Upper bounds of observed intervals.
+    y_min : float | None
+        Minimum value for the CDF.
+    y_max : float | None
+        Maximum value for the CDF.
+    weights : np.ndarray | None
+        Weights for each data point.
+    eps : float
+        Convergence threshold.
+    max_iter : int
+        Maximum number of iterations.
+
+    Returns
+    -------
+    cdf : cenreg.distribution.cdf.CumulativeDist
+        Cumulative distribution function object.
+    """
+
+    assert len(lb.shape) == 1
+    assert len(ub.shape) == 1
+    assert lb.shape[0] == ub.shape[0]
+    if weights is not None:
+        assert len(weights.shape) == 1
+        assert lb.shape[0] == weights.shape[0]
+    if np.any(lb == np.inf):
+        raise NotImplementedError("lb containing np.inf is not supported.")
+    if np.any(ub == -np.inf):
+        raise NotImplementedError("ub containing -np.inf is not supported.")
+
+    # Set y_min and y_max if not provided
+    y = np.concatenate([lb, ub])
+    y_min, y_max = _set_ymin_ymax(y, y_min, y_max)
+
+    # initialize weights
+    if weights is None:
+        weights = np.ones_like(lb).astype(float).reshape(-1, 1)
+    else:
+        weights = weights.astype(float).reshape(-1, 1)
+
+    # initialize distribution
+    lb = lb.astype(float)
+    ub = ub.astype(float)
+    mask_exact = lb == ub
+    lb[mask_exact] -= 0.00001
+    vals = np.concatenate([lb, ub])
+    omega = np.unique(vals[np.isfinite(vals)])
+    omega = np.concatenate([[-np.inf], omega, [np.inf]])
+    num_bin = len(omega) - 1
+    s = np.full((num_bin,), 1.0 / num_bin)
+
+    # iterate EM algorithm
+    n = lb.shape[0]
+    batch_size = int(1000000 / num_bin + 1)
+    for i in range(max_iter):
+        pi = np.zeros_like(s)
+        for start in range(0, n, batch_size):
+            end = min(start + batch_size, n)
+            mask_l = (omega[:-1] >= lb[start:end].reshape(-1, 1)).astype(float)
+            mask_r = (omega[1:] <= ub[start:end].reshape(-1, 1)).astype(float)
+            mask = mask_l * mask_r
+            temp = mask * s.reshape(1, -1)
+            mu = temp / temp.sum(axis=1).reshape(-1, 1)
+            mu *= weights[start:end]
+            pi += mu.sum(axis=0)
+        pi /= weights.sum()
+        diff = pi - s
+        loss = np.mean(diff * diff)
+        s = pi
+        if loss < num_bin * eps:
+            break
+
+    # create CDF
+    omega[0] = y_min
+    omega[-1] = y_max
+    cdf = CumulativeDist(b=omega, p=s, interpolate="right")
+    return cdf

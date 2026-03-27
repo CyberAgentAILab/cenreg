@@ -1,6 +1,13 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## [0.1.0] - 2026-03-27
+### Added
+- Tutorial for Turnbull estimator
+- New distribution classes (CumlativeDist and QuantileDist)
+### Removed
+- Old distribution classes (EmpiricalCDF, LinearCDF, and LinearQuantileFunction)
+
 ## [0.0.6] - 2025-12-05
 ### Added
 - Hyperparameters for TS-LGB model

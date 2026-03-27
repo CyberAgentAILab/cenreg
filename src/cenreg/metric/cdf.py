@@ -28,7 +28,7 @@ def negative_loglikelihood(
         Boundaries of the prediction to be evaluated.
         The first element must be at most the smallest observed time.
         The last element must be strictly larger than the largest observed time.
-        If None, dist.boundaries is used.
+        If None, dist.b is used.
     simplified : bool
         Use simplified version for censored data points.
     EPS : float
@@ -50,11 +50,9 @@ def negative_loglikelihood(
         uncensored = uncensored.astype(bool)
     if boundaries is None:
         try:
-            boundaries = dist.boundaries
+            boundaries = dist.b
         except AttributeError:
-            raise ValueError(
-                "boundaries must be provided if pred does not have boundaries."
-            )
+            raise ValueError("boundaries must be provided if pred does not have b.")
 
     # check idx
     idx = np.searchsorted(boundaries, observed_times.reshape(-1, 1), side="right")
@@ -166,7 +164,7 @@ def nll_sc(
     for k in range(len(list_dist)):
         mask = events == k
 
-        b = list_dist[k].boundaries
+        b = list_dist[k].b
         idx = np.searchsorted(b, observed_times, side="right")
         idx = np.clip(idx, 1, len(b) - 1)
         left = b[idx - 1]
@@ -232,7 +230,7 @@ def km_calibration(
         uncensored = uncensored.astype(bool)
     if y_bins is None:
         try:
-            y_bins = dist.y_bins
+            y_bins = dist.get_boundaries()
         except AttributeError:
             raise ValueError("y_bins must be provided if pred does not have y_bins.")
 
@@ -243,7 +241,7 @@ def km_calibration(
     F_km = km.cdf(y_bins)
     F_km[-1] = 1.0
     f_km = F_km[1:] - F_km[:-1]
-    F_pred = dist.cdf(y_bins.reshape(1, -1))
+    F_pred = dist.cdf(y_bins.reshape(-1))
     f_pred_mean = np.mean(F_pred[:, 1:] - F_pred[:, :-1], 0)
 
     # compute logarithmic loss for KM valid region

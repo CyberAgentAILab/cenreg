@@ -6,21 +6,21 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Reference &mdash; cenreg 0.0.6 documentation</title>
+  <title>API Reference &mdash; cenreg 0.0.7 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=1fd71caa"></script>
+      <script src="_static/documentation_options.js?v=bbaf98b3"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="cenreg.distribution package" href="cenreg.distribution.html" />
-    <link rel="prev" title="SC-Net Model" href="sc_net.html" /> 
+    <link rel="prev" title="QuantileDist class" href="class_quantile_dist.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,6 +49,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Additional Documentation</span></p>
 <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="class_cumulative_dist.html">CumulativeDist class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_quantile_dist.html">QuantileDist class</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.metric.html">cenreg.metric package</a></li>
@@ -89,35 +91,9 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="cenreg.distribution.html">cenreg.distribution package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html#module-cenreg.distribution.empirical">cenreg.distribution.empirical module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.empirical.EmpiricalCDF"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.empirical.EmpiricalCDF.average_cdf"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF.average_cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.empirical.EmpiricalCDF.cdf"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF.cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.empirical.EmpiricalCDF.icdf"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF.icdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.empirical.EmpiricalCDF.set"><code class="docutils literal notranslate"><span class="pre">EmpiricalCDF.set()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html#module-cenreg.distribution.linear">cenreg.distribution.linear module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearCDF"><code class="docutils literal notranslate"><span class="pre">LinearCDF</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearCDF.average_cdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.average_cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearCDF.cdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearCDF.get_boundary_lengths"><code class="docutils literal notranslate"><span class="pre">LinearCDF.get_boundary_lengths()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearCDF.icdf"><code class="docutils literal notranslate"><span class="pre">LinearCDF.icdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearCDF.set_knot_values"><code class="docutils literal notranslate"><span class="pre">LinearCDF.set_knot_values()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearQuantileFunction"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearQuantileFunction.average_cdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.average_cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearQuantileFunction.cdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.cdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearQuantileFunction.get_qk_lengths"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.get_qk_lengths()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearQuantileFunction.icdf"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.icdf()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="cenreg.distribution.html#cenreg.distribution.linear.LinearQuantileFunction.set_knot_values"><code class="docutils literal notranslate"><span class="pre">LinearQuantileFunction.set_knot_values()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html#cenreg-distribution-cdf-module">cenreg.distribution.cdf module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html#cenreg-distribution-interpolate-module">cenreg.distribution.interpolate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html#cenreg-distribution-quantile-module">cenreg.distribution.quantile module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cenreg.distribution.html#module-cenreg.distribution">Module contents</a></li>
 </ul>
 </li>
@@ -367,7 +343,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="sc_net.html" class="btn btn-neutral float-left" title="SC-Net Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="class_quantile_dist.html" class="btn btn-neutral float-left" title="QuantileDist class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="cenreg.distribution.html" class="btn btn-neutral float-right" title="cenreg.distribution package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

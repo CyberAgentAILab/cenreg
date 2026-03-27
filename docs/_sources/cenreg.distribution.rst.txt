@@ -4,18 +4,26 @@ cenreg.distribution package
 Submodules
 ----------
 
-cenreg.distribution.empirical module
-------------------------------------
+cenreg.distribution.cdf module
+------------------------------
 
-.. automodule:: cenreg.distribution.empirical
+.. automodule:: cenreg.distribution.cdf
    :members:
    :show-inheritance:
    :undoc-members:
 
-cenreg.distribution.linear module
----------------------------------
+cenreg.distribution.interpolate module
+--------------------------------------
 
-.. automodule:: cenreg.distribution.linear
+.. automodule:: cenreg.distribution.interpolate
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
+cenreg.distribution.quantile module
+-----------------------------------
+
+.. automodule:: cenreg.distribution.quantile
    :members:
    :show-inheritance:
    :undoc-members:
