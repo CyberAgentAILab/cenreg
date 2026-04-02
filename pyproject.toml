@@ -18,6 +18,23 @@ classifiers = [
 license = {text = "Apache License (2.0)"}
 license-files = ["LICEN[CS]E*"]
 
+dependencies = [
+  "numpy",
+  "scipy",
+]
+
+[dependency-groups]
+dev = [
+  "ty",
+  "ruff",
+  "pytest",
+]
+optional = [
+  "pandas",
+  "scikit-learn",
+  "matplotlib",
+]
+
 [project.urls]
 Homepage = "https://github.com/CyberAgentAILab/cenreg"
 Issues = "https://github.com/CyberAgentAILab/cenreg/issues"
