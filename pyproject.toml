@@ -39,6 +39,9 @@ optional = [
 Homepage = "https://github.com/CyberAgentAILab/cenreg"
 Issues = "https://github.com/CyberAgentAILab/cenreg/issues"
 
+[tool.uv]
+exclude-newer = "1 week"
+
 [tool.ruff]
 # Ruff only supports pyproject.toml, not setup.cfg.
 # Implicit configurations as default: https://docs.astral.sh/ruff/configuration/
