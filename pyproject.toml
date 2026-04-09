@@ -72,6 +72,17 @@ error-on-warning = true
 # The format to use for printing diagnostic messages.
 output-format = "full"
 
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version_scheme = "semver2"
+version_provider = "scm"
+version_files = [
+    "src/cenreg/__version__.py:version",
+]
+update_changelog_on_bump = true
+major_version_zero = true
+
 [tool.uv-dynamic-versioning]
 vcs = "git"
 style = "semver"
