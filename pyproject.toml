@@ -21,6 +21,7 @@ license-files = ["LICEN[CS]E*"]
 dependencies = [
   "numpy",
   "scipy",
+  "torch",
 ]
 
 [dependency-groups]
