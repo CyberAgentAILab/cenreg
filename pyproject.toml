@@ -44,6 +44,7 @@ Issues = "https://github.com/CyberAgentAILab/cenreg/issues"
 exclude-newer = "1 week"
 
 [tool.ruff]
+extend-exclude = ["*.ipynb"]
 # Ruff only supports pyproject.toml, not setup.cfg.
 # Implicit configurations as default: https://docs.astral.sh/ruff/configuration/
 lint.select = [
@@ -72,6 +73,10 @@ unused-ignore-comment = "warn"
 error-on-warning = true
 # The format to use for printing diagnostic messages.
 output-format = "full"
+
+[tool.ty.src]
+include = ["src", "tests"]
+exclude = ["notebooks"]
 
 [tool.commitizen]
 name = "cz_conventional_commits"
