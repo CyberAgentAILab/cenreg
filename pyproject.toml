@@ -19,9 +19,9 @@ license = "Apache-2.0"
 license-files = ["LICEN[CS]E*"]
 
 dependencies = [
-  "numpy",
-  "scipy",
-  "torch",
+  "numpy>=2.2.6,<3",
+  "scipy>=1.15.3,<2",
+  "torch>=2.11.0,<3",
 ]
 
 [dependency-groups]
@@ -59,6 +59,13 @@ lint.select = [
     "N",      # pep8-naming
     "UP",     # pyupgrade
     "ARG001", # unused arguments in functions
+]
+lint.ignore = [
+    "S101", # allow assertion-based validation in the current codebase
+    "N801", # keep legacy public class names for now
+    "N803", # keep legacy parameter names for now
+    "N806", # keep legacy local variable names for now
+    "N812", # allow torch.nn.functional as F
 ]
 # Allow automatic fixes for all fixable issues
 lint.fixable = ["ALL"]
