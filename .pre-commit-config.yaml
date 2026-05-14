@@ -22,13 +22,13 @@ repos:
     args: [--fix=auto]
   - id: name-tests-test
   - id: pretty-format-json
+    exclude: \.ipynb$
   - id: requirements-txt-fixer
   - id: trailing-whitespace
 - repo: https://github.com/lovesegfault/beautysh
   rev: v6.4.2
   hooks:
-  - description: A Bash beautifier for the masses
-    id: beautysh
+  - id: beautysh
 - repo: https://github.com/commitizen-tools/commitizen
   rev: v4.13.9
   hooks:
@@ -38,8 +38,7 @@ repos:
     - pre-push
 - repo: local
   hooks:
-  - description: Run python linting
-    entry: uvx ruff check --fix --config=pyproject.toml
+  - entry: uv run ruff check --fix
     id: ruff-check
     language: system
     name: ruff check
@@ -49,8 +48,7 @@ repos:
     types_or:
     - python
     - jupyter
-  - description: Run python formatting
-    entry: uvx ruff format
+  - entry: uv run ruff format
     id: ruff-format
     language: system
     name: ruff format
@@ -60,14 +58,13 @@ repos:
     types_or:
     - python
     - jupyter
-  - description: Run python type checking
-    entry: uvx ty check
+  - entry: uv run ty check
     id: ty
     language: system
     name: ty
     stages:
-      - pre-commit
-      - manual
+    - pre-commit
+    - manual
     types_or:
-      - python
-      - pyi
+    - python
+    - pyi
