@@ -69,7 +69,6 @@ lint.ignore = [
     "N801", # keep legacy public class names for now
     "N803", # keep legacy parameter names for now
     "N806", # keep legacy local variable names for now
-    "N812", # allow torch.nn.functional as F
 ]
 # Allow automatic fixes for all fixable issues
 lint.fixable = ["ALL"]
