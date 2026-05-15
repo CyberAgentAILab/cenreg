@@ -21,6 +21,10 @@ license-files = ["LICEN[CS]E*"]
 dependencies = [
   "numpy>=2.2.6,<3",
   "scipy>=1.15.3,<2",
+]
+
+[project.optional-dependencies]
+pytorch = [
   "torch>=2.11.0,<3",
 ]
 
