@@ -53,9 +53,7 @@ class CopulaNegativeLogLikelihood:
                 self.survival_copula = survival_copula
                 print("Warning: survival_copula is not None. copula is ignored.")
 
-    def loss(
-        self, F_pred: torch.Tensor, observed_times: torch.Tensor, events: torch.Tensor
-    ) -> torch.Tensor:
+    def loss(self, F_pred: torch.Tensor, observed_times: torch.Tensor, events: torch.Tensor) -> torch.Tensor:
         assert len(F_pred.shape) == 2
         assert F_pred.shape[0] == observed_times.shape[0]
 

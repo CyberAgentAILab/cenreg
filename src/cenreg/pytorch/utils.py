@@ -50,7 +50,5 @@ def denormalize_pred(pred: torch.Tensor, min_y: float, max_y: float) -> torch.Te
     assert (pred.min() >= 0) and (pred.max() <= 1)
 
     pred_cumsum = torch.cumsum(pred, dim=1)
-    pred_cumsum = torch.cat(
-        [torch.zeros(pred.shape[0], 1, device=pred.device), pred_cumsum], dim=1
-    )
+    pred_cumsum = torch.cat([torch.zeros(pred.shape[0], 1, device=pred.device), pred_cumsum], dim=1)
     return (pred_cumsum * (max_y - min_y)) + min_y

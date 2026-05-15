@@ -17,12 +17,8 @@ class NegativeLogLikelihood:
         assert len(pred.shape) == 2
         assert len(observed_times.shape) == 1
         assert len(events.shape) == 1
-        assert observed_times.max() < self.y_bins[-1], (
-            "Observed times exceed y_bins range."
-        )
-        assert observed_times.min() >= self.y_bins[0], (
-            "Observed times below y_bins range."
-        )
+        assert observed_times.max() < self.y_bins[-1], "Observed times exceed y_bins range."
+        assert observed_times.min() >= self.y_bins[0], "Observed times below y_bins range."
 
         events = events.long().view(-1, 1)
         idx = torch.searchsorted(self.y_bins, observed_times.view(-1, 1), right=True)
@@ -46,12 +42,8 @@ class Brier:
         assert len(pred.shape) == 2
         assert len(observed_times.shape) == 1
         assert len(events.shape) == 1
-        assert observed_times.max() < self.y_bins[-1], (
-            "Observed times exceed y_bins range."
-        )
-        assert observed_times.min() >= self.y_bins[0], (
-            "Observed times below y_bins range."
-        )
+        assert observed_times.max() < self.y_bins[-1], "Observed times exceed y_bins range."
+        assert observed_times.min() >= self.y_bins[0], "Observed times below y_bins range."
 
         events = events.long().view(-1, 1)
         idx = torch.searchsorted(self.y_bins, observed_times.view(-1, 1), right=True)
@@ -67,13 +59,9 @@ class RankedProbabilityScore:
         self.y_bins = y_bins
         self.num_cls = (len(y_bins) - 1) * num_risks
         self.num_risks = num_risks
-        self.triu = torch.triu(
-            torch.ones(self.num_cls, self.num_cls, device=y_bins.device)
-        )
+        self.triu = torch.triu(torch.ones(self.num_cls, self.num_cls, device=y_bins.device))
 
-    def loss(
-        self, f_pred: torch.Tensor, observed_times: torch.Tensor, events: torch.Tensor
-    ) -> torch.Tensor:
+    def loss(self, f_pred: torch.Tensor, observed_times: torch.Tensor, events: torch.Tensor) -> torch.Tensor:
         events = events.long().view(-1, 1)
         idx = torch.searchsorted(self.y_bins, observed_times.view(-1, 1), right=True)
         idx = (idx - 1) * self.num_risks + events

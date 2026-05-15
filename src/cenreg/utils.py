@@ -1,9 +1,7 @@
 import numpy as np
 
 
-def create_bins(
-    max_y: float, min_y: float = 0.0, num_bins=10, algorithm: str = "even"
-) -> np.ndarray:
+def create_bins(max_y: float, min_y: float = 0.0, num_bins=10, algorithm: str = "even") -> np.ndarray:
     """
     Create bins for discretizing a continuous variable.  This function generates
     evenly spaced bins between `min_y` and `max_y` with num_bins-2 intervals, and
@@ -33,9 +31,7 @@ def create_bins(
     return np.linspace(0.0, max_y + w, num_bins + 1)
 
 
-def create_discretized_labels(
-    bins: np.ndarray, num_risks: int, t: np.ndarray, e: np.ndarray
-) -> np.ndarray:
+def create_discretized_labels(bins: np.ndarray, num_risks: int, t: np.ndarray, e: np.ndarray) -> np.ndarray:
     """
     Create discretized labels for survival analysis.
 
