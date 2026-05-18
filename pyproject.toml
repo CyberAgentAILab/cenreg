@@ -76,7 +76,8 @@ lint.fixable = ["ALL"]
 line-length = 120
 
 [tool.ruff.lint.pep8-naming]
-ignore-names = ["functional"]
+# torch.nn.functional is imported as F, so ignore N812 errors for names starting with F.
+extend-ignore-names = ["F"]
 
 [tool.ty.rules]
 unused-ignore-comment = "warn"
