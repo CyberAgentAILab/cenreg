@@ -1,4 +1,5 @@
 import math
+
 import numpy as np
 
 
@@ -24,9 +25,7 @@ class IndependenceCopula:
         probability : ndarray (float)
             ndarray of shape [batch_size].
         """
-        assert u.ndim == 2 and u.shape[1] == 2, (
-            "Input must be a 2D array with shape [batch_size, 2]"
-        )
+        assert u.ndim == 2 and u.shape[1] == 2, "Input must be a 2D array with shape [batch_size, 2]"
 
         return np.prod(u, axis=1)
 

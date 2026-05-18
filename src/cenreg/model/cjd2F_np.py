@@ -4,7 +4,8 @@ import numpy as np
 def _integral(jd_pred: np.ndarray) -> np.ndarray:
     """
     Calculate the integral of the joint distribution predictions to estimate the cumulative distribution function (CDF).
-    This function is based on this paper: A. Tsiatis, A nonidentifiability aspect of the problem of competing risks, 1975.
+    This function is based on this paper: A. Tsiatis, A nonidentifiability aspect of the problem of competing risks,
+    1975.
 
     Parameters
     ----------

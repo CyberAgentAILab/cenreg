@@ -1,11 +1,11 @@
 import itertools
-import numpy as np
 import os
+
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim
-from typing import List
 
 
 class MseModel(nn.Module):
@@ -60,12 +60,12 @@ class MseModel(nn.Module):
         self,
         F_pred: torch.Tensor,
         c,
-        idx_list: List[int],
+        idx_list: list[int],
         i: int,
-        K: int,
-        idx_list_use_Ft: List[int],
+        k: int,
+        idx_list_use_Ft: list[int],
     ):
-        if i == K:
+        if i == k:
             idx = torch.tensor(idx_list, dtype=torch.long)
             idx = idx.view(1, idx.shape[0], idx.shape[1])
             idx_expand = idx.expand(F_pred.shape[0], idx.shape[1], idx.shape[2])
@@ -75,10 +75,10 @@ class MseModel(nn.Module):
             idx_list.append([j + 1 for j in range(F_pred.shape[2] - 1)])
         else:
             idx_list.append([F_pred.shape[2] - 1 for j in range(F_pred.shape[2] - 1)])
-        temp1 = self._copula_sum_sub(F_pred, c, idx_list, i + 1, K, idx_list_use_Ft)
+        temp1 = self._copula_sum_sub(F_pred, c, idx_list, i + 1, k, idx_list_use_Ft)
         idx_list.pop()
-        idx_list.append([j for j in range(F_pred.shape[2] - 1)])
-        temp2 = self._copula_sum_sub(F_pred, c, idx_list, i + 1, K, idx_list_use_Ft)
+        idx_list.append(list(range(F_pred.shape[2] - 1)))
+        temp2 = self._copula_sum_sub(F_pred, c, idx_list, i + 1, k, idx_list_use_Ft)
         idx_list.pop()
         return temp1 - temp2
 
@@ -89,7 +89,7 @@ class MseModel(nn.Module):
         w: torch.Tensor,
         num_risks: int,
         k: int,
-        list_K: List[int],
+        list_k: list[int],
     ):
         """
         Convert F_pred into jd_pred.
@@ -109,7 +109,7 @@ class MseModel(nn.Module):
         k: int
             The index of the risk.
 
-        list_K: list of int
+        list_k: list of int
             The list of indices of the risks.
 
         Returns
@@ -122,7 +122,7 @@ class MseModel(nn.Module):
         for i in range(num_risks + 1):
             if i < 2 or w[i] == 0.0:
                 continue
-            for v in itertools.combinations(list_K, i):
+            for v in itertools.combinations(list_k, i):
                 if k in v:
                     q -= sign * w[i] * self._copula_sum_sub(F_pred, copula, [], 0, num_risks, v)
             sign *= -1.0
@@ -158,7 +158,7 @@ class MseModel(nn.Module):
             w1 = torch.tensor([0.0] + [1 / i for i in range(1, num_risks + 1)])
 
         # compute q
-        list_K = [i for i in range(num_risks)]
+        list_K = list(range(num_risks))
         loss = 0.0
         for k in range(num_risks):
             if k == focal_risk:
@@ -228,8 +228,7 @@ def minimize_mse(model, num_epochs: int) -> np.ndarray:
 
             if epoch % 50 == 0:
                 print(
-                    "epoch=%d, mean loss=%.9f (best_epoch=%d, best loss=%.9f)"
-                    % (epoch, loss.item(), best_epoch, best_loss)
+                    f"epoch={epoch}, mean loss={loss.item():.9f} (best_epoch={best_epoch}, best loss={best_loss:.9f})"
                 )
                 print("model.theta", model.theta)
             loss.backward()

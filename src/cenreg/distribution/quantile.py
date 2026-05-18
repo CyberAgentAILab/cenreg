@@ -75,9 +75,7 @@ class QuantileDist:
             ret[mask] = linear_interpolation(self.v, self.q, y[mask])
             return ret
         else:
-            raise NotImplementedError(
-                "Only 'linear' interpolation is supported for CDF."
-            )
+            raise NotImplementedError("Only 'linear' interpolation is supported for CDF.")
 
     def icdf(self, quantiles: float | np.ndarray) -> np.ndarray:
         """

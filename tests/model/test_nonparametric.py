@@ -1,5 +1,6 @@
-import numpy as np
 import unittest
+
+import numpy as np
 
 from cenreg.model.copula_np import IndependenceCopula
 from cenreg.model.nonparametric import (
@@ -145,9 +146,7 @@ class ZhengKleinEstimator(unittest.TestCase):
         self.assertEqual(dist.b.shape, (6,))
         self.assertEqual(dist.cum_p.shape, (5,))
         self.assertTrue(np.allclose(dist.b, np.array([0, 1, 2, 3, 4, 5])))
-        self.assertTrue(
-            np.allclose(dist.cum_p, np.array([0.0, 0.2, 0.4, 0.7, 1.0]), rtol=0.01)
-        )
+        self.assertTrue(np.allclose(dist.cum_p, np.array([0.0, 0.2, 0.4, 0.7, 1.0]), rtol=0.01))
         self.assertTrue(
             np.allclose(
                 dist.cdf(np.array([0, 1, 2, 2.5, 3, 4, 5])),

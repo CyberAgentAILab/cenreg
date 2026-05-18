@@ -36,9 +36,7 @@ def brier(
 
     events = events.astype(int)
     num_bin = len(boundaries) - 1
-    idx = np.searchsorted(
-        boundaries, observed_times.reshape(-1, 1), side="right"
-    ).reshape(-1)
+    idx = np.searchsorted(boundaries, observed_times.reshape(-1, 1), side="right").reshape(-1)
     idx = events * num_bin + (idx - 1)
 
     num_bin = len(boundaries) - 1

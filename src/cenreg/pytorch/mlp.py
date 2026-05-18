@@ -56,7 +56,7 @@ class MLP_MultiHead(nn.Module):
         list_fc2 = []
         list_fc3 = []
         list_fc4 = []
-        for i in range(output_num):
+        for _ in range(output_num):
             list_fc2.append(nn.Linear(num_neuron, num_neuron))
             list_fc3.append(nn.Linear(num_neuron, num_neuron))
             list_fc4.append(nn.Linear(num_neuron, output_len))
@@ -94,12 +94,12 @@ class SMM(nn.Module):
         self.beta = torch.nn.Parameter(torch.ones(1), requires_grad=True)
         self.gamma = torch.nn.Parameter(torch.zeros(1), requires_grad=True)
         list_init_w = []
-        for i in range(self.K):
+        for _ in range(self.K):
             init_w = np.random.uniform(low=0.0, high=1.0, size=(embed_size, self.K))
             list_init_w.append(torch.Tensor(init_w))
         self.w = nn.ParameterList([nn.Parameter(list_init_w[i], requires_grad=True) for i in range(self.K)])
         list_init_b = []
-        for i in range(self.K):
+        for _ in range(self.K):
             init_b = np.random.uniform(low=0.0, high=1.0, size=(self.K,))
             list_init_b.append(torch.Tensor(init_b))
         self.b = nn.ParameterList([nn.Parameter(list_init_b[i], requires_grad=True) for i in range(self.K)])
@@ -136,7 +136,7 @@ class SMM_MultiHead(nn.Module):
         super().__init__()
         self.fc1 = nn.Linear(input_len, num_neuron)
         list_smm = []
-        for i in range(output_num):
+        for _ in range(output_num):
             list_smm.append(SMM(num_neuron + input_monotone_len))
         self.list_smm = nn.ModuleList(list_smm)
 

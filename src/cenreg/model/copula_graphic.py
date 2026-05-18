@@ -7,10 +7,10 @@ def _binary_search_F_single(
     G_cur: np.ndarray,
     copula,
     target: float,
-    EPS: float = 0.00001,
+    eps: float = 0.00001,
 ):
     F_cur = (F_lb + F_ub) / 2.0
-    if F_ub - F_lb < EPS:
+    if F_ub - F_lb < eps:
         return F_cur
     u = np.array([[F_cur, G_cur]])
     temp = 1.0 - F_cur - G_cur + copula.cdf(u)
@@ -27,10 +27,10 @@ def _binary_search_G_single(
     G_ub: np.ndarray,
     copula,
     target: float,
-    EPS: float = 0.00001,
+    eps: float = 0.00001,
 ):
     G_cur = (G_lb + G_ub) / 2
-    if G_ub - G_lb < EPS:
+    if G_ub - G_lb < eps:
         return G_cur
     u = np.array([[F_cur, G_cur]])
     temp = 1.0 - F_cur - G_cur + copula.cdf(u)
@@ -80,9 +80,9 @@ def estimate(
         weights = np.ones_like(observed_times)
 
     # sort values
-    l_zip = list(zip(observed_times, uncensored.astype(bool), weights))
+    l_zip = list(zip(observed_times, uncensored.astype(bool), weights, strict=True))
     l_sorted = sorted(l_zip, key=lambda y: (y[0], ~y[1]))
-    z, e, w = zip(*l_sorted)
+    z, e, w = zip(*l_sorted, strict=True)
     observed_times = np.array(z)
     uncensored = np.array(e)
     weights = np.array(w)

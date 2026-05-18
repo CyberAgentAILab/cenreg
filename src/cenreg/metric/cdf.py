@@ -9,7 +9,7 @@ def negative_loglikelihood(
     uncensored: np.ndarray | None = None,
     boundaries: np.ndarray | None = None,
     simplified: bool = True,
-    EPS: float = 0.0001,
+    eps: float = 0.0001,
 ) -> np.ndarray:
     """
     Compute negative log-likelihood (NLL).
@@ -31,7 +31,7 @@ def negative_loglikelihood(
         If None, dist.b is used.
     simplified : bool
         Use simplified version for censored data points.
-    EPS : float
+    eps : float
         Small positive value for numerical stability.
 
     Returns
@@ -68,10 +68,10 @@ def negative_loglikelihood(
     b_ub = boundaries[idx + 1]
     F_lb = dist.cdf(b_lb.reshape(-1, 1)).reshape(-1)
     F_ub = dist.cdf(b_ub.reshape(-1, 1)).reshape(-1)
-    loss[uncensored] = -np.log(F_ub[uncensored] - F_lb[uncensored] + EPS)
+    loss[uncensored] = -np.log(F_ub[uncensored] - F_lb[uncensored] + eps)
     last_idx = idx == len(boundaries) - 2
-    loss[~uncensored & ~last_idx] = -np.log(1.0 - F_ub[~uncensored & ~last_idx] + EPS)
-    loss[~uncensored & last_idx] = -np.log(1.0 - F_lb[~uncensored & last_idx] + EPS)
+    loss[~uncensored & ~last_idx] = -np.log(1.0 - F_ub[~uncensored & ~last_idx] + eps)
+    loss[~uncensored & last_idx] = -np.log(1.0 - F_lb[~uncensored & last_idx] + eps)
     return loss
 
 
@@ -148,7 +148,7 @@ def nll_sc(
     observed_times: np.ndarray,
     events: np.ndarray,
     survival_copula,
-    EPS: float = 0.0001,
+    eps: float = 0.0001,
 ):
     """
     Compute Negative Log-Likelihood based on Survival Copula (NLL-SC).
@@ -169,15 +169,13 @@ def nll_sc(
         idx = np.clip(idx, 1, len(b) - 1)
         left = b[idx - 1]
         right = b[idx]
-        diff[mask] = np.clip(right[mask] - left[mask], EPS, None)
+        diff[mask] = np.clip(right[mask] - left[mask], eps, None)
 
         Sl = np.zeros(observed_times.shape[0])
         Sr = np.zeros(observed_times.shape[0])
         Sl[mask] = 1.0 - list_dist[k].cdf(left.reshape(-1, 1)).reshape(-1)[mask]
         Sr[mask] = 1.0 - list_dist[k].cdf(right.reshape(-1, 1)).reshape(-1)[mask]
-        S_pred = (
-            1.0 - list_dist[k].cdf(observed_times.reshape(-1, 1)).reshape(-1)[~mask]
-        )
+        S_pred = 1.0 - list_dist[k].cdf(observed_times.reshape(-1, 1)).reshape(-1)[~mask]
         Sl[~mask] = S_pred
         Sr[~mask] = S_pred
         Sl_list.append(Sl.reshape(-1, 1))
@@ -187,7 +185,7 @@ def nll_sc(
     Sr = np.concatenate(Sr_list, axis=1)
     sl = survival_copula.cdf(Sl)
     sr = survival_copula.cdf(Sr)
-    log_fl = np.log(np.clip((sl - sr) / diff, EPS, None))
+    log_fl = np.log(np.clip((sl - sr) / diff, eps, None))
     return -log_fl
 
 
@@ -196,7 +194,7 @@ def km_calibration(
     observed_times: np.ndarray,
     uncensored: np.ndarray | None = None,
     y_bins: np.ndarray | None = None,
-    EPS: float = 0.0001,
+    eps: float = 0.0001,
 ) -> float:
     """
     Compute KM-Calibration
@@ -245,14 +243,14 @@ def km_calibration(
     f_pred_mean = np.mean(F_pred[:, 1:] - F_pred[:, :-1], 0)
 
     # compute logarithmic loss for KM valid region
-    log_empirical = np.log(f_km[:last_idx] + EPS)
-    log_mean_pred = np.log(f_pred_mean[:last_idx] + EPS)
+    log_empirical = np.log(f_km[:last_idx] + eps)
+    log_mean_pred = np.log(f_pred_mean[:last_idx] + eps)
     loss_valid = np.sum(f_km[:last_idx] * (log_empirical - log_mean_pred))
 
     # compute logarithmic loss for KM invalid region
     sum_empirical = np.sum(f_km[last_idx:])
-    log_sum_empirical = np.log(sum_empirical + EPS)
-    log_sum_pred = np.log(np.sum(f_pred_mean[last_idx:]) + EPS)
+    log_sum_empirical = np.log(sum_empirical + eps)
+    log_sum_pred = np.log(np.sum(f_pred_mean[last_idx:]) + eps)
     loss_invalid = sum_empirical * (log_sum_empirical - log_sum_pred)
 
     return loss_valid + loss_invalid

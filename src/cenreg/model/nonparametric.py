@@ -32,6 +32,43 @@ def _set_ymin_ymax(
     return temp_min, temp_max
 
 
+def _validate_cdf_inputs(
+    y: np.ndarray,
+    weights: np.ndarray | None = None,
+    y_min: float | None = None,
+    y_max: float | None = None,
+):
+    if len(y.shape) != 1:
+        raise ValueError("y must be one-dimensional array.")
+    if y.size == 0:
+        raise ValueError("y must not be empty.")
+    if weights is not None:
+        if len(weights.shape) != 1:
+            raise ValueError("weight must be one-dimensional array.")
+        if weights.shape[0] != y.shape[0]:
+            raise ValueError("weight and y must have the same length.")
+        if np.any(weights < 0.0):
+            raise ValueError("weight must be non-negative.")
+    if y_min is not None:
+        assert y_min <= np.min(y), "y_min must be less than or equal to min(y)."
+    if y_max is not None:
+        assert y_max >= np.max(y), "y_max must be greater than or equal to max(y)."
+
+
+def _adjust_bins(bins: np.ndarray, y_min: float, y_max: float) -> np.ndarray:
+    if y_min is not None:
+        if y_min > bins[0]:
+            raise ValueError("y_min must be less than or equal to the minimum observed value.")
+        elif y_min < bins[0]:
+            bins = np.append(y_min, bins)
+    if y_max is not None:
+        if y_max < bins[-1]:
+            raise ValueError("y_max must be greater than or equal to the maximum observed value.")
+        elif y_max > bins[-1]:
+            bins = np.append(bins, y_max)
+    return bins
+
+
 def empirical_cdf_estimator(
     y: np.ndarray,
     weights: np.ndarray | None = None,
@@ -61,23 +98,9 @@ def empirical_cdf_estimator(
     """
 
     # Input validation
-    if len(y.shape) != 1:
-        raise ValueError("y must be one-dimensional array.")
-    if y.size == 0:
-        raise ValueError("y must not be empty.")
+    _validate_cdf_inputs(y, weights, y_min, y_max)
     if weights is None:
         weights = np.ones_like(y)
-    else:
-        if len(weights.shape) != 1:
-            raise ValueError("weight must be one-dimensional array.")
-        if weights.shape[0] != y.shape[0]:
-            raise ValueError("weight and y must have the same length.")
-        if np.any(weights < 0.0):
-            raise ValueError("weight must be non-negative.")
-    if y_min is not None:
-        assert y_min <= np.min(y), "y_min must be less than or equal to min(y)."
-    if y_max is not None:
-        assert y_max >= np.max(y), "y_max must be greater than or equal to max(y)."
 
     # Set y_min and y_max if not provided
     y_min, y_max = _set_ymin_ymax(y, y_min, y_max)
@@ -92,20 +115,10 @@ def empirical_cdf_estimator(
     cum_p = np.cumsum(p)
     cum_p = np.append(0.0, cum_p)  # CDF starts from 0.0
     cum_p[-1] = 1.0  # Ensure last value is exactly 1.0
-    if y_min is not None:
-        if y_min > bins[0]:
-            raise ValueError(
-                "y_min must be less than or equal to the minimum observed value."
-            )
-        elif y_min < bins[0]:
-            bins = np.append(y_min, bins)
-    if y_max is not None:
-        if y_max < bins[-1]:
-            raise ValueError(
-                "y_max must be greater than or equal to the maximum observed value."
-            )
-        elif y_max > bins[-1]:
-            bins = np.append(bins, y_max)
+
+    # Adjust bins for y_min and y_max
+    bins = _adjust_bins(bins, y_min, y_max)
+
     return CumulativeDist(b=bins, cum_p=cum_p, interpolate="right")
 
 
@@ -150,13 +163,9 @@ def kaplan_meier_estimator(
         assert len(weights.shape) == 1
         assert observed_times.shape[0] == weights.shape[0]
     if y_min is not None:
-        assert y_min <= np.min(observed_times), (
-            "y_min must be less than or equal to min(observed_times)."
-        )
+        assert y_min <= np.min(observed_times), "y_min must be less than or equal to min(observed_times)."
     if y_max is not None:
-        assert y_max >= np.max(observed_times), (
-            "y_max must be greater than or equal to max(observed_times)."
-        )
+        assert y_max >= np.max(observed_times), "y_max must be greater than or equal to max(observed_times)."
 
     # sort based on uncensored and observed_times
     temp = np.concatenate(
@@ -175,9 +184,7 @@ def kaplan_meier_estimator(
     temp = np.concatenate([temp, num_alive.reshape(-1, 1)], axis=1)
     dead = temp[temp[:, 1] == 1]
     cumsum_death = np.concatenate([[0.0], np.cumsum(dead[:, 2])])
-    cut_index = np.concatenate(([True], dead[1:, 0] != dead[:-1, 0], [True])).nonzero()[
-        0
-    ]
+    cut_index = np.concatenate(([True], dead[1:, 0] != dead[:-1, 0], [True])).nonzero()[0]
     num_death = cumsum_death[cut_index[1:]] - cumsum_death[cut_index[:-1]]
     num_alive = dead[cut_index[:-1], 3]
     time_points = dead[cut_index[:-1], 0]
@@ -201,6 +208,75 @@ def kaplan_meier_estimator(
     dist.alive = num_alive
     dist.dead = num_death
     return dist
+
+
+def _binary_search_F_single(F_lb: float, F_ub: float, G_cur: float, copula, target: float, eps=0.0001):
+    F_cur = (F_lb + F_ub) / 2.0
+    if F_ub - F_lb < eps:
+        return F_cur
+    u = np.array([[F_cur, G_cur]])
+    temp = 1.0 - F_cur - G_cur + copula.cdf(u)
+    if temp > target:
+        F_lb = F_cur
+    else:
+        F_ub = F_cur
+    return _binary_search_F_single(F_lb, F_ub, G_cur, copula, target)
+
+
+def _binary_search_G_single(G_lb: float, G_ub: float, F_cur: float, copula, target: float, eps=0.0001):
+    G_cur = (G_lb + G_ub) / 2.0
+    if G_ub - G_lb < eps:
+        return G_cur
+    u = np.array([[F_cur, G_cur]])
+    temp = 1.0 - F_cur - G_cur + copula.cdf(u)
+    if temp > target:
+        G_lb = G_cur
+    else:
+        G_ub = G_cur
+    return _binary_search_G_single(G_lb, G_ub, F_cur, copula, target)
+
+
+def _process_zheng_klein_loop(temp: np.ndarray, copula, total_weight: float):
+    """Process main loop for zheng_klein_estimator."""
+    f = 0.0
+    g = 0.0
+    times = []
+    survival_rates = []
+    cum_weight = 0.0
+
+    for i in range(temp.shape[0]):
+        cum_weight += temp[i, 2]
+        if i + 1 < temp.shape[0] and temp[i, 0] == temp[i + 1, 0] and temp[i, 1] == temp[i + 1, 1]:
+            continue  # skip duplicates
+        target = 1.0 - cum_weight / total_weight
+        if temp[i, 1] > 0:  # uncensored
+            f = _binary_search_F_single(f, 1.0, g, copula, target)
+            times.append(temp[i, 0])
+            survival_rates.append(1.0 - f)
+        else:
+            g = _binary_search_G_single(g, 1.0, f, copula, target)
+
+    return times, survival_rates
+
+
+def _adjust_cdf_bounds(
+    b: np.ndarray, survival_rates: np.ndarray, y_min: float | None, y_max: float | None, observed_times: np.ndarray
+):
+    """Adjust CDF bounds with y_min and y_max."""
+    if y_min is None:
+        y_min = 0.0
+    if y_min < b[0]:
+        b = np.append(y_min, b)
+        survival_rates = np.append(1.0, survival_rates)
+
+    if y_max is None:
+        y_max = np.max(observed_times)
+    if y_max > b[-1]:  # last observation is censored
+        b = np.append(b, y_max)
+    else:
+        survival_rates = survival_rates[:-1]
+
+    return b, survival_rates
 
 
 def zheng_klein_estimator(
@@ -236,34 +312,6 @@ def zheng_klein_estimator(
         Cumulative distribution function.
     """
 
-    def _binary_search_F_single(
-        F_lb: float, F_ub: float, G_cur: float, copula, target: float, EPS=0.0001
-    ):
-        F_cur = (F_lb + F_ub) / 2.0
-        if F_ub - F_lb < EPS:
-            return F_cur
-        u = np.array([[F_cur, G_cur]])
-        temp = 1.0 - F_cur - G_cur + copula.cdf(u)
-        if temp > target:
-            F_lb = F_cur
-        else:
-            F_ub = F_cur
-        return _binary_search_F_single(F_lb, F_ub, G_cur, copula, target)
-
-    def _binary_search_G_single(
-        G_lb: float, G_ub: float, F_cur: float, copula, target: float, EPS=0.0001
-    ):
-        G_cur = (G_lb + G_ub) / 2.0
-        if G_ub - G_lb < EPS:
-            return G_cur
-        u = np.array([[F_cur, G_cur]])
-        temp = 1.0 - F_cur - G_cur + copula.cdf(u)
-        if temp > target:
-            G_lb = G_cur
-        else:
-            G_ub = G_cur
-        return _binary_search_G_single(G_lb, G_ub, F_cur, copula, target)
-
     assert len(observed_times.shape) == 1
     assert len(uncensored.shape) == 1
     assert observed_times.shape[0] == uncensored.shape[0]
@@ -289,42 +337,14 @@ def zheng_klein_estimator(
     temp = temp[np.argsort(temp[:, 0])]
 
     # compute
-    f = 0.0
-    g = 0.0
-    times = []
-    survival_rates = []
     total_weight = np.sum(weights)
-    cum_weight = 0.0
-    for i in range(temp.shape[0]):
-        cum_weight += temp[i, 2]
-        if (
-            i + 1 < temp.shape[0]
-            and temp[i, 0] == temp[i + 1, 0]
-            and temp[i, 1] == temp[i + 1, 1]
-        ):
-            continue  # skip duplicates
-        target = 1.0 - cum_weight / total_weight
-        if temp[i, 1] > 0:  # uncensored
-            f = _binary_search_F_single(f, 1.0, g, copula, target)
-            times.append(temp[i, 0])
-            survival_rates.append(1.0 - f)
-        else:
-            g = _binary_search_G_single(g, 1.0, f, copula, target)
+    times, survival_rates = _process_zheng_klein_loop(temp, copula, total_weight)
 
     # create CDF
     b = np.array(times)
     survival_rates = np.array(survival_rates)
-    if y_min is None:
-        y_min = 0.0
-    if y_min < b[0]:
-        b = np.append(y_min, b)
-        survival_rates = np.append(1.0, survival_rates)
-    if y_max is None:
-        y_max = np.max(observed_times)
-    if y_max > b[-1]:  # last observation is censored
-        b = np.append(b, y_max)
-    else:
-        survival_rates = survival_rates[:-1]
+    b, survival_rates = _adjust_cdf_bounds(b, survival_rates, y_min, y_max, observed_times)
+
     dist = CumulativeDist(b=b, cum_p=1.0 - survival_rates, interpolate="right")
     return dist
 
@@ -399,7 +419,7 @@ def turnbull_estimator(
     # iterate EM algorithm
     n = lb.shape[0]
     batch_size = int(1000000 / num_bin + 1)
-    for i in range(max_iter):
+    for _ in range(max_iter):
         pi = np.zeros_like(s)
         for start in range(0, n, batch_size):
             end = min(start + batch_size, n)
