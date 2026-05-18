@@ -3,10 +3,10 @@ import torch.nn.functional as F
 
 
 class NegativeLogLikelihood:
-    def __init__(self, y_bins: torch.Tensor, num_risks: int, EPS: float = 0.0001):
+    def __init__(self, y_bins: torch.Tensor, num_risks: int, eps: float = 0.0001):
         self.y_bins = y_bins
         self.num_risks = num_risks
-        self.EPS = EPS
+        self.eps = eps
 
     def loss(
         self,
@@ -24,7 +24,7 @@ class NegativeLogLikelihood:
         idx = torch.searchsorted(self.y_bins, observed_times.view(-1, 1), right=True)
         idx = (idx - 1) * self.num_risks + events
         p = torch.gather(pred, 1, idx)
-        return -torch.log(p + self.EPS).view(-1)
+        return -torch.log(p + self.eps).view(-1)
 
 
 class Brier:

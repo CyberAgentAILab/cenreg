@@ -9,7 +9,7 @@ def negative_log_likelihood(
     y: torch.Tensor,
     y_bins: torch.Tensor = None,
     uncensored: torch.Tensor = None,
-    EPS: float = 0.0001,
+    eps: float = 0.0001,
 ) -> torch.Tensor:
     """
     Compute Negative log-likelihood.
@@ -24,7 +24,7 @@ def negative_log_likelihood(
 
     uncensored: Tensor of shape [batch_size]
 
-    EPS: float
+    eps: float
 
     Returns
     -------
@@ -50,19 +50,19 @@ def negative_log_likelihood(
         F_ub_uncensored = F_ub[uncensored]
 
     loss = torch.zeros(y.shape[0], 1, device=y.device)
-    pu = F_ub_uncensored - F_lb_uncensored + EPS
+    pu = F_ub_uncensored - F_lb_uncensored + eps
     loss[uncensored] = -torch.log(pu)
     if uncensored is not None:
         F_lb_censored = F_lb[~uncensored]
         F_ub_censored = F_ub[~uncensored]
         c = y[~uncensored].view(-1, 1)
         F_c = dist.cdf(c, ~uncensored)
-        denominator = torch.clamp(1.0 - F_c, min=EPS)
+        denominator = torch.clamp(1.0 - F_c, min=eps)
         w = torch.clamp((F_ub_censored - F_c) / denominator, min=0.0, max=1.0)
         w = w.detach()
-        pc1 = F_ub_censored - F_lb_censored + EPS
+        pc1 = F_ub_censored - F_lb_censored + eps
         loss[~uncensored, :] -= w * torch.log(pc1)
-        pc2 = 1.0 - F_ub_censored + EPS
+        pc2 = 1.0 - F_ub_censored + eps
         loss[~uncensored, :] -= (1.0 - w) * torch.log(pc2)
     return loss
 
@@ -76,7 +76,7 @@ class NegativeLogLikelihood:
         self.distribution = LinearCDF(y_bins)
         self.y_bins = y_bins
         self.apply_cumsum = apply_cumsum
-        self.EPS = 0.0001
+        self.eps = 0.0001
 
     def loss(
         self,
@@ -88,7 +88,7 @@ class NegativeLogLikelihood:
         assert len(y.shape) == 1
 
         self.distribution.set_knot_values(pred, apply_cumsum=self.apply_cumsum)
-        return negative_log_likelihood(self.distribution, y, self.y_bins, uncensored, self.EPS)
+        return negative_log_likelihood(self.distribution, y, self.y_bins, uncensored, self.eps)
 
 
 class CNLL_CR:
@@ -99,10 +99,10 @@ class CNLL_CR:
     def __init__(self, boundaries: torch.Tensor, num_risks: int):
         self.max_time = boundaries[-1]
         self.list_distribution = []
-        for i in range(num_risks):
+        for _ in range(num_risks):
             self.list_distribution.append(LinearCDF(boundaries))
         self.boundaries = boundaries
-        self.EPS = 0.0001
+        self.eps = 0.0001
 
     def loss(self, pred: torch.Tensor, observed_times: torch.Tensor, events: torch.Tensor) -> torch.Tensor:
         num_risks = len(self.list_distribution)
@@ -121,18 +121,18 @@ class CNLL_CR:
             F_lb_uncensored = F_lb[uncensored]
             F_ub_uncensored = F_ub[uncensored]
             pu = torch.clamp(F_ub_uncensored - F_lb_uncensored, min=0.0)
-            loss[uncensored] -= torch.log(pu + self.EPS).view(-1)
+            loss[uncensored] -= torch.log(pu + self.eps).view(-1)
 
             F_lb_censored = F_lb[~uncensored]
             F_ub_censored = F_ub[~uncensored]
             c = observed_times[~uncensored].view(-1, 1)
             F_c = dist.cdf(c, ~uncensored)
-            denominator = torch.clamp(1.0 - F_c, min=self.EPS)
+            denominator = torch.clamp(1.0 - F_c, min=self.eps)
             w = torch.clamp((F_ub_censored - F_c) / denominator, min=0.0, max=1.0)
             w = w.detach()
-            pc1 = F_ub_censored - F_lb_censored + self.EPS
+            pc1 = F_ub_censored - F_lb_censored + self.eps
             loss[~uncensored] -= (w * torch.log(pc1)).view(-1)
-            pc2 = 1.0 - F_ub_censored + self.EPS
+            pc2 = 1.0 - F_ub_censored + self.eps
             loss[~uncensored] -= ((1.0 - w) * torch.log(pc2)).view(-1)
         return loss
 

@@ -1,5 +1,6 @@
-import numpy as np
 import unittest
+
+import numpy as np
 
 from cenreg.distribution.quantile import QuantileDist
 
@@ -12,9 +13,7 @@ class TestQuantileDist(unittest.TestCase):
             interpolate="linear",
         )
 
-        ret = dist.cdf(
-            np.array([-0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5])
-        )
+        ret = dist.cdf(np.array([-0.5, 0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5]))
         self.assertEqual(ret.shape, (11,))
         self.assertAlmostEqual(ret[0].item(), 0.0)
         self.assertAlmostEqual(ret[1].item(), 0.0)

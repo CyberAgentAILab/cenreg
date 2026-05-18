@@ -51,9 +51,7 @@ class CumulativeDist:
                 assert np.all(np.diff(cum_p) >= 0.0), "cum_p must be non-decreasing"
             else:
                 assert b.shape[0] - 1 == cum_p.shape[1]
-                assert np.all(np.diff(cum_p, axis=1) >= 0.0), (
-                    "cum_p must be non-decreasing"
-                )
+                assert np.all(np.diff(cum_p, axis=1) >= 0.0), "cum_p must be non-decreasing"
         elif p is not None:
             p = np.array(p)
             assert len(p.shape) <= 2

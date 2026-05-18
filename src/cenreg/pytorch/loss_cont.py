@@ -8,8 +8,8 @@ class NegativeLogLikelihood:
     Negative Log-Likelihood
     """
 
-    def __init__(self, EPS=0.0001):
-        self.EPS = EPS
+    def __init__(self, eps=0.0001):
+        self.eps = eps
 
     def loss(
         self,
@@ -27,8 +27,8 @@ class NegativeLogLikelihood:
 
         uncensored = events.to("cpu").detach().numpy().copy().astype(bool)
         ret = torch.zeros_like(observed_times)
-        ret[uncensored] = -torch.log(df[uncensored] + self.EPS)
-        ret[~uncensored] = -torch.log(1.0 - F_pred[~uncensored] + self.EPS)
+        ret[uncensored] = -torch.log(df[uncensored] + self.eps)
+        ret[~uncensored] = -torch.log(1.0 - F_pred[~uncensored] + self.eps)
         return ret
 
 
@@ -39,8 +39,8 @@ class CopulaNegativeLogLikelihood:
     return -log ((dC/dF) (dF/dt))
     """
 
-    def __init__(self, copula=None, survival_copula=None, EPS=0.0001):
-        self.EPS = EPS
+    def __init__(self, copula=None, survival_copula=None, eps=0.0001):
+        self.eps = eps
         if copula is None:
             if survival_copula is None:
                 self.survival_copula = IndependenceCopula()
@@ -64,7 +64,7 @@ class CopulaNegativeLogLikelihood:
             pred_sum = torch.sum(F_pred[:, k])
             temp = torch.autograd.grad(pred_sum, observed_times, create_graph=True)[0]
             df[mask] = temp[mask]
-        log_df = torch.log(df + self.EPS)
+        log_df = torch.log(df + self.eps)
 
         s = 1.0 - F_pred
         if self.survival_copula is None:
@@ -75,5 +75,5 @@ class CopulaNegativeLogLikelihood:
         c_sum = torch.sum(c)
         dc = torch.autograd.grad(c_sum, s, create_graph=True)[0]
         events = events.view(-1, 1).detach()
-        log_dc = torch.log(torch.gather(dc, 1, events) + self.EPS)
+        log_dc = torch.log(torch.gather(dc, 1, events) + self.eps)
         return -(log_df + log_dc)

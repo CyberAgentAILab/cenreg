@@ -82,9 +82,7 @@ class KaplanMeierDistribution:
         temp = np.concatenate([temp, num_alive.reshape(-1, 1)], axis=1)
         dead = temp[temp[:, 1] == 1]
         cumsum_death = np.concatenate([[0.0], np.cumsum(dead[:, 2])])
-        cut_index = np.concatenate(
-            ([True], dead[1:, 0] != dead[:-1, 0], [True])
-        ).nonzero()[0]
+        cut_index = np.concatenate(([True], dead[1:, 0] != dead[:-1, 0], [True])).nonzero()[0]
         self._num_death = cumsum_death[cut_index[1:]] - cumsum_death[cut_index[:-1]]
         self._num_alive = dead[cut_index[:-1], 3]
         self._time_points = dead[cut_index[:-1], 0]
@@ -108,7 +106,7 @@ class KaplanMeierDistribution:
         if start_time >= 0.0:
             start_time = 0.0
         else:
-            print("WARNING: minimum observed time is negative {}".format(start_time))
+            print(f"WARNING: minimum observed time is negative {start_time}")
         if start_time < self._time_points[0]:
             self.bins = np.append(start_time, self._time_points)
             self.survival_rates = np.append(1.0, self.survival_rates)
@@ -123,12 +121,8 @@ class KaplanMeierDistribution:
             self.bins = np.append(self.bins, np.max(observed_times))
             self.survival_rates = np.append(self.survival_rates, self.cure_rate)
             if alpha is not None:
-                self.survival_rates_lb = np.append(
-                    self.survival_rates_lb, self.cure_rate
-                )
-                self.survival_rates_ub = np.append(
-                    self.survival_rates_ub, self.cure_rate
-                )
+                self.survival_rates_lb = np.append(self.survival_rates_lb, self.cure_rate)
+                self.survival_rates_ub = np.append(self.survival_rates_ub, self.cure_rate)
 
     def average_cdf(self, t: np.ndarray):
         """

@@ -1,15 +1,15 @@
 import itertools
+
 import numpy as np
-from typing import List
 
 
 def _copula_sum_sub(
     F_pred: np.ndarray,
     c,
-    idx_list: List[int],
+    idx_list: list[int],
     i: int,
     K: int,
-    idx_list_use_Ft: List[int],
+    idx_list_use_Ft: list[int],
 ) -> np.ndarray:
     if i == K:
         temp_list = []
@@ -32,10 +32,10 @@ def _copula_sum_sub(
 def convert(
     F_pred: np.ndarray,
     copula,
-    w: List[int],
+    w: list[int],
     num_risks: int,
     k: int,
-    list_K: List[int],
+    list_K: list[int],
 ) -> np.ndarray:
     """
     Convert F_pred into jd_pred.
