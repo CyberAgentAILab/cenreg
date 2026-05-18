@@ -50,9 +50,7 @@ class MseModel(nn.Module):
 
     def loss(self):
         F_pred = self.forward()
-        loss = self._mean_squared_error(
-            F_pred, self.jd_pred, self.copula, self.focal_risk
-        )
+        loss = self._mean_squared_error(F_pred, self.jd_pred, self.copula, self.focal_risk)
         return loss
 
     def configure_optimizers(self):
@@ -126,17 +124,11 @@ class MseModel(nn.Module):
                 continue
             for v in itertools.combinations(list_K, i):
                 if k in v:
-                    q -= (
-                        sign
-                        * w[i]
-                        * self._copula_sum_sub(F_pred, copula, [], 0, num_risks, v)
-                    )
+                    q -= sign * w[i] * self._copula_sum_sub(F_pred, copula, [], 0, num_risks, v)
             sign *= -1.0
         return q
 
-    def _mean_squared_error(
-        self, F_pred: torch.Tensor, jd_pred: torch.Tensor, copula, focal_risk: int = -1
-    ):
+    def _mean_squared_error(self, F_pred: torch.Tensor, jd_pred: torch.Tensor, copula, focal_risk: int = -1):
         """
         Loss function to estimate marginal distribution from joint distribution.
 

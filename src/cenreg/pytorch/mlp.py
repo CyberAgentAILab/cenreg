@@ -97,16 +97,12 @@ class SMM(nn.Module):
         for i in range(self.K):
             init_w = np.random.uniform(low=0.0, high=1.0, size=(embed_size, self.K))
             list_init_w.append(torch.Tensor(init_w))
-        self.w = nn.ParameterList(
-            [nn.Parameter(list_init_w[i], requires_grad=True) for i in range(self.K)]
-        )
+        self.w = nn.ParameterList([nn.Parameter(list_init_w[i], requires_grad=True) for i in range(self.K)])
         list_init_b = []
         for i in range(self.K):
             init_b = np.random.uniform(low=0.0, high=1.0, size=(self.K,))
             list_init_b.append(torch.Tensor(init_b))
-        self.b = nn.ParameterList(
-            [nn.Parameter(list_init_b[i], requires_grad=True) for i in range(self.K)]
-        )
+        self.b = nn.ParameterList([nn.Parameter(list_init_b[i], requires_grad=True) for i in range(self.K)])
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         list_h = []
@@ -121,9 +117,7 @@ class SMM(nn.Module):
 
 
 class SMM_MultiHead(nn.Module):
-    def __init__(
-        self, input_len: int, input_monotone_len: int, output_num: int, num_neuron: int
-    ):
+    def __init__(self, input_len: int, input_monotone_len: int, output_num: int, num_neuron: int):
         """
         Initializes the SMM_MultiHead class.
 

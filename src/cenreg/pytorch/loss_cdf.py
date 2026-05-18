@@ -88,9 +88,7 @@ class NegativeLogLikelihood:
         assert len(y.shape) == 1
 
         self.distribution.set_knot_values(pred, apply_cumsum=self.apply_cumsum)
-        return negative_log_likelihood(
-            self.distribution, y, self.y_bins, uncensored, self.EPS
-        )
+        return negative_log_likelihood(self.distribution, y, self.y_bins, uncensored, self.EPS)
 
 
 class CNLL_CR:
@@ -106,13 +104,9 @@ class CNLL_CR:
         self.boundaries = boundaries
         self.EPS = 0.0001
 
-    def loss(
-        self, pred: torch.Tensor, observed_times: torch.Tensor, events: torch.Tensor
-    ) -> torch.Tensor:
+    def loss(self, pred: torch.Tensor, observed_times: torch.Tensor, events: torch.Tensor) -> torch.Tensor:
         num_risks = len(self.list_distribution)
-        idx = torch.searchsorted(
-            self.boundaries, observed_times.view(-1, 1), right=True
-        ).view(-1)
+        idx = torch.searchsorted(self.boundaries, observed_times.view(-1, 1), right=True).view(-1)
         b_lb = self.boundaries[idx - 1]
         b_ub = self.boundaries[idx]
 

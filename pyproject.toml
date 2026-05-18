@@ -69,12 +69,15 @@ lint.ignore = [
     "N801", # keep legacy public class names for now
     "N803", # keep legacy parameter names for now
     "N806", # keep legacy local variable names for now
-    "N812", # allow torch.nn.functional as F
 ]
 # Allow automatic fixes for all fixable issues
 lint.fixable = ["ALL"]
 # Same as MacBookPro (15inch) and IDEs, 1920px full width.
 line-length = 120
+
+[tool.ruff.lint.pep8-naming]
+# torch.nn.functional is imported as F, so ignore N812 errors for names starting with F.
+extend-ignore-names = ["F"]
 
 [tool.ty.rules]
 unused-ignore-comment = "warn"
