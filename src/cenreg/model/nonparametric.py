@@ -349,6 +349,26 @@ def zheng_klein_estimator(
     return dist
 
 
+def _validate_interval_inputs(
+    lb: np.ndarray,
+    ub: np.ndarray,
+    weights: np.ndarray | None = None,
+):
+    if len(lb.shape) != 1 or len(ub.shape) != 1:
+        raise ValueError("lb and ub must be one-dimensional arrays.")
+    if lb.shape[0] != ub.shape[0]:
+        raise ValueError("lb and ub must have the same length.")
+    if weights is not None:
+        if len(weights.shape) != 1:
+            raise ValueError("weights must be a one-dimensional array.")
+        if lb.shape[0] != weights.shape[0]:
+            raise ValueError("weights must have the same length as lb and ub.")
+    if np.any(lb == np.inf):
+        raise NotImplementedError("lb containing np.inf is not supported.")
+    if np.any(ub == -np.inf):
+        raise NotImplementedError("ub containing -np.inf is not supported.")
+
+
 def turnbull_estimator(
     lb: np.ndarray,
     ub: np.ndarray,
@@ -359,7 +379,7 @@ def turnbull_estimator(
     max_iter: int = 100,
 ):
     """
-    Compute Turnbull estimator for interval-censored data.
+    Turnbull estimator for interval-censored data.
 
     Parameters
     ----------
@@ -384,16 +404,7 @@ def turnbull_estimator(
         Cumulative distribution function object.
     """
 
-    assert len(lb.shape) == 1
-    assert len(ub.shape) == 1
-    assert lb.shape[0] == ub.shape[0]
-    if weights is not None:
-        assert len(weights.shape) == 1
-        assert lb.shape[0] == weights.shape[0]
-    if np.any(lb == np.inf):
-        raise NotImplementedError("lb containing np.inf is not supported.")
-    if np.any(ub == -np.inf):
-        raise NotImplementedError("ub containing -np.inf is not supported.")
+    _validate_interval_inputs(lb, ub, weights)
 
     # Set y_min and y_max if not provided
     y = np.concatenate([lb, ub])
@@ -409,7 +420,13 @@ def turnbull_estimator(
     lb = lb.astype(float)
     ub = ub.astype(float)
     mask_exact = lb == ub
-    lb[mask_exact] -= 0.00001
+    diff = ub[~mask_exact] - lb[~mask_exact]
+    diff = diff[np.isfinite(diff)]
+    if len(diff) == 0:
+        min_diff = 0.00001
+    else:
+        min_diff = min(diff.min(), 0.0001) / 10.0
+    lb[mask_exact] -= min_diff
     vals = np.concatenate([lb, ub])
     omega = np.unique(vals[np.isfinite(vals)])
     omega = np.concatenate([[-np.inf], omega, [np.inf]])
