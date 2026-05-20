@@ -534,17 +534,16 @@ def li_watkins_yu_estimator(
         mask = (F_ub - F_lb).reshape(-1) < 1e-7
         pi = np.zeros((len(lb), F_t.shape[1]))
         if np.any(mask):
-            pi[mask, :] = (F_t > F_lb[mask, :]).astype(float)
+            pi[mask, :] = (F_t >= F_lb[mask, :]).astype(float)
         if np.any(~mask):
             pi[~mask, :] = (F_t - F_lb[~mask, :]) / (F_ub[~mask] - F_lb[~mask])
         pi = np.clip(pi, 0.0, 1.0)
         pi_mean = pi.mean(axis=0)
-        dist = CumulativeDist(b=omega, p=pi_mean, interpolate="right")
+        dist = CumulativeDist(b=omega, cum_p=pi_mean[:-1], interpolate="right")
 
         # compute loss
         diff = pi_mean - F_t.reshape(-1)
         loss = np.mean(diff * diff)
-        print("loss:", loss)
         if loss < eps:
             break
 

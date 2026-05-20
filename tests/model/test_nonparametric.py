@@ -259,18 +259,18 @@ class TestLiWatkinsYuEstimator(unittest.TestCase):
         ub = np.array([1, 2, np.inf, 4, 3])
         cdf = li_watkins_yu_estimator(lb, ub, y_min=0.0, y_max=5.0)
 
-        self.assertEqual(cdf.b.shape, (10,))
-        self.assertEqual(cdf.cum_p.shape, (9,))
+        self.assertEqual(cdf.b.shape, (6,))
+        self.assertEqual(cdf.cum_p.shape, (5,))
         self.assertTrue(
             np.allclose(
                 cdf.b,
-                np.array([0.0, 0.99999, 1, 1.99999, 2, 2.99999, 3, 3.99999, 4, 5.0]),
+                np.array([0.0, 1.0, 2.0, 3.0, 4.0, 5.0]),
             )
         )
         self.assertTrue(
             np.allclose(
                 cdf.cum_p,
-                np.array([0.0, 0.2, 0.2, 0.4, 0.4, 0.7, 0.7, 1.0, 1.0]),
+                np.array([0.0, 0.2, 0.4, 0.7, 1.0]),
                 rtol=0.01,
             )
         )
@@ -284,10 +284,10 @@ class TestLiWatkinsYuEstimator(unittest.TestCase):
 
         ret = cdf.icdf(np.array([0.0, 0.1, 0.5, 0.9, 1.0]))
         self.assertEqual(ret.shape, (5,))
-        self.assertAlmostEqual(ret[0].item(), 0.99999)
-        self.assertAlmostEqual(ret[1].item(), 0.99999)
-        self.assertAlmostEqual(ret[2].item(), 2.99999)
-        self.assertAlmostEqual(ret[3].item(), 3.99999)
+        self.assertAlmostEqual(ret[0].item(), 1.0)
+        self.assertAlmostEqual(ret[1].item(), 1.0)
+        self.assertAlmostEqual(ret[2].item(), 3.0)
+        self.assertAlmostEqual(ret[3].item(), 4.0)
         self.assertAlmostEqual(ret[4].item(), 4.0)
 
 
