@@ -531,14 +531,18 @@ def li_watkins_yu_estimator(
         F_t = dist.cdf(omega.reshape(-1, 1)).reshape(1, -1)
         F_lb = dist.cdf(lb.reshape(-1, 1))
         F_ub = dist.cdf(ub.reshape(-1, 1))
-        mask = (F_ub - F_lb).reshape(-1) < 1e-7
-        pi = np.zeros((len(lb), F_t.shape[1]))
-        if np.any(mask):
-            pi[mask, :] = (F_t >= F_lb[mask, :]).astype(float)
-        if np.any(~mask):
-            pi[~mask, :] = (F_t - F_lb[~mask, :]) / (F_ub[~mask] - F_lb[~mask])
-        pi = np.clip(pi, 0.0, 1.0)
-        pi_mean = pi.mean(axis=0)
+        pi = np.zeros_like(omega)
+        for start in range(0, n, batch_size):
+            end = min(start + batch_size, n)
+            mask = (F_ub[start:end] - F_lb[start:end]).reshape(-1) < 1e-7
+            temp = np.zeros((mask.shape[0], F_t.shape[1]))
+            if np.any(mask):
+                temp[mask, :] = (F_t >= F_lb[start:end][mask, :]).astype(float)
+            if np.any(~mask):
+                temp[~mask, :] = (F_t - F_lb[start:end][~mask, :]) / (F_ub[start:end][~mask] - F_lb[start:end][~mask])
+            temp = np.clip(temp, 0.0, 1.0) * weights[start:end]
+            pi += temp.sum(axis=0)
+        pi_mean = pi / weights.sum()
         dist = CumulativeDist(b=omega, cum_p=pi_mean[:-1], interpolate="right")
 
         # compute loss
