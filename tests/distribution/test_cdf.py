@@ -122,6 +122,27 @@ class TestCumulativeDist(unittest.TestCase):
         self.assertAlmostEqual(ret[3].item(), 2.0)
         self.assertAlmostEqual(ret[4].item(), 2.0)
 
+    def test_right3(self):
+        dist = CumulativeDist(
+            b=np.array([0.0, 1.0, 2.0, 3.0]),
+            cum_p=np.array([0.0, 0.3, 1.0]),
+            interpolate="right",
+        )
+
+        ret = dist.cdf(np.array([[-0.5, 0.0, 0.5, 1.0, 1.5], [1.5, 2.0, 2.5, 3.0, 3.5]]))
+        print("ret", ret)
+        self.assertEqual(ret.shape, (2, 5))
+        self.assertAlmostEqual(ret[0, 0].item(), 0.0)
+        self.assertAlmostEqual(ret[0, 1].item(), 0.0)
+        self.assertAlmostEqual(ret[0, 2].item(), 0.0)
+        self.assertAlmostEqual(ret[0, 3].item(), 0.3)
+        self.assertAlmostEqual(ret[0, 4].item(), 0.3)
+        self.assertAlmostEqual(ret[1, 0].item(), 0.3)
+        self.assertAlmostEqual(ret[1, 1].item(), 1.0)
+        self.assertAlmostEqual(ret[1, 2].item(), 1.0)
+        self.assertAlmostEqual(ret[1, 3].item(), 1.0)
+        self.assertAlmostEqual(ret[1, 4].item(), 1.0)
+
     def test_linear1(self):
         dist = CumulativeDist(
             b=np.array([0.0, 1.0, 2.0, 3.0, 4.0]),
@@ -187,7 +208,6 @@ class TestCumulativeDist(unittest.TestCase):
             interpolate="linear",
         )
 
-        print("test_linear3")
         ret = dist.cdf(np.array([2.0, 2.5, 3.0]))
         self.assertEqual(ret.shape, (2, 3))
         self.assertAlmostEqual(ret[0, 0].item(), 0.3)
@@ -211,7 +231,6 @@ class TestCumulativeDist(unittest.TestCase):
             interpolate="linear",
         )
 
-        print("test_linear4")
         ret = dist.cdf(np.array([[2.0], [2.5]]))
         self.assertEqual(ret.shape, (2, 1))
         self.assertAlmostEqual(ret[0, 0].item(), 0.3)

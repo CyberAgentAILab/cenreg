@@ -459,3 +459,93 @@ def turnbull_estimator(
     omega[-1] = y_max
     cdf = CumulativeDist(b=omega, p=s, interpolate="right")
     return cdf
+
+
+def li_watkins_yu_estimator(
+    lb: np.ndarray,
+    ub: np.ndarray,
+    p: float = 2.0,
+    y_min: float | None = None,
+    y_max: float | None = None,
+    weights: np.ndarray | None = None,
+    eps: float = 1e-8,
+    max_iter: int = 100,
+):
+    """
+    Li-Watkins-Yu estimator for interval-censored data.
+
+    Parameters
+    ----------
+    lb : np.ndarray
+        Lower bounds of observed intervals.
+    ub : np.ndarray
+        Upper bounds of observed intervals.
+    p : float
+        Norm parameter for the estimator.  If p=2, we use L2 norm.  If p=1, we use L1 norm.
+    y_min : float | None
+        Minimum value for the CDF.
+    y_max : float | None
+        Maximum value for the CDF.
+    weights : np.ndarray | None
+        Weights for each data point.
+    eps : float
+        Convergence threshold.
+    max_iter : int
+        Maximum number of iterations.
+
+    Returns
+    -------
+    cdf : cenreg.distribution.cdf.CumulativeDist
+        Cumulative distribution function object.
+    """
+
+    _validate_interval_inputs(lb, ub, weights)
+    if p != 2.0:
+        raise NotImplementedError("Only L2 norm (p=2) is supported for Li-Watkins-Yu estimator.")
+
+    # Set y_min and y_max if not provided
+    y = np.concatenate([lb, ub])
+    y_min, y_max = _set_ymin_ymax(y, y_min, y_max)
+
+    # initialize weights
+    if weights is None:
+        weights = np.ones_like(lb).astype(float).reshape(-1, 1)
+    else:
+        weights = weights.astype(float).reshape(-1, 1)
+
+    # initialize distribution
+    lb = lb.astype(float)
+    ub = ub.astype(float)
+    vals = np.concatenate([lb, ub])
+    omega = np.unique(vals[np.isfinite(vals)])
+    omega = np.concatenate([[y_min], omega, [y_max]])
+    num_bin = len(omega) - 1
+    s = np.full((num_bin,), 1.0 / num_bin)
+    dist = CumulativeDist(b=omega, p=s, interpolate="right")
+
+    # iterate EM algorithm
+    n = lb.shape[0]
+    batch_size = int(1000000 / num_bin + 1)
+    for _ in range(max_iter):
+        # update distribution
+        F_t = dist.cdf(omega.reshape(-1, 1)).reshape(1, -1)
+        F_lb = dist.cdf(lb.reshape(-1, 1))
+        F_ub = dist.cdf(ub.reshape(-1, 1))
+        mask = (F_ub - F_lb).reshape(-1) < 1e-7
+        pi = np.zeros((len(lb), F_t.shape[1]))
+        if np.any(mask):
+            pi[mask, :] = (F_t > F_lb[mask, :]).astype(float)
+        if np.any(~mask):
+            pi[~mask, :] = (F_t - F_lb[~mask, :]) / (F_ub[~mask] - F_lb[~mask])
+        pi = np.clip(pi, 0.0, 1.0)
+        pi_mean = pi.mean(axis=0)
+        dist = CumulativeDist(b=omega, p=pi_mean, interpolate="right")
+
+        # compute loss
+        diff = pi_mean - F_t.reshape(-1)
+        loss = np.mean(diff * diff)
+        print("loss:", loss)
+        if loss < eps:
+            break
+
+    return dist

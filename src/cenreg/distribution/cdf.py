@@ -81,6 +81,7 @@ class CumulativeDist:
         -------
         y : np.ndarray | float
             Values for which the CDF is computed.
+            y can be a scalar or a one-dimensional array or a two-dimensional array.
 
         Returns
         -------
@@ -88,15 +89,16 @@ class CumulativeDist:
             CDF values for each value in y.
         """
 
-        if self.cum_p.ndim == 1:
-            assert y.ndim == 1
-        elif self.cum_p.ndim == 2:
-            assert y.ndim == 1 or y.ndim == 2
+        # check input y
+        if isinstance(y, np.ndarray):
+            if len(y.shape) > 2:
+                raise ValueError("y must be a scalar or a one-dimensional array or a two-dimensional array.")
         else:
-            raise ValueError("cum_p must be one-dimensional or two-dimensional.")
+            if isinstance(y, float):
+                y = np.array([y])
+            else:
+                raise ValueError("y must be a scalar or a one-dimensional array or a two-dimensional array.")
 
-        if isinstance(y, float):
-            y = np.array([y])
         if self.cum_p.ndim == 2 and y.ndim == 1:
             y = np.tile(y, (self.cum_p.shape[0], 1))
 
