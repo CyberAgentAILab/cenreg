@@ -464,7 +464,6 @@ def turnbull_estimator(
 def li_watkins_yu_estimator(
     lb: np.ndarray,
     ub: np.ndarray,
-    p: float = 2.0,
     y_min: float | None = None,
     y_max: float | None = None,
     weights: np.ndarray | None = None,
@@ -480,8 +479,6 @@ def li_watkins_yu_estimator(
         Lower bounds of observed intervals.
     ub : np.ndarray
         Upper bounds of observed intervals.
-    p : float
-        Norm parameter for the estimator.  If p=2, we use L2 norm.  If p=1, we use L1 norm.
     y_min : float | None
         Minimum value for the CDF.
     y_max : float | None
@@ -500,8 +497,6 @@ def li_watkins_yu_estimator(
     """
 
     _validate_interval_inputs(lb, ub, weights)
-    if p != 2.0:
-        raise NotImplementedError("Only L2 norm (p=2) is supported for Li-Watkins-Yu estimator.")
 
     # Set y_min and y_max if not provided
     y = np.concatenate([lb, ub])
