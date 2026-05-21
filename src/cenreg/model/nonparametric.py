@@ -358,15 +358,27 @@ def _validate_interval_inputs(
         raise ValueError("lb and ub must be one-dimensional arrays.")
     if lb.shape[0] != ub.shape[0]:
         raise ValueError("lb and ub must have the same length.")
-    if weights is not None:
-        if len(weights.shape) != 1:
-            raise ValueError("weights must be a one-dimensional array.")
-        if lb.shape[0] != weights.shape[0]:
-            raise ValueError("weights must have the same length as lb and ub.")
     if np.any(lb == np.inf):
         raise NotImplementedError("lb containing np.inf is not supported.")
     if np.any(ub == -np.inf):
         raise NotImplementedError("ub containing -np.inf is not supported.")
+    lb = lb.astype(float)
+    ub = ub.astype(float)
+    lb = np.where(np.isnan(lb), -np.inf, lb)
+    ub = np.where(np.isnan(ub), np.inf, ub)
+    if np.any(lb > ub):
+        raise ValueError("Each element of lb must be less than or equal to the corresponding element of ub.")
+
+    if weights is None:
+        weights = np.ones_like(lb).astype(float).reshape(-1, 1)
+    else:
+        weights = weights.astype(float).reshape(-1, 1)
+        if len(weights.shape) != 1:
+            raise ValueError("weights must be a one-dimensional array.")
+        if lb.shape[0] != weights.shape[0]:
+            raise ValueError("weights must have the same length as lb and ub.")
+
+    return lb, ub, weights
 
 
 def turnbull_estimator(
@@ -404,30 +416,15 @@ def turnbull_estimator(
         Cumulative distribution function object.
     """
 
-    _validate_interval_inputs(lb, ub, weights)
+    lb, ub, weights = _validate_interval_inputs(lb, ub, weights)
+    if np.any(lb == ub):
+        raise NotImplementedError("Exact observations (lb == ub) are not supported in turnbull_estimator.")
 
     # Set y_min and y_max if not provided
-    y = np.concatenate([lb, ub])
-    y_min, y_max = _set_ymin_ymax(y, y_min, y_max)
-
-    # initialize weights
-    if weights is None:
-        weights = np.ones_like(lb).astype(float).reshape(-1, 1)
-    else:
-        weights = weights.astype(float).reshape(-1, 1)
+    vals = np.concatenate([lb, ub])
+    y_min, y_max = _set_ymin_ymax(vals, y_min, y_max)
 
     # initialize distribution
-    lb = lb.astype(float)
-    ub = ub.astype(float)
-    mask_exact = lb == ub
-    diff = ub[~mask_exact] - lb[~mask_exact]
-    diff = diff[np.isfinite(diff)]
-    if len(diff) == 0:
-        min_diff = 0.00001
-    else:
-        min_diff = min(diff.min(), 0.0001) / 10.0
-    lb[mask_exact] -= min_diff
-    vals = np.concatenate([lb, ub])
     omega = np.unique(vals[np.isfinite(vals)])
     omega = np.concatenate([[-np.inf], omega, [np.inf]])
     num_bin = len(omega) - 1
@@ -496,22 +493,13 @@ def li_watkins_yu_estimator(
         Cumulative distribution function object.
     """
 
-    _validate_interval_inputs(lb, ub, weights)
+    lb, ub, weights = _validate_interval_inputs(lb, ub, weights)
 
     # Set y_min and y_max if not provided
-    y = np.concatenate([lb, ub])
-    y_min, y_max = _set_ymin_ymax(y, y_min, y_max)
-
-    # initialize weights
-    if weights is None:
-        weights = np.ones_like(lb).astype(float).reshape(-1, 1)
-    else:
-        weights = weights.astype(float).reshape(-1, 1)
+    vals = np.concatenate([lb, ub])
+    y_min, y_max = _set_ymin_ymax(vals, y_min, y_max)
 
     # initialize distribution
-    lb = lb.astype(float)
-    ub = ub.astype(float)
-    vals = np.concatenate([lb, ub])
     omega = np.unique(vals[np.isfinite(vals)])
     omega = np.concatenate([[y_min], omega, [y_max]])
     num_bin = len(omega) - 1

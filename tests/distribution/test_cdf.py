@@ -130,7 +130,6 @@ class TestCumulativeDist(unittest.TestCase):
         )
 
         ret = dist.cdf(np.array([[-0.5, 0.0, 0.5, 1.0, 1.5], [1.5, 2.0, 2.5, 3.0, 3.5]]))
-        print("ret", ret)
         self.assertEqual(ret.shape, (2, 5))
         self.assertAlmostEqual(ret[0, 0].item(), 0.0)
         self.assertAlmostEqual(ret[0, 1].item(), 0.0)

@@ -10,6 +10,7 @@ from cenreg.model.nonparametric import (
     turnbull_estimator,
     zheng_klein_estimator,
 )
+from cenreg.utils import adjust_exact_observations
 
 
 class TestComputeEmpiricalCDF(unittest.TestCase):
@@ -219,6 +220,7 @@ class TestTurnbullEstimator(unittest.TestCase):
     def test1(self):
         lb = np.array([1, 2, 2, 4, 3])
         ub = np.array([1, 2, np.inf, 4, 3])
+        lb, ub = adjust_exact_observations(lb, ub)
         cdf = turnbull_estimator(lb, ub, y_min=0.0, y_max=5.0)
 
         self.assertEqual(cdf.b.shape, (10,))
