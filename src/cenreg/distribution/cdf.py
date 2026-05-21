@@ -82,7 +82,7 @@ class CumulativeDist:
         else:
             if b.shape[0] - 1 != cum_p.shape[1]:
                 raise ValueError("Length of cum_p must be one less than length of b.")
-            if np.any(np.diff(cum_p, axis=1) < 0.0):
+            if np.any(np.diff(cum_p, axis=1) < 0.0):  # allow cum_p[i, j] == cum_p[i, j + 1]
                 raise ValueError("cum_p must be non-decreasing.")
 
     def _validate_p(self, p: np.ndarray, b: np.ndarray):

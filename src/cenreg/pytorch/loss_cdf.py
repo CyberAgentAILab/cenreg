@@ -137,6 +137,63 @@ class CNLL_CR:
         return loss
 
 
+def negative_log_likelihood_interval(
+    dist,
+    lb: torch.Tensor,
+    ub: torch.Tensor,
+    eps: float = 0.0001,
+) -> torch.Tensor:
+    """
+    Compute Negative log-likelihood for interval-censored data.
+
+    Parameters
+    ----------
+    dist: predicted distribution
+
+    lb: Tensor of shape [batch_size]
+
+    ub: Tensor of shape [batch_size]
+
+    eps: float
+
+    Returns
+    -------
+    loss : Tensor of shape [batch_size]
+    """
+
+    F_lb = dist.cdf(lb.view(-1, 1))
+    F_ub = dist.cdf(ub.view(-1, 1))
+    loss = -torch.log(F_ub - F_lb + eps)
+    return loss
+
+
+class NegativeLogLikelihoodInterval:
+    """
+    Loss class for negative log-likelihood for interval-censored data.
+    """
+
+    def __init__(self, y_bins: torch.Tensor, apply_cumsum: bool = True):
+        self.distribution = LinearCDF(y_bins)
+        self.apply_cumsum = apply_cumsum
+        self.eps = 0.0001
+
+    def loss(
+        self,
+        pred: torch.Tensor,
+        lb: torch.Tensor,
+        ub: torch.Tensor,
+    ) -> torch.Tensor:
+        if len(pred.shape) != 2:
+            raise ValueError("pred should be of shape [batch_size, num_bins]")
+        if len(lb.shape) != 1:
+            raise ValueError("lb should be of shape [batch_size]")
+        if len(ub.shape) != 1:
+            raise ValueError("ub should be of shape [batch_size]")
+
+        self.distribution.set_knot_values(pred, apply_cumsum=self.apply_cumsum)
+        return negative_log_likelihood_interval(self.distribution, lb, ub, self.eps)
+
+
 def brier(
     dist,
     y: torch.Tensor,
