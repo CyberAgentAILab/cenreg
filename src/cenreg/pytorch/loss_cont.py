@@ -32,6 +32,29 @@ class NegativeLogLikelihood:
         return ret
 
 
+class NegativeLogLikelihoodInterval:
+    """
+    Negative Log-Likelihood for interval-censored data
+    """
+
+    def __init__(self, eps=0.0001):
+        self.eps = eps
+
+    def loss(self, F_pred: torch.Tensor, lb: torch.Tensor, ub: torch.Tensor) -> torch.Tensor:
+        assert len(F_pred.shape) == 2
+        assert F_pred.shape[0] == lb.shape[0]
+        raise NotImplementedError("NegativeLogLikelihoodInterval is not implemented yet.")
+
+        loss = torch.zeros_like(lb)
+        mask_exact = (lb == ub).detach()
+        pred_sum = torch.sum(F_pred[mask_exact])
+        df = torch.autograd.grad(pred_sum, lb, create_graph=True)[0]
+        loss[mask_exact] = -torch.log(df[mask_exact] + self.eps)
+
+        loss[~mask_exact] = -torch.log(F_pred[~mask_exact] + self.eps)
+        return loss
+
+
 class CopulaNegativeLogLikelihood:
     """
     Negative Log Likelihood with survival copula

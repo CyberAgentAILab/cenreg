@@ -64,6 +64,20 @@ class TestCumulativeDist(unittest.TestCase):
         self.assertAlmostEqual(ret[3].item(), 2.0)
         self.assertAlmostEqual(ret[4].item(), 2.0)
 
+    def test_left3(self):
+        omega = np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0])
+        cum_p = np.array([0.0, 0.15, 0.55, 0.85, 1.0])
+        dist = CumulativeDist(b=omega, cum_p=cum_p, interpolate="left")
+
+        ret = dist.cdf(np.array([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0]))
+        self.assertEqual(ret.shape, (6,))
+        self.assertAlmostEqual(ret[0].item(), 0.0)
+        self.assertAlmostEqual(ret[1].item(), 0.0)
+        self.assertAlmostEqual(ret[2].item(), 0.15)
+        self.assertAlmostEqual(ret[3].item(), 0.55)
+        self.assertAlmostEqual(ret[4].item(), 0.85)
+        self.assertAlmostEqual(ret[5].item(), 1.0)
+
     def test_right1(self):
         dist = CumulativeDist(
             b=np.array([0.0, 1.0, 2.0, 3.0, 4.0]),

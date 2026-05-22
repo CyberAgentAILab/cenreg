@@ -504,7 +504,7 @@ def li_watkins_yu_estimator(
     omega = np.concatenate([[y_min], omega, [y_max]])
     num_bin = len(omega) - 1
     s = np.full((num_bin,), 1.0 / num_bin)
-    dist = CumulativeDist(b=omega, p=s, interpolate="right")
+    dist = CumulativeDist(b=omega, p=s, interpolate="left")
 
     # iterate EM algorithm
     n = lb.shape[0]
@@ -526,7 +526,7 @@ def li_watkins_yu_estimator(
             temp = np.clip(temp, 0.0, 1.0) * weights[start:end]
             pi += temp.sum(axis=0)
         pi_mean = pi / weights.sum()
-        dist = CumulativeDist(b=omega, cum_p=pi_mean[:-1], interpolate="right")
+        dist = CumulativeDist(b=omega, cum_p=pi_mean[1:], interpolate="left")
 
         # compute loss
         diff = pi_mean - F_t.reshape(-1)

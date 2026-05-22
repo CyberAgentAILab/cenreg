@@ -30,7 +30,6 @@ class CumulativeDist:
         cum_p : np.ndarray | None
             Cumulative probability distribution.
             cum_p must be one-dimensional or two-dimensional.
-            If both p and cum_p are given, cum_p is used.
         interpolate : str
             'linear', 'left', or 'right' indicating the interpolation method.
             If 'linear' is set, linear interpolation is used.
@@ -45,6 +44,8 @@ class CumulativeDist:
         if b.ndim != 1:
             raise ValueError("b must be a one-dimensional array.")
         if cum_p is not None:
+            if p is not None:
+                raise ValueError("Only one of p and cum_p can be provided.")
             cum_p = np.array(cum_p)
             self._validate_cum_p(cum_p, b)
         elif p is not None:
@@ -55,14 +56,7 @@ class CumulativeDist:
         if interpolate not in ["linear", "left", "right"]:
             raise ValueError("interpolate must be 'linear', 'left', or 'right'.")
         if confidence_interval is not None:
-            if not isinstance(confidence_interval, np.ndarray):
-                raise ValueError("confidence_interval must be a numpy array.")
-            if confidence_interval.ndim != 2:
-                raise ValueError("confidence_interval must be a two-dimensional array.")
-            if confidence_interval.shape[1] != 2:
-                raise ValueError("confidence_interval must have two columns.")
-            if confidence_interval.shape[0] != cum_p.shape[0]:
-                raise ValueError("confidence_interval must have the same number of rows as cum_p.")
+            self._validate_confidence_interval(confidence_interval, cum_p)
 
         self.b = b
         self.cum_p = cum_p
@@ -79,7 +73,7 @@ class CumulativeDist:
                 raise ValueError("cum_p must be in the range [0.0, 1.0].")
             if np.all(np.diff(cum_p) < 0.0):
                 raise ValueError("cum_p must be non-decreasing.")
-        else:
+        else:  # cum_p.ndim == 2
             if b.shape[0] - 1 != cum_p.shape[1]:
                 raise ValueError("Length of cum_p must be one less than length of b.")
             if np.any(np.diff(cum_p, axis=1) < 0.0):  # allow cum_p[i, j] == cum_p[i, j + 1]
@@ -94,11 +88,21 @@ class CumulativeDist:
             if b.shape[0] - 1 != p.shape[0]:
                 raise ValueError("Length of p must be one less than length of b.")
             cum_p = np.cumsum(p)
-        else:
+        else:  # p.ndim == 2
             if b.shape[0] - 1 != p.shape[1]:
                 raise ValueError("Length of p must be one less than length of b.")
             cum_p = np.cumsum(p, axis=1)
         return cum_p
+
+    def _validate_confidence_interval(self, confidence_interval: np.ndarray, cum_p: np.ndarray):
+        if confidence_interval.shape[0] != cum_p.shape[0]:
+            raise ValueError("confidence_interval must have the same number of rows as cum_p.")
+        if confidence_interval.shape[1] != 2:
+            raise ValueError("confidence_interval must have two columns.")
+        if np.any(confidence_interval < 0.0) or np.any(confidence_interval > 1.0):
+            raise ValueError("confidence_interval must be in the range [0.0, 1.0].")
+        if np.any(confidence_interval[:, 0] > confidence_interval[:, 1]):
+            raise ValueError("Lower bound of confidence interval must be less than or equal to upper bound.")
 
     def cdf(self, y: float | np.ndarray):
         """
