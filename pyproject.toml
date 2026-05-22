@@ -71,7 +71,6 @@ lint.ignore = [
     "N803", # keep legacy parameter names for now
     "N806", # keep legacy local variable names for now
     "N999", # keep legacy module names for now
-    "B904", # keep legacy exception handlers for now
 ]
 # Allow automatic fixes for all fixable issues
 lint.fixable = ["ALL"]
