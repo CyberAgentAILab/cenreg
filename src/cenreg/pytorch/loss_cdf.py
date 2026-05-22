@@ -91,7 +91,7 @@ class NegativeLogLikelihood:
         return negative_log_likelihood(self.distribution, y, self.y_bins, uncensored, self.eps)
 
 
-class CNLL_CR:
+class CNLLCR:
     """
     Censored Negative Log Likelihood for Competing Risks
     """

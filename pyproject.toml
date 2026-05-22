@@ -66,7 +66,6 @@ lint.select = [
 ]
 lint.ignore = [
     "S101", # allow assertion-based validation in the current codebase
-    "N801", # keep legacy public class names for now
     "N802", # keep legacy function names for now
     "N803", # keep legacy parameter names for now
     "N806", # keep legacy local variable names for now

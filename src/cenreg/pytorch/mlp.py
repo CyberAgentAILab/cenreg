@@ -38,7 +38,7 @@ class MLP(nn.Module):
         return x
 
 
-class MLP_MultiHead(nn.Module):
+class MLPMultiHead(nn.Module):
     """
     Multi Layer Perceptron with Multiple Outputs
     """
@@ -116,10 +116,10 @@ class SMM(nn.Module):
         return y
 
 
-class SMM_MultiHead(nn.Module):
+class SMMMultiHead(nn.Module):
     def __init__(self, input_len: int, input_monotone_len: int, output_num: int, num_neuron: int):
         """
-        Initializes the SMM_MultiHead class.
+        Initializes the SMMMultiHead class.
 
         Parameters
         ----------
