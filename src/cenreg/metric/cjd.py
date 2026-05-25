@@ -74,8 +74,9 @@ def negative_loglikelihood(
         Small value to avoid log(0).
     Returns
     -------
-    NLL : float
-        Value of negative log-likelihood.
+    NLL : ndarray
+        Per-sample negative log-likelihood values.
+        Array shape is [batch_size].
     """
     events = events.astype(int).reshape(-1, 1)
     idx = np.searchsorted(boundaries, observed_times.reshape(-1, 1), side="right")
