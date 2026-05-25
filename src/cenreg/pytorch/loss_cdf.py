@@ -7,8 +7,8 @@ from cenreg.pytorch.distribution import LinearCDF
 def negative_log_likelihood(
     dist,
     y: torch.Tensor,
-    y_bins: torch.Tensor = None,
-    uncensored: torch.Tensor = None,
+    y_bins: torch.Tensor | None = None,
+    uncensored: torch.Tensor | None = None,
     eps: float = 0.0001,
 ) -> torch.Tensor:
     """
@@ -82,7 +82,7 @@ class NegativeLogLikelihood:
         self,
         pred: torch.Tensor,
         y: torch.Tensor,
-        uncensored: torch.Tensor = None,
+        uncensored: torch.Tensor | None = None,
     ) -> torch.Tensor:
         assert len(pred.shape) == 2
         assert len(y.shape) == 1
@@ -91,7 +91,7 @@ class NegativeLogLikelihood:
         return negative_log_likelihood(self.distribution, y, self.y_bins, uncensored, self.eps)
 
 
-class CNLL_CR:
+class CNLLCR:
     """
     Censored Negative Log Likelihood for Competing Risks
     """
@@ -140,7 +140,7 @@ class CNLL_CR:
 def brier(
     dist,
     y: torch.Tensor,
-    y_bins: torch.Tensor = None,
+    y_bins: torch.Tensor | None = None,
 ) -> torch.Tensor:
     """
     Compute the Brier score.
@@ -159,10 +159,10 @@ def brier(
     """
 
     assert len(y.shape) == 1
-    assert len(y_bins.shape) == 1
 
     if y_bins is None:
         y_bins = dist.boundaries
+    assert len(y_bins.shape) == 1
 
     idx = torch.searchsorted(y_bins, y.view(-1, 1), right=True)
     F_pred = dist.cdf(y_bins)
@@ -216,10 +216,10 @@ def ranked_probability_score(
     """
 
     assert len(y.shape) == 1
-    assert len(y_bins.shape) == 1
 
     if y_bins is None:
         y_bins = dist.boundaries
+    assert len(y_bins.shape) == 1
 
     F_pred = dist.cdf(y_bins[1:-1])
     idx = torch.searchsorted(y_bins, y.view(-1, 1), right=True) - 1

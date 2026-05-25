@@ -51,8 +51,8 @@ def negative_loglikelihood(
     if boundaries is None:
         try:
             boundaries = dist.b
-        except AttributeError:
-            raise ValueError("boundaries must be provided if pred does not have b.")
+        except AttributeError as err:
+            raise ValueError("boundaries must be provided if pred does not have b.") from err
 
     # check idx
     idx = np.searchsorted(boundaries, observed_times.reshape(-1, 1), side="right")
@@ -229,8 +229,8 @@ def km_calibration(
     if y_bins is None:
         try:
             y_bins = dist.get_boundaries()
-        except AttributeError:
-            raise ValueError("y_bins must be provided if pred does not have y_bins.")
+        except AttributeError as err:
+            raise ValueError("y_bins must be provided if pred does not have y_bins.") from err
 
     # compute Kaplan-Meier distribution and prediction distribution
     km = kaplan_meier.KaplanMeierDistribution()

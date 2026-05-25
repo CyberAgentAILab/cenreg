@@ -1,5 +1,6 @@
 import itertools
 import os
+from collections.abc import Sequence
 
 import numpy as np
 import torch
@@ -11,11 +12,11 @@ import torch.optim
 class MseModel(nn.Module):
     def __init__(
         self,
-        jd_pred: np.array,
+        jd_pred: np.ndarray,
         copula,
         learning_rate: float = 0.01,
         focal_risk: int = -1,
-        init_f: np.ndarray = None,
+        init_f: np.ndarray | None = None,
         optimizer=None,
     ):
         super().__init__()
@@ -63,7 +64,7 @@ class MseModel(nn.Module):
         idx_list: list[int],
         i: int,
         k: int,
-        idx_list_use_Ft: list[int],
+        idx_list_use_Ft: Sequence[int],
     ):
         if i == k:
             idx = torch.tensor(idx_list, dtype=torch.long)
