@@ -2,13 +2,13 @@ import numpy as np
 
 
 def _binary_search_F_single(
-    F_lb: np.ndarray,
-    F_ub: np.ndarray,
-    G_cur: np.ndarray,
+    F_lb: float,
+    F_ub: float,
+    G_cur: float,
     copula,
     target: float,
     eps: float = 0.00001,
-):
+) -> float:
     F_cur = (F_lb + F_ub) / 2.0
     if F_ub - F_lb < eps:
         return F_cur
@@ -22,13 +22,13 @@ def _binary_search_F_single(
 
 
 def _binary_search_G_single(
-    F_cur: np.ndarray,
-    G_lb: np.ndarray,
-    G_ub: np.ndarray,
+    F_cur: float,
+    G_lb: float,
+    G_ub: float,
     copula,
     target: float,
     eps: float = 0.00001,
-):
+) -> float:
     G_cur = (G_lb + G_ub) / 2
     if G_ub - G_lb < eps:
         return G_cur

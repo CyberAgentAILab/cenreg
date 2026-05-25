@@ -1,5 +1,6 @@
 import itertools
 import os
+from collections.abc import Sequence
 
 import numpy as np
 import torch
@@ -63,7 +64,7 @@ class MseModel(nn.Module):
         idx_list: list[int],
         i: int,
         k: int,
-        idx_list_use_Ft: list[int],
+        idx_list_use_Ft: Sequence[int],
     ):
         if i == k:
             idx = torch.tensor(idx_list, dtype=torch.long)
