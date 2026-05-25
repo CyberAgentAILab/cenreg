@@ -283,7 +283,7 @@ def zheng_klein_estimator(
     observed_times: np.ndarray,
     uncensored: np.ndarray,
     copula,
-    weights: np.ndarray = None,
+    weights: np.ndarray | None = None,
     y_min: float | None = None,
     y_max: float | None = None,
 ) -> CumulativeDist:

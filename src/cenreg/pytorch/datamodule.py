@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import DataLoader
 
 
-class ProbDataset(torch.utils.data.Dataset):
+class ProbDataset(torch.utils.data.Dataset[tuple[torch.Tensor, torch.Tensor]]):
     def __init__(self, features, targets):
         self.features = torch.tensor(features, dtype=torch.float32)
         self.targets = torch.tensor(targets, dtype=torch.int64)
@@ -10,8 +10,8 @@ class ProbDataset(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.targets)
 
-    def __getitem__(self, idx):
-        return self.features[idx], self.targets[idx]
+    def __getitem__(self, index) -> tuple[torch.Tensor, torch.Tensor]:
+        return self.features[index], self.targets[index]
 
     def len_feature(self):
         return self.features.shape[1]
@@ -50,7 +50,7 @@ class ProbDataModule(torch.utils.data.Dataset):
         )
 
 
-class SurvDataset(torch.utils.data.Dataset):
+class SurvDataset(torch.utils.data.Dataset[tuple[torch.Tensor, torch.Tensor, torch.Tensor]]):
     def __init__(self, features, observed_times, events):
         self.features = torch.tensor(features, dtype=torch.float32)
         self.events = torch.tensor(events, dtype=torch.int64)
@@ -59,8 +59,8 @@ class SurvDataset(torch.utils.data.Dataset):
     def __len__(self):
         return len(self.events)
 
-    def __getitem__(self, idx):
-        return self.features[idx], self.observed_times[idx], self.events[idx]
+    def __getitem__(self, index) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+        return self.features[index], self.observed_times[index], self.events[index]
 
     def len_feature(self):
         return self.features.shape[1]

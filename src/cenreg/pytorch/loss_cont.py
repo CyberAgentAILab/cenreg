@@ -15,7 +15,7 @@ class NegativeLogLikelihood:
         self,
         F_pred: torch.Tensor,
         observed_times: torch.Tensor,
-        events: torch.Tensor = None,
+        events: torch.Tensor | None = None,
     ) -> torch.Tensor:
         assert len(F_pred.shape) == 2
         assert F_pred.shape[0] == observed_times.shape[0]
@@ -23,7 +23,7 @@ class NegativeLogLikelihood:
         pred_sum = torch.sum(F_pred)
         df = torch.autograd.grad(pred_sum, observed_times, create_graph=True)[0]
         if events is None:
-            return -torch.log(df + self.EPS)
+            return -torch.log(df + self.eps)
 
         uncensored = events.to("cpu").detach().numpy().copy().astype(bool)
         ret = torch.zeros_like(observed_times)

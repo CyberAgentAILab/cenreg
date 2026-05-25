@@ -45,7 +45,7 @@ def estimate(
     observed_times: np.ndarray,
     uncensored: np.ndarray,
     copula,
-    weights: np.ndarray = None,
+    weights: np.ndarray | None = None,
 ):
     """
     Copula-Graphic estimator.

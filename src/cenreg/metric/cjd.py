@@ -51,7 +51,7 @@ def negative_loglikelihood(
     f_pred: np.ndarray,
     boundaries: np.ndarray,
     epsilon: float = 0.0001,
-) -> float:
+) -> np.ndarray:
     """
     Compute negative log-likelihood (NLL).
 
