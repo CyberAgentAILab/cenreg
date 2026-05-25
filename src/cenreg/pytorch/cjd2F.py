@@ -12,11 +12,11 @@ import torch.optim
 class MseModel(nn.Module):
     def __init__(
         self,
-        jd_pred: np.array,
+        jd_pred: np.ndarray,
         copula,
         learning_rate: float = 0.01,
         focal_risk: int = -1,
-        init_f: np.ndarray = None,
+        init_f: np.ndarray | None = None,
         optimizer=None,
     ):
         super().__init__()
