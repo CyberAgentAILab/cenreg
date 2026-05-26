@@ -14,9 +14,9 @@ class MseModel(nn.Module):
         self,
         jd_pred: np.ndarray,
         copula,
+        init_f: np.ndarray,
         learning_rate: float = 0.01,
         focal_risk: int = -1,
-        init_f: np.ndarray | None = None,
         optimizer=None,
     ):
         super().__init__()
