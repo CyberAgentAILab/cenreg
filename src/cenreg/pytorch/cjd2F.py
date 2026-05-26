@@ -14,19 +14,20 @@ class MseModel(nn.Module):
         self,
         jd_pred: np.ndarray,
         copula,
-        init_f: np.ndarray,
         learning_rate: float = 0.01,
         focal_risk: int = -1,
+        init_f: np.ndarray | None = None,
         optimizer=None,
     ):
         super().__init__()
-        assert len(init_f.shape) == 3
+        if init_f is not None:
+            assert len(init_f.shape) == 3
         assert len(jd_pred.shape) == 3
 
         self.jd_pred = torch.tensor(jd_pred, dtype=torch.float32).detach()
         self.focal_risk = focal_risk
         self.fc = nn.Linear(1, jd_pred.size, bias=False)
-        self.shape = init_f.shape
+        self.shape = init_f.shape if init_f is not None else jd_pred.shape
         self.copula = copula
         self.learning_rate = learning_rate
         if init_f is not None:
