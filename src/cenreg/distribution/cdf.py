@@ -1,3 +1,5 @@
+from typing import Literal
+
 import numpy as np
 
 from cenreg.distribution.interpolate import linear_interpolation
@@ -13,7 +15,7 @@ class CumulativeDist:
         b: np.ndarray,
         p: np.ndarray | None = None,
         cum_p: np.ndarray | None = None,
-        interpolate: str = "linear",
+        interpolate: Literal["linear", "left", "right"] = "linear",
         confidence_interval: np.ndarray | None = None,
     ):
         """
@@ -31,7 +33,7 @@ class CumulativeDist:
             Cumulative probability distribution.
             cum_p must be one-dimensional or two-dimensional.
             If both p and cum_p are given, cum_p is used.
-        interpolate : str
+        interpolate :  Literal["linear", "left", "right"]
             'linear', 'left', or 'right' indicating the interpolation method.
             If 'linear' is set, linear interpolation is used.
             If 'left' is set, the CDF value at the left edge of each bin is used.
@@ -73,7 +75,7 @@ class CumulativeDist:
         self.interpolate = interpolate
         self.confidence_interval = confidence_interval
 
-    def cdf(self, y: float | np.ndarray):
+    def cdf(self, y: int | float | np.ndarray):
         """
         Cumulative distribution function (i.e., inverse of quantile function).
 
@@ -87,6 +89,8 @@ class CumulativeDist:
         cum_p : np.ndarray
             CDF values for each value in y.
         """
+        if isinstance(y, int | float):
+            y = np.array([y], dtype=float)
 
         if self.cum_p.ndim == 1:
             assert y.ndim == 1
@@ -95,8 +99,6 @@ class CumulativeDist:
         else:
             raise ValueError("cum_p must be one-dimensional or two-dimensional.")
 
-        if isinstance(y, float):
-            y = np.array([y])
         if self.cum_p.ndim == 2 and y.ndim == 1:
             y = np.tile(y, (self.cum_p.shape[0], 1))
 
@@ -154,8 +156,8 @@ class CumulativeDist:
             Compute inverse CDF values for each value in quantiles.
         """
 
-        if isinstance(quantiles, float):
-            quantiles = np.array([quantiles])
+        if isinstance(quantiles, int | float):
+            quantiles = np.array([quantiles], dtype=float)
         if np.any(quantiles < 0.0):
             raise ValueError("quantiles must be non-negative.")
         if np.any(quantiles > 1.0):
