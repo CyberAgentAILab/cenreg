@@ -1,5 +1,6 @@
 import numpy as np
 
+from typing import Literal
 from cenreg.distribution.interpolate import linear_interpolation
 
 
@@ -13,7 +14,7 @@ class CumulativeDist:
         b: np.ndarray,
         p: np.ndarray | None = None,
         cum_p: np.ndarray | None = None,
-        interpolate: str = "linear",
+        interpolate: Literal["linear", "left", "right"] = "linear",
         confidence_interval: np.ndarray | None = None,
     ):
         """
@@ -31,7 +32,7 @@ class CumulativeDist:
             Cumulative probability distribution.
             cum_p must be one-dimensional or two-dimensional.
             If both p and cum_p are given, cum_p is used.
-        interpolate : str
+        interpolate :  Literal["linear", "left", "right"]
             'linear', 'left', or 'right' indicating the interpolation method.
             If 'linear' is set, linear interpolation is used.
             If 'left' is set, the CDF value at the left edge of each bin is used.
