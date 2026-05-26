@@ -61,7 +61,7 @@ class QuantileDist:
             CDF values for each value in y.
             Array shape is equal to the shape of y.
         """
-        if isinstance(y, float):
+        if isinstance(y, int | float):
             y = np.array([y])
 
         if self.interpolate == "linear":
@@ -97,7 +97,7 @@ class QuantileDist:
             Array shape is equal to the shape of quantiles.
         """
 
-        if isinstance(quantiles, float):
+        if isinstance(quantiles, int | float):
             quantiles = np.array([quantiles])
         if np.any(quantiles < 0.0):
             raise ValueError("quantiles must be non-negative.")

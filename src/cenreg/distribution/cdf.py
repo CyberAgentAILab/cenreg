@@ -73,7 +73,7 @@ class CumulativeDist:
         self.interpolate = interpolate
         self.confidence_interval = confidence_interval
 
-    def cdf(self, y: float | np.ndarray):
+    def cdf(self, y: int | float | np.ndarray):
         """
         Cumulative distribution function (i.e., inverse of quantile function).
 
@@ -87,6 +87,8 @@ class CumulativeDist:
         cum_p : np.ndarray
             CDF values for each value in y.
         """
+        if isinstance(y, int | float):
+            y = np.array([y])
 
         if self.cum_p.ndim == 1:
             assert y.ndim == 1
@@ -95,8 +97,6 @@ class CumulativeDist:
         else:
             raise ValueError("cum_p must be one-dimensional or two-dimensional.")
 
-        if isinstance(y, float):
-            y = np.array([y])
         if self.cum_p.ndim == 2 and y.ndim == 1:
             y = np.tile(y, (self.cum_p.shape[0], 1))
 
@@ -154,7 +154,7 @@ class CumulativeDist:
             Compute inverse CDF values for each value in quantiles.
         """
 
-        if isinstance(quantiles, float):
+        if isinstance(quantiles, int | float):
             quantiles = np.array([quantiles])
         if np.any(quantiles < 0.0):
             raise ValueError("quantiles must be non-negative.")
