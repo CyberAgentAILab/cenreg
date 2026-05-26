@@ -61,7 +61,7 @@ class MseModel(nn.Module):
         self,
         F_pred: torch.Tensor,
         c,
-        idx_list: list[int],
+        idx_list: list[list[int]],
         i: int,
         k: int,
         idx_list_use_Ft: Sequence[int],
