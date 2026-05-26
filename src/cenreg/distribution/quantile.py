@@ -62,7 +62,7 @@ class QuantileDist:
             Array shape is equal to the shape of y.
         """
         if isinstance(y, int | float):
-            y = np.array([y])
+            y = np.array([y], dtype=float)
 
         if self.interpolate == "linear":
             # linear interpolation implementation

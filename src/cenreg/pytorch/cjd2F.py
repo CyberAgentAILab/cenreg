@@ -187,6 +187,7 @@ def minimize_mse(model, num_epochs: int) -> np.ndarray:
     F_pred: estimated CDF.
         np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]
     """
+    assert num_epochs > 0
 
     best_epoch = -1
     best_loss = float("inf")

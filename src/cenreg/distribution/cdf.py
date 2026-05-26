@@ -90,7 +90,7 @@ class CumulativeDist:
             CDF values for each value in y.
         """
         if isinstance(y, int | float):
-            y = np.array([y])
+            y = np.array([y], dtype=float)
 
         if self.cum_p.ndim == 1:
             assert y.ndim == 1
@@ -157,7 +157,7 @@ class CumulativeDist:
         """
 
         if isinstance(quantiles, int | float):
-            quantiles = np.array([quantiles])
+            quantiles = np.array([quantiles], dtype=float)
         if np.any(quantiles < 0.0):
             raise ValueError("quantiles must be non-negative.")
         if np.any(quantiles > 1.0):
