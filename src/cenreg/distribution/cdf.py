@@ -1,6 +1,7 @@
+from typing import Literal
+
 import numpy as np
 
-from typing import Literal
 from cenreg.distribution.interpolate import linear_interpolation
 
 
