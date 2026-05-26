@@ -235,6 +235,7 @@ def minimize_mse(model, num_epochs: int) -> np.ndarray:
             loss.backward()
             optimizer.step()
 
+    assert path is not None
     checkpoint = torch.load(path)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()
