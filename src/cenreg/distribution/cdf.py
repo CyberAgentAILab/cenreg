@@ -104,7 +104,7 @@ class CumulativeDist:
         if np.any(confidence_interval[:, 0] > confidence_interval[:, 1]):
             raise ValueError("Lower bound of confidence interval must be less than or equal to upper bound.")
 
-    def cdf(self, y: float | np.ndarray):
+    def cdf(self, y: float | np.ndarray) -> np.ndarray:
         """
         Cumulative distribution function (i.e., inverse of quantile function).
 

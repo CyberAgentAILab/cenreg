@@ -72,7 +72,42 @@ def negative_loglikelihood(
     last_idx = idx == len(boundaries) - 2
     loss[~uncensored & ~last_idx] = -np.log(1.0 - F_ub[~uncensored & ~last_idx] + eps)
     loss[~uncensored & last_idx] = -np.log(1.0 - F_lb[~uncensored & last_idx] + eps)
-    return loss
+    return loss.sum()
+
+
+def negative_log_likelihood_interval(
+    dist,
+    lb: np.ndarray,
+    ub: np.ndarray,
+    eps: float = 0.0001,
+) -> np.ndarray:
+    """
+    Compute Negative log-likelihood for interval-censored data.
+
+    Parameters
+    ----------
+    dist: distribution object
+        Prediction results.
+    lb: ndarray
+        Lower bounds of the intervals.
+    ub: ndarray
+        Upper bounds of the intervals.
+    eps: float
+        Small positive value for numerical stability.
+
+    Returns
+    -------
+    loss : ndarray
+        Value of negative log-likelihood.
+    """
+
+    if np.any(lb >= ub):
+        raise ValueError("lb must be strictly smaller than ub for all data points.")
+
+    mask = (dist.b >= lb.reshape(-1, 1)) & (dist.b < ub.reshape(-1, 1))
+    p = np.diff(dist.cum_p, axis=0)
+    loss = -np.log(np.sum(p * mask.astype(np.float32), axis=1) + eps)
+    return loss.sum()
 
 
 def brier(
