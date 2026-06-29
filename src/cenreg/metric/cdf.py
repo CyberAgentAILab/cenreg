@@ -1,8 +1,6 @@
 import numpy as np
 
-import cenreg.model.kaplan_meier as kaplan_meier
-
-
+'''
 def negative_loglikelihood(
     dist,
     observed_times: np.ndarray,
@@ -108,6 +106,90 @@ def negative_log_likelihood_interval(
     p = np.diff(dist.cum_p, axis=0)
     loss = -np.log(np.sum(p * mask.astype(np.float32), axis=1) + eps)
     return loss.sum()
+'''
+
+
+def _negative_log_likelihood(
+    dist,
+    lb: np.ndarray,
+    ub: np.ndarray,
+    proportional: bool = True,
+    eps: float = 0.0001,
+) -> np.ndarray:
+    """
+    Compute Negative log-likelihood.
+
+    Parameters
+    ----------
+    dist: predicted distribution
+
+    lb: ndarray of shape [batch_size]
+        lower bound of the interval-censored data
+
+    ub: ndarray of shape [batch_size]
+        upper bound of the interval-censored data
+
+    proportional: bool
+        whether to distribute the probability mass proportionally for censored data
+
+    eps: float
+        small value to avoid numerical issues
+
+    Returns
+    -------
+    loss : ndarray of shape [batch_size]
+    """
+
+    y_bins = dist.b
+    idx_lb = np.searchsorted(y_bins, lb.reshape(-1, 1), side="right")
+    idx_lb = np.clip(idx_lb, 1, len(y_bins) - 1)
+    idx_ub = np.searchsorted(y_bins, ub.reshape(-1, 1), side="left")
+    idx_ub = np.clip(idx_ub, 1, len(y_bins) - 1)
+    b_lb = y_bins[idx_lb - 1]
+    b_ub = y_bins[idx_ub]
+    F_lb = dist.cdf(b_lb)
+    F_ub = dist.cdf(b_ub)
+
+    if proportional:
+        interval = (idx_lb + 1 == idx_ub)[:, 0]
+        F_lb[interval] = dist.cdf(lb.reshape(-1, 1))[interval]
+        F_ub[interval] = dist.cdf(ub.reshape(-1, 1))[interval]
+
+    loss = -np.log(F_ub - F_lb + eps)
+    return loss.reshape(-1)
+
+
+def negative_log_likelihood_survival(
+    dist,
+    y: np.ndarray,
+    uncensored: np.ndarray = None,
+    proportional: bool = True,
+    eps: float = 0.0001,
+) -> np.ndarray:
+    if len(y.shape) != 1:
+        raise ValueError("y must be of shape [batch_size]")
+
+    lb = y
+    ub = y
+    ub[~uncensored] = np.inf
+    return _negative_log_likelihood(dist, lb, ub, proportional, eps)
+
+
+def negative_log_likelihood_interval(
+    dist,
+    lb: np.ndarray,
+    ub: np.ndarray,
+    proportional: bool = True,
+    eps: float = 0.0001,
+) -> np.ndarray:
+    if len(lb.shape) != 1:
+        raise ValueError("lb must be of shape [batch_size]")
+    if len(ub.shape) != 1:
+        raise ValueError("ub must be of shape [batch_size]")
+    if len(lb) != len(ub):
+        raise ValueError("lb and ub must have the same length")
+
+    return _negative_log_likelihood(dist, lb, ub, proportional, eps)
 
 
 def brier(
@@ -224,6 +306,7 @@ def nll_sc(
     return -log_fl
 
 
+'''
 def km_calibration(
     dist,
     observed_times: np.ndarray,
@@ -268,7 +351,7 @@ def km_calibration(
             raise ValueError("y_bins must be provided if pred does not have y_bins.")
 
     # compute Kaplan-Meier distribution and prediction distribution
-    km = kaplan_meier.KaplanMeierDistribution()
+    km = KaplanMeierDistribution()
     km.fit(observed_times, uncensored)
     last_idx = np.searchsorted(y_bins, km.last_uncensored_time, side="right") - 1
     F_km = km.cdf(y_bins)
@@ -289,3 +372,4 @@ def km_calibration(
     loss_invalid = sum_empirical * (log_sum_empirical - log_sum_pred)
 
     return loss_valid + loss_invalid
+'''

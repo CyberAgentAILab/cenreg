@@ -1,3 +1,4 @@
+import numpy as np
 import torch
 import torch.nn.functional as F
 
@@ -85,7 +86,7 @@ class NegativeLogLikelihoodSurvival:
         self.distribution.set_knot_values(pred, apply_cumsum=self.apply_cumsum)
         lb = y
         ub = y
-        ub[~uncensored] = self.y_bins[-1]
+        ub[~uncensored] = np.inf
         return negative_log_likelihood(self.distribution, lb, ub, self.proportional, self.eps)
 
 
@@ -103,6 +104,15 @@ class NegativeLogLikelihoodInterval:
     ):
         if not isinstance(y_bins, torch.Tensor):
             raise ValueError("y_bins should be a torch.Tensor")
+        if len(y_bins.shape) != 1:
+            raise ValueError("y_bins should be a 1D tensor")
+        diff = torch.diff(y_bins)
+        if torch.any(diff <= 0.0):
+            raise ValueError("y_bins should be sorted in ascending order")
+        if y_bins[0] == -np.inf:
+            raise ValueError("y_bins should not contain -inf")
+        if y_bins[-1] == np.inf:
+            raise ValueError("y_bins should not contain inf")
 
         self.distribution = CumulativeDist(y_bins)
         self.y_bins = y_bins
