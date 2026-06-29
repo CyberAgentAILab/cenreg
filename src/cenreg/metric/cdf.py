@@ -166,11 +166,38 @@ def negative_log_likelihood_survival(
     proportional: bool = True,
     eps: float = 0.0001,
 ) -> np.ndarray:
+    """
+    Compute Negative log-likelihood for survival data.
+
+    Parameters
+    ----------
+    dist: predicted distribution
+        Must be an instance of cenreg.distribution.cdf.CumulativeDist with linear interpolation.
+
+    y: ndarray of shape [batch_size]
+        observed times
+
+    uncensored: ndarray of shape [batch_size]
+        boolean array indicating whether the event was observed (True) or censored (False)
+
+    proportional: bool
+        whether to distribute the probability mass proportionally for censored data
+
+    eps: float
+        small value to avoid numerical issues
+
+    Returns
+    -------
+    loss : ndarray of shape [batch_size]
+    """
+
     if len(y.shape) != 1:
         raise ValueError("y must be of shape [batch_size]")
+    if dist.interpolate != "linear":
+        raise Warning("dist must be an instance of cenreg.distribution.cdf.CumulativeDist with linear interpolation.")
 
-    lb = y
-    ub = y
+    lb = y.astype(float)
+    ub = y.astype(float)
     ub[~uncensored] = np.inf
     return _negative_log_likelihood(dist, lb, ub, proportional, eps)
 
@@ -182,12 +209,39 @@ def negative_log_likelihood_interval(
     proportional: bool = True,
     eps: float = 0.0001,
 ) -> np.ndarray:
+    """
+    Compute Negative log-likelihood for interval-censored data.
+
+    Parameters
+    ----------
+    dist: predicted distribution
+        Must be an instance of cenreg.distribution.cdf.CumulativeDist with linear interpolation.
+
+    lb: ndarray of shape [batch_size]
+        lower bounds of the intervals
+
+    ub: ndarray of shape [batch_size]
+        upper bounds of the intervals
+
+    proportional: bool
+        whether to distribute the probability mass proportionally for censored data
+
+    eps: float
+        small value to avoid numerical issues
+
+    Returns
+    -------
+    loss : ndarray of shape [batch_size]
+    """
+
     if len(lb.shape) != 1:
         raise ValueError("lb must be of shape [batch_size]")
     if len(ub.shape) != 1:
         raise ValueError("ub must be of shape [batch_size]")
     if len(lb) != len(ub):
         raise ValueError("lb and ub must have the same length")
+    if dist.interpolate != "linear":
+        raise Warning("dist must be an instance of cenreg.distribution.cdf.CumulativeDist with linear interpolation.")
 
     return _negative_log_likelihood(dist, lb, ub, proportional, eps)
 

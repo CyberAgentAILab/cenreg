@@ -60,3 +60,64 @@ def d_calibration(
     diff = (np.sum(count_unc, 0) + np.sum(count_cen, 0)) / quantiles.shape[0]
     diff -= len_bin
     return np.sum(diff * diff)
+
+
+def ic_calibration(
+    dist,
+    lb: np.ndarray,
+    ub: np.ndarray,
+    p: float = 2.0,
+    b: np.ndarray | None = None,
+    EPS: float = 0.0001,
+) -> float:
+    """
+    Interval-Censored Calibration (IC-Cal).
+
+    Parameters
+    ----------
+    dist: distribution object
+        Predicted distribution.
+    lb : ndarray (float) of shape [batch_size]
+        Lower bound of the interval.
+    ub : ndarray (float) of shape [batch_size]
+        Upper bound of the interval.
+    p : float
+        Power for the calibration error. Only p=2 is implemented.
+    b : ndarray (float) or None
+        Bin boundaries used to compute IC-Cal.
+        If None, default boundaries are used.
+    EPS : float
+        Small value to avoid division by zero.
+
+    Returns
+    -------
+    IC-Cal : float
+        Value of IC-Cal.
+    """
+
+    assert len(lb.shape) == 1
+    assert len(ub.shape) == 1
+    assert lb.shape[0] == ub.shape[0]
+
+    if p != 2.0:
+        raise NotImplementedError("Only p=2 is implemented.")
+
+    F_lb = dist.cdf(lb.reshape(-1, 1))
+    F_ub = dist.cdf(ub.reshape(-1, 1))
+    if b is None:
+        temp01 = np.array([[0.0], [1.0]])
+        u = np.unique(np.concatenate([temp01, F_lb, F_ub]))
+    else:
+        u = b
+
+    mask = (F_ub - F_lb).reshape(-1) < EPS
+    pi = np.zeros((len(lb), len(u)))
+    if np.any(mask):
+        pi[mask, :] = (u > F_lb[mask, :]).astype(float)
+    if np.any(~mask):
+        pi[~mask, :] = (u - F_lb[~mask, :]) / (F_ub[~mask] - F_lb[~mask])
+    pi = np.clip(pi, 0.0, 1.0)
+    diff = pi.mean(axis=0) - u
+    a = diff[:-1]
+    b = diff[1:]
+    return np.sum(np.diff(u) * (a * a + a * b + b * b) / 3.0)
