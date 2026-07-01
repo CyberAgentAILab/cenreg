@@ -9,7 +9,7 @@ from cenreg.metric.cdf import km_calibration
 class TestKMCalibration(unittest.TestCase):
     def test1(self):
         pred = np.array([[0.1, 0.2, 0.6, 0.8, 1.0]])
-        dist = CumulativeDist(np.array([0, 1, 2, 3, 4, 5]), cum_p=pred)
+        dist = CumulativeDist(np.array([0, 1, 2, 3, 4, 5], dtype=float), cum_p=pred)
 
         observed_times = np.array([1, 2, 2, 3, 4])
         uncensored = np.array([True, True, False, True, True])

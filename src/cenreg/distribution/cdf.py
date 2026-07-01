@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 
 from cenreg.distribution.interpolate import linear_interpolation
@@ -43,27 +45,31 @@ class CumulativeDist:
         b = np.array(b)
         if b.ndim != 1:
             raise ValueError("b must be a one-dimensional array.")
+        if not np.issubdtype(b.dtype, np.floating):
+            warnings.warn("b is not float, converting to float.", stacklevel=2)
+            b = b.astype(float)
+        self.b = b
+
         if cum_p is not None:
             if p is not None:
                 raise ValueError("Only one of p and cum_p can be provided.")
             cum_p = np.array(cum_p)
-            self._validate_cum_p(cum_p, b)
+            self._validate_and_set_cum_p(cum_p, b)
         elif p is not None:
             p = np.array(p)
-            cum_p = self._validate_p(p, b)
+            self._validate_p_and_set_cum_p(p, b)
         else:
             raise ValueError("Either p or cum_p must be provided.")
+
         if interpolate not in ["linear", "left", "right"]:
             raise ValueError("interpolate must be 'linear', 'left', or 'right'.")
-        if confidence_interval is not None:
-            self._validate_confidence_interval(confidence_interval, cum_p)
-
-        self.b = b
-        self.cum_p = cum_p
         self.interpolate = interpolate
+
+        if confidence_interval is not None:
+            self._validate_confidence_interval(confidence_interval, self.cum_p)
         self.confidence_interval = confidence_interval
 
-    def _validate_cum_p(self, cum_p: np.ndarray, b: np.ndarray):
+    def _validate_and_set_cum_p(self, cum_p: np.ndarray, b: np.ndarray):
         if cum_p.ndim > 2:
             raise ValueError("cum_p must be one-dimensional or two-dimensional.")
         if cum_p.ndim == 1:
@@ -78,12 +84,20 @@ class CumulativeDist:
                 raise ValueError("Length of cum_p must be one less than length of b.")
             if np.any(np.diff(cum_p, axis=1) < 0.0):  # allow cum_p[i, j] == cum_p[i, j + 1]
                 raise ValueError("cum_p must be non-decreasing.")
+        # check if cum_p is float
+        if not np.issubdtype(cum_p.dtype, np.floating):
+            warnings.warn("cum_p is not float, converting to float.", stacklevel=2)
+            cum_p = cum_p.astype(float)
+        self.cum_p = cum_p
 
-    def _validate_p(self, p: np.ndarray, b: np.ndarray):
+    def _validate_p_and_set_cum_p(self, p: np.ndarray, b: np.ndarray):
         if p.ndim > 2:
             raise ValueError("p must be one-dimensional or two-dimensional.")
         if np.any(p < 0.0):
             raise ValueError("p must be non-negative.")
+        if not np.issubdtype(p.dtype, np.floating):
+            warnings.warn("p is not float, converting to float.", stacklevel=2)
+            p = p.astype(float)
         if p.ndim == 1:
             if b.shape[0] - 1 != p.shape[0]:
                 raise ValueError("Length of p must be one less than length of b.")
@@ -92,7 +106,7 @@ class CumulativeDist:
             if b.shape[0] - 1 != p.shape[1]:
                 raise ValueError("Length of p must be one less than length of b.")
             cum_p = np.cumsum(p, axis=1)
-        return cum_p
+        self.cum_p = cum_p
 
     def _validate_confidence_interval(self, confidence_interval: np.ndarray, cum_p: np.ndarray):
         if confidence_interval.shape[0] != cum_p.shape[0]:
@@ -129,7 +143,9 @@ class CumulativeDist:
                 y = np.array([y])
             else:
                 raise ValueError("y must be a scalar or a one-dimensional array or a two-dimensional array.")
-
+        if not np.issubdtype(y.dtype, np.floating):
+            warnings.warn("y is not float, converting to float.", stacklevel=2)
+            y = y.astype(float)
         if self.cum_p.ndim == 2 and y.ndim == 1:
             y = np.tile(y, (self.cum_p.shape[0], 1))
 
@@ -186,12 +202,7 @@ class CumulativeDist:
             Compute inverse CDF values for each value in quantiles.
         """
 
-        if isinstance(quantiles, float):
-            quantiles = np.array([quantiles])
-        if np.any(quantiles < 0.0):
-            raise ValueError("quantiles must be non-negative.")
-        if np.any(quantiles > 1.0):
-            raise ValueError("quantiles must be at most 1.0.")
+        quantiles = self._validate_quantiles(quantiles)
         if self.cum_p.ndim == 2 and quantiles.ndim == 1:
             quantiles = np.tile(quantiles, (self.cum_p.shape[0], 1))
 
@@ -234,6 +245,18 @@ class CumulativeDist:
             mask = ~(mask_low | mask_high)
             ret[mask] = self.b[idx[mask]]
             return ret
+
+    def _validate_quantiles(self, quantiles):
+        if isinstance(quantiles, float):
+            quantiles = np.array([quantiles])
+        elif not np.issubdtype(quantiles.dtype, np.floating):
+            warnings.warn("quantiles is not float, converting to float.", stacklevel=2)
+            quantiles = quantiles.astype(float)
+        if np.any(quantiles < 0.0):
+            raise ValueError("quantiles must be non-negative.")
+        if np.any(quantiles > 1.0):
+            raise ValueError("quantiles must be at most 1.0.")
+        return quantiles
 
     def survival_function(self, y: float | np.ndarray) -> np.ndarray:
         """
