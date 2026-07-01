@@ -205,8 +205,8 @@ def kaplan_meier_estimator(
     else:
         survival_rates = survival_rates[:-1]
     dist = CumulativeDist(b=b, cum_p=1.0 - survival_rates, interpolate="right")
-    dist.alive = num_alive
-    dist.dead = num_death
+    # dist.alive = num_alive
+    # dist.dead = num_death
     return dist
 
 
@@ -283,7 +283,7 @@ def zheng_klein_estimator(
     observed_times: np.ndarray,
     uncensored: np.ndarray,
     copula,
-    weights: np.ndarray = None,
+    weights: np.ndarray | None = None,
     y_min: float | None = None,
     y_max: float | None = None,
 ) -> CumulativeDist:

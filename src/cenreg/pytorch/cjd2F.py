@@ -1,5 +1,6 @@
 import itertools
 import os
+from collections.abc import Sequence
 
 import numpy as np
 import torch
@@ -11,21 +12,22 @@ import torch.optim
 class MseModel(nn.Module):
     def __init__(
         self,
-        jd_pred: np.array,
+        jd_pred: np.ndarray,
         copula,
         learning_rate: float = 0.01,
         focal_risk: int = -1,
-        init_f: np.ndarray = None,
+        init_f: np.ndarray | None = None,
         optimizer=None,
     ):
         super().__init__()
-        assert len(init_f.shape) == 3
+        if init_f is not None:
+            assert len(init_f.shape) == 3
         assert len(jd_pred.shape) == 3
 
         self.jd_pred = torch.tensor(jd_pred, dtype=torch.float32).detach()
         self.focal_risk = focal_risk
         self.fc = nn.Linear(1, jd_pred.size, bias=False)
-        self.shape = init_f.shape
+        self.shape = init_f.shape if init_f is not None else jd_pred.shape
         self.copula = copula
         self.learning_rate = learning_rate
         if init_f is not None:
@@ -60,10 +62,10 @@ class MseModel(nn.Module):
         self,
         F_pred: torch.Tensor,
         c,
-        idx_list: list[int],
+        idx_list: list[list[int]],
         i: int,
         k: int,
-        idx_list_use_Ft: list[int],
+        idx_list_use_Ft: Sequence[int],
     ):
         if i == k:
             idx = torch.tensor(idx_list, dtype=torch.long)
@@ -186,6 +188,7 @@ def minimize_mse(model, num_epochs: int) -> np.ndarray:
     F_pred: estimated CDF.
         np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]
     """
+    assert num_epochs > 0
 
     best_epoch = -1
     best_loss = float("inf")
@@ -234,6 +237,7 @@ def minimize_mse(model, num_epochs: int) -> np.ndarray:
             loss.backward()
             optimizer.step()
 
+    assert path is not None
     checkpoint = torch.load(path)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()

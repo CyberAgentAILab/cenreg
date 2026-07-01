@@ -1,4 +1,5 @@
 import itertools
+from collections.abc import Sequence
 
 import numpy as np
 
@@ -9,7 +10,7 @@ def _copula_sum_sub(
     idx_list: list[int],
     i: int,
     K: int,
-    idx_list_use_Ft: list[int],
+    idx_list_use_Ft: Sequence[int],
 ) -> np.ndarray:
     if i == K:
         temp_list = []

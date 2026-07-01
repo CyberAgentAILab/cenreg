@@ -1,4 +1,5 @@
 import warnings
+from typing import Literal
 
 import numpy as np
 
@@ -15,7 +16,7 @@ class CumulativeDist:
         b: np.ndarray,
         p: np.ndarray | None = None,
         cum_p: np.ndarray | None = None,
-        interpolate: str = "linear",
+        interpolate: Literal["linear", "left", "right"] = "linear",
         confidence_interval: np.ndarray | None = None,
     ):
         """
@@ -32,7 +33,8 @@ class CumulativeDist:
         cum_p : np.ndarray | None
             Cumulative probability distribution.
             cum_p must be one-dimensional or two-dimensional.
-        interpolate : str
+            If both p and cum_p are given, cum_p is used.
+        interpolate :  Literal["linear", "left", "right"]
             'linear', 'left', or 'right' indicating the interpolation method.
             If 'linear' is set, linear interpolation is used.
             If 'left' is set, the CDF value at the left edge of each bin is used.
@@ -133,6 +135,8 @@ class CumulativeDist:
         cum_p : np.ndarray
             CDF values for each value in y.
         """
+        if isinstance(y, int | float):
+            y = np.array([y], dtype=float)
 
         # check input y
         if isinstance(y, np.ndarray):

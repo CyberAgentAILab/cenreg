@@ -39,7 +39,7 @@ class LinearCDF:
     def __init__(
         self,
         boundaries: torch.Tensor,
-        values: torch.Tensor = None,
+        values: torch.Tensor | None = None,
         apply_cumsum: bool = True,
     ):
         """
@@ -179,7 +179,7 @@ class LinearCDF:
         # set values
         if apply_cumsum:
             if values.dim() == 1:
-                cum_values = torch.cumsum(values)
+                cum_values = torch.cumsum(values, dim=0)
                 values = torch.cat([torch.tensor([0.0]), cum_values], 0)
             else:
                 cum_values = torch.cumsum(values, dim=1)
@@ -217,7 +217,7 @@ class LinearQuantileFunction:
     def __init__(
         self,
         qk_levels: torch.Tensor,
-        qk_values: torch.Tensor = None,
+        qk_values: torch.Tensor | None = None,
         apply_cumsum: bool = True,
     ):
         """
@@ -363,7 +363,7 @@ class LinearQuantileFunction:
         # set values
         if apply_cumsum:
             if qk_values.dim() == 1:
-                cum_values = torch.cumsum(qk_values)
+                cum_values = torch.cumsum(qk_values, dim=0)
                 qk_values = torch.cat([torch.tensor([0.0]), cum_values], 0)
             else:
                 cum_values = torch.cumsum(qk_values, dim=1)
