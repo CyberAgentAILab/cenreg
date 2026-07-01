@@ -1,5 +1,7 @@
 import numpy as np
 
+from cenreg.model.nonparametric import kaplan_meier_estimator
+
 '''
 def negative_loglikelihood(
     dist,
@@ -360,7 +362,6 @@ def nll_sc(
     return -log_fl
 
 
-'''
 def km_calibration(
     dist,
     observed_times: np.ndarray,
@@ -384,7 +385,7 @@ def km_calibration(
     y_bins: ndarray
         Bins for the prediction to be evaluated.
         Each element in observed_times must be STRICTLY smaller than y_bins[-1]
-    EPS : float
+    eps : float
         Small positive value for numerical stability
 
     Returns
@@ -400,14 +401,13 @@ def km_calibration(
         uncensored = uncensored.astype(bool)
     if y_bins is None:
         try:
-            y_bins = dist.get_boundaries()
+            y_bins = dist.b
         except AttributeError:
-            raise ValueError("y_bins must be provided if pred does not have y_bins.")
+            raise ValueError("y_bins must be provided if dist does not have attribute 'b'.")
 
     # compute Kaplan-Meier distribution and prediction distribution
-    km = KaplanMeierDistribution()
-    km.fit(observed_times, uncensored)
-    last_idx = np.searchsorted(y_bins, km.last_uncensored_time, side="right") - 1
+    km = kaplan_meier_estimator(observed_times, uncensored)
+    last_idx = np.searchsorted(y_bins, km.b[-1], side="right") - 1
     F_km = km.cdf(y_bins)
     F_km[-1] = 1.0
     f_km = F_km[1:] - F_km[:-1]
@@ -426,4 +426,3 @@ def km_calibration(
     loss_invalid = sum_empirical * (log_sum_empirical - log_sum_pred)
 
     return loss_valid + loss_invalid
-'''

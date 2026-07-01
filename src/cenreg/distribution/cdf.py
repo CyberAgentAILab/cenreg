@@ -135,7 +135,7 @@ class CumulativeDist:
 
         if self.interpolate == "linear":
             # linear interpolation implementation
-            ret = np.zeros_like(y)
+            ret = np.zeros_like(y, dtype=float)
             mask_low = y <= self.b[0]
             ret[mask_low] = 0.0
             mask_high = y > self.b[-1]
@@ -148,8 +148,7 @@ class CumulativeDist:
                 zeros = np.zeros((self.cum_p.shape[0], 1))
                 temp = np.concatenate((zeros, self.cum_p), axis=1)
                 temp2 = linear_interpolation(self.b, temp, y)
-                ret[mask] = temp2[mask]
-                # ret[mask] = linear_interpolation(boundaries, temp, y)[mask]
+                ret[mask] = temp2[mask].flatten()
             return ret
         else:
             # step function implementation

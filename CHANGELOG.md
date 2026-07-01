@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - APIs for negative log likelihood
 ### Removed
-- Old distribution classes (CopulaGraphicDistribution)
+- Old distribution classes (CopulaGraphicDistribution, KaplanMeierDistribution)
 
 ## [0.1.0] - 2026-03-27
 ### Added
