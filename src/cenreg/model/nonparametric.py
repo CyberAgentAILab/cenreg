@@ -349,6 +349,38 @@ def zheng_klein_estimator(
     return dist
 
 
+def _validate_interval_inputs(
+    lb: np.ndarray,
+    ub: np.ndarray,
+    weights: np.ndarray | None = None,
+):
+    if len(lb.shape) != 1 or len(ub.shape) != 1:
+        raise ValueError("lb and ub must be one-dimensional arrays.")
+    if lb.shape[0] != ub.shape[0]:
+        raise ValueError("lb and ub must have the same length.")
+    if np.any(lb == np.inf):
+        raise NotImplementedError("lb containing np.inf is not supported.")
+    if np.any(ub == -np.inf):
+        raise NotImplementedError("ub containing -np.inf is not supported.")
+    lb = lb.astype(float)
+    ub = ub.astype(float)
+    lb = np.where(np.isnan(lb), -np.inf, lb)
+    ub = np.where(np.isnan(ub), np.inf, ub)
+    if np.any(lb > ub):
+        raise ValueError("Each element of lb must be less than or equal to the corresponding element of ub.")
+
+    if weights is None:
+        weights = np.ones_like(lb).astype(float).reshape(-1, 1)
+    else:
+        weights = weights.astype(float).reshape(-1, 1)
+        if len(weights.shape) != 1:
+            raise ValueError("weights must be a one-dimensional array.")
+        if lb.shape[0] != weights.shape[0]:
+            raise ValueError("weights must have the same length as lb and ub.")
+
+    return lb, ub, weights
+
+
 def turnbull_estimator(
     lb: np.ndarray,
     ub: np.ndarray,
@@ -359,7 +391,7 @@ def turnbull_estimator(
     max_iter: int = 100,
 ):
     """
-    Compute Turnbull estimator for interval-censored data.
+    Turnbull estimator for interval-censored data.
 
     Parameters
     ----------
@@ -384,33 +416,15 @@ def turnbull_estimator(
         Cumulative distribution function object.
     """
 
-    assert len(lb.shape) == 1
-    assert len(ub.shape) == 1
-    assert lb.shape[0] == ub.shape[0]
-    if weights is not None:
-        assert len(weights.shape) == 1
-        assert lb.shape[0] == weights.shape[0]
-    if np.any(lb == np.inf):
-        raise NotImplementedError("lb containing np.inf is not supported.")
-    if np.any(ub == -np.inf):
-        raise NotImplementedError("ub containing -np.inf is not supported.")
+    lb, ub, weights = _validate_interval_inputs(lb, ub, weights)
+    if np.any(lb == ub):
+        raise NotImplementedError("Exact observations (lb == ub) are not supported in turnbull_estimator.")
 
     # Set y_min and y_max if not provided
-    y = np.concatenate([lb, ub])
-    y_min, y_max = _set_ymin_ymax(y, y_min, y_max)
-
-    # initialize weights
-    if weights is None:
-        weights = np.ones_like(lb).astype(float).reshape(-1, 1)
-    else:
-        weights = weights.astype(float).reshape(-1, 1)
+    vals = np.concatenate([lb, ub])
+    y_min, y_max = _set_ymin_ymax(vals, y_min, y_max)
 
     # initialize distribution
-    lb = lb.astype(float)
-    ub = ub.astype(float)
-    mask_exact = lb == ub
-    lb[mask_exact] -= 0.00001
-    vals = np.concatenate([lb, ub])
     omega = np.unique(vals[np.isfinite(vals)])
     omega = np.concatenate([[-np.inf], omega, [np.inf]])
     num_bin = len(omega) - 1
@@ -442,3 +456,82 @@ def turnbull_estimator(
     omega[-1] = y_max
     cdf = CumulativeDist(b=omega, p=s, interpolate="right")
     return cdf
+
+
+def li_watkins_yu_estimator(
+    lb: np.ndarray,
+    ub: np.ndarray,
+    y_min: float | None = None,
+    y_max: float | None = None,
+    weights: np.ndarray | None = None,
+    eps: float = 1e-8,
+    max_iter: int = 100,
+):
+    """
+    Li-Watkins-Yu estimator for interval-censored data.
+
+    Parameters
+    ----------
+    lb : np.ndarray
+        Lower bounds of observed intervals.
+    ub : np.ndarray
+        Upper bounds of observed intervals.
+    y_min : float | None
+        Minimum value for the CDF.
+    y_max : float | None
+        Maximum value for the CDF.
+    weights : np.ndarray | None
+        Weights for each data point.
+    eps : float
+        Convergence threshold.
+    max_iter : int
+        Maximum number of iterations.
+
+    Returns
+    -------
+    cdf : cenreg.distribution.cdf.CumulativeDist
+        Cumulative distribution function object.
+    """
+
+    lb, ub, weights = _validate_interval_inputs(lb, ub, weights)
+
+    # Set y_min and y_max if not provided
+    vals = np.concatenate([lb, ub])
+    y_min, y_max = _set_ymin_ymax(vals, y_min, y_max)
+
+    # initialize distribution
+    omega = np.unique(vals[np.isfinite(vals)])
+    omega = np.concatenate([[y_min], omega, [y_max]])
+    num_bin = len(omega) - 1
+    s = np.full((num_bin,), 1.0 / num_bin)
+    dist = CumulativeDist(b=omega, p=s, interpolate="left")
+
+    # iterate EM algorithm
+    n = lb.shape[0]
+    batch_size = int(1000000 / num_bin + 1)
+    for _ in range(max_iter):
+        # update distribution
+        F_t = dist.cdf(omega.reshape(-1, 1)).reshape(1, -1)
+        F_lb = dist.cdf(lb.reshape(-1, 1))
+        F_ub = dist.cdf(ub.reshape(-1, 1))
+        pi = np.zeros_like(omega)
+        for start in range(0, n, batch_size):
+            end = min(start + batch_size, n)
+            mask = (F_ub[start:end] - F_lb[start:end]).reshape(-1) < 1e-7
+            temp = np.zeros((mask.shape[0], F_t.shape[1]))
+            if np.any(mask):
+                temp[mask, :] = (F_t >= F_lb[start:end][mask, :]).astype(float)
+            if np.any(~mask):
+                temp[~mask, :] = (F_t - F_lb[start:end][~mask, :]) / (F_ub[start:end][~mask] - F_lb[start:end][~mask])
+            temp = np.clip(temp, 0.0, 1.0) * weights[start:end]
+            pi += temp.sum(axis=0)
+        pi_mean = pi / weights.sum()
+        dist = CumulativeDist(b=omega, cum_p=pi_mean[1:], interpolate="left")
+
+        # compute loss
+        diff = pi_mean - F_t.reshape(-1)
+        loss = np.mean(diff * diff)
+        if loss < eps:
+            break
+
+    return dist

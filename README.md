@@ -1,6 +1,14 @@
 # The `cenreg` Package
 
-The Python package `cenreg` is repository for probabilistic forecasts such as quantile regression and distribution regression and for censored regression such as survival analysis and interval-censored data analysis.
+The Python package `cenreg` is a repository for probabilistic forecasts such as quantile regression and distribution regression and for censored regression such as survival analysis and interval-censored data analysis.
+
+Features:
++ **Tree-based models** run fast and output accurate predictions.
++ **Neural network models** are implemented both for structured data (e.g., tabular data) and non-structured data (e.g., image data).
++ Both models can handle **competing risks**.
++ Both models are based on the (conditional) independence assumption or the non-informative assuption, but they can also handle **dependent censoring** based on assumed copula.
++ **Strictly proper scoring rules** are implemented to evaluate the discrimination performances of prediction models.  The scoring rules can handle right-censored and interval-censored data.
++ **Binning-free calibration metrics** are implemented to evaluate the calibration performances of prediction models.  The calibration metrics can handle right-censored and interval-censored data.
 
 
 ## Getting Started
@@ -34,24 +42,6 @@ Read the [documentation](https://cyberagentailab.github.io/cenreg/) to get start
 
 ## Citation
 
-[1] [H. Yanagisawa and S. Akiyama, Survival Analysis via Density Estimation, ICML 2025](https://icml.cc/virtual/2025/poster/43491) (Paper in [OpenReview](https://openreview.net/forum?id=z9SRjXPf8T))
-
-```
-  @InProceedings{yanagisawa2025survival,
-    author    = {Yanagisawa, Hiroki and Akiyama, Shunta},
-    booktitle = {Proceedings of ICML 2025},
-    title     = {Survival Analysis via Density Estimation},
-    year      = {2025},
-  }
-```
-
-[2] [H. Yanagisawa, Proper Scoring Rules for Survival Analysis, ICML 2023](https://proceedings.mlr.press/v202/yanagisawa23a/yanagisawa23a.pdf)
-
-```
-@InProceedings{yanagisawa2023proper,
-   author    = {Yanagisawa, Hiroki},
-   booktitle = {Proceedings of ICML 2023},
-   title     = {Proper Scoring Rules for Survival Analysis},
-   year      = {2023},
-}
-```
++ [H. Yanagisawa and S. Akiyama, A Strictly Proper Scoring Rule and a Calibration Metric for Interval-Censored Data Analysis, ICML 2026](https://icml.cc/virtual/2026/poster/65937) (Paper in [OpenReview](https://openreview.net/forum?id=8jViL8YrB1))
++ [H. Yanagisawa and S. Akiyama, Survival Analysis via Density Estimation, ICML 2025](https://icml.cc/virtual/2025/poster/43491) (Paper in [OpenReview](https://openreview.net/forum?id=z9SRjXPf8T))
++ [H. Yanagisawa, Proper Scoring Rules for Survival Analysis, ICML 2023](https://proceedings.mlr.press/v202/yanagisawa23a/yanagisawa23a.pdf)

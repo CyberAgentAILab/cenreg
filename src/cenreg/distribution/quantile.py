@@ -46,7 +46,7 @@ class QuantileDist:
         self.v = v
         self.interpolate = interpolate
 
-    def cdf(self, y: float | np.ndarray):
+    def cdf(self, y: float | int | np.ndarray):
         """
         Cumulative distribution function (i.e., inverse of quantile function).
 
@@ -61,8 +61,10 @@ class QuantileDist:
             CDF values for each value in y.
             Array shape is equal to the shape of y.
         """
-        if isinstance(y, int | float):
+        if np.isscalar(y):
             y = np.array([y], dtype=float)
+        else:
+            y = np.asarray(y)
 
         if self.interpolate == "linear":
             # linear interpolation implementation
@@ -77,7 +79,7 @@ class QuantileDist:
         else:
             raise NotImplementedError("Only 'linear' interpolation is supported for CDF.")
 
-    def icdf(self, quantiles: float | np.ndarray) -> np.ndarray:
+    def icdf(self, quantiles: float | int | np.ndarray) -> np.ndarray:
         """
         Inverse cumulative distribution function (i.e., quantile function).
 
@@ -97,8 +99,10 @@ class QuantileDist:
             Array shape is equal to the shape of quantiles.
         """
 
-        if isinstance(quantiles, int | float):
-            quantiles = np.array([quantiles])
+        if np.isscalar(quantiles):
+            quantiles = np.array([quantiles], dtype=float)
+        else:
+            quantiles = np.asarray(quantiles)
         if np.any(quantiles < 0.0):
             raise ValueError("quantiles must be non-negative.")
         if np.any(quantiles > 1.0):
