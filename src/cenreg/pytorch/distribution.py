@@ -448,8 +448,8 @@ def _linear_interpolation(kx: torch.Tensor, ky: torch.Tensor, x: torch.Tensor) -
         left = ky[idx - 1]
         right = ky[idx]
     elif idx.ndim == 1:
-        left = torch.take(ky, idx - 1, -1)
-        right = torch.take(ky, idx, -1)
+        left = torch.index_select(ky, -1, idx - 1)
+        right = torch.index_select(ky, -1, idx)
     else:
         left = torch.take_along_dim(ky, idx - 1, -1)
         right = torch.take_along_dim(ky, idx, -1)
@@ -543,6 +543,18 @@ class CumulativeDist:
             cum_p = torch.cumsum(p, dim=1)
         return cum_p
 
+    def _require_cum_p(self) -> torch.Tensor:
+        if self.cum_p is None:
+            raise ValueError("cum_p must be set before evaluating CDF/ICDF.")
+        return self.cum_p
+
+    def _normalize_quantiles(self, quantiles: float | torch.Tensor, dtype: torch.dtype) -> torch.Tensor:
+        if isinstance(quantiles, torch.Tensor):
+            return quantiles.to(dtype=dtype)
+        if isinstance(quantiles, int | float):
+            return torch.tensor([quantiles], dtype=dtype)
+        raise ValueError("quantiles must be a scalar or a torch.Tensor.")
+
     def cdf(self, y: float | torch.Tensor) -> torch.Tensor:
         """
         Cumulative distribution function (i.e., inverse of quantile function).
@@ -559,19 +571,21 @@ class CumulativeDist:
             CDF values for each value in y.
         """
 
+        cum_p = self._require_cum_p()
+
         # check input y
         if isinstance(y, torch.Tensor):
             if len(y.shape) > 2:
                 raise ValueError("y must be a scalar or a one-dimensional array or a two-dimensional array.")
-            y = y.to(dtype=self.cum_p.dtype)
+            y = y.to(dtype=cum_p.dtype)
         else:
             if isinstance(y, float):
-                y = torch.tensor([y], dtype=self.cum_p.dtype)
+                y = torch.tensor([y], dtype=cum_p.dtype)
             else:
                 raise ValueError("y must be a scalar or a one-dimensional array or a two-dimensional array.")
 
-        if self.cum_p.ndim == 2 and y.ndim == 1:
-            y = y.unsqueeze(0).repeat(self.cum_p.shape[0], 1)
+        if cum_p.ndim == 2 and y.ndim == 1:
+            y = y.unsqueeze(0).repeat(cum_p.shape[0], 1)
 
         if self.interpolate == "linear":
             # linear interpolation implementation
@@ -581,12 +595,12 @@ class CumulativeDist:
             mask_high = y > self.b[-1]
             ret[mask_high] = 1.0
             mask = ~(mask_low | mask_high)
-            if self.cum_p.ndim == 1:
-                cum_p = torch.cat([torch.tensor([0.0], dtype=self.cum_p.dtype), self.cum_p])
-                ret[mask] = _linear_interpolation(self.b, cum_p, y[mask])
-            else:  # self.cum_p.ndim == 2
-                zeros = torch.zeros((self.cum_p.shape[0], 1), dtype=self.cum_p.dtype)
-                temp = torch.cat([zeros, self.cum_p], dim=1)
+            if cum_p.ndim == 1:
+                temp = torch.cat([torch.tensor([0.0], dtype=cum_p.dtype), cum_p])
+                ret[mask] = _linear_interpolation(self.b, temp, y[mask])
+            else:  # cum_p.ndim == 2
+                zeros = torch.zeros((cum_p.shape[0], 1), dtype=cum_p.dtype)
+                temp = torch.cat([zeros, cum_p], dim=1)
                 temp2 = _linear_interpolation(self.b, temp, y)
                 ret[mask] = temp2[mask]
                 # ret[mask] = linear_interpolation(boundaries, temp, y)[mask]
@@ -595,16 +609,16 @@ class CumulativeDist:
             # step function implementation
             idx = torch.searchsorted(self.b, y, side=self.interpolate)
             idx = torch.clamp(idx, 1, len(self.b) - 1)
-            if self.cum_p.dim() == 1:
-                ret = self.cum_p[idx - 1]
+            if cum_p.dim() == 1:
+                ret = cum_p[idx - 1]
                 if self.interpolate == "left":
                     ret[y <= self.b[0]] = 0.0
                     ret[y > self.b[-1]] = 1.0
                 else:
                     ret[y < self.b[0]] = 0.0
                     ret[y >= self.b[-1]] = 1.0
-            else:  # self.cum_p.dim() == 2
-                ret = torch.take_along_dim(self.cum_p, idx - 1, dim=1)
+            else:  # cum_p.dim() == 2
+                ret = torch.take_along_dim(cum_p, idx - 1, dim=1)
                 if self.interpolate == "left":
                     ret[y <= self.b[0]] = 0.0
                     ret[y > self.b[-1]] = 1.0
@@ -636,56 +650,62 @@ class CumulativeDist:
             Compute inverse CDF values for each value in quantiles.
         """
 
-        if isinstance(quantiles, float):
-            quantiles = torch.tensor([quantiles], dtype=self.cum_p.dtype)
+        cum_p = self._require_cum_p()
+
+        quantiles = self._normalize_quantiles(quantiles, cum_p.dtype)
         if torch.any(quantiles < 0.0):
             raise ValueError("quantiles must be non-negative.")
         if torch.any(quantiles > 1.0):
             raise ValueError("quantiles must be at most 1.0.")
-        if self.cum_p.ndim == 2 and quantiles.ndim == 1:
-            quantiles = quantiles.unsqueeze(0).repeat(self.cum_p.shape[0], 1)
+        if cum_p.ndim == 2 and quantiles.ndim == 1:
+            quantiles = quantiles.unsqueeze(0).repeat(cum_p.shape[0], 1)
 
         if self.interpolate == "linear":
             # linear interpolation implementation
             ret = torch.zeros_like(quantiles)
-            if self.cum_p.ndim == 1:
+            if cum_p.ndim == 1:
                 mask_low = quantiles <= 0.0
-                mask_high = quantiles >= self.cum_p[-1]
+                mask_high = quantiles >= cum_p[-1]
             else:
                 mask_low = quantiles <= 0.0
-                mask_high = quantiles >= self.cum_p[:, -1].reshape(-1, 1)
+                mask_high = quantiles >= cum_p[:, -1].reshape(-1, 1)
             ret[mask_low] = self.b[0]
             ret[mask_high] = self.b[-1]
             mask = ~(mask_low | mask_high)
-            if self.cum_p.ndim == 1:
-                cum_p = torch.cat([torch.tensor([0.0], dtype=self.cum_p.dtype), self.cum_p])
-                ret[mask] = _linear_interpolation(cum_p, self.b, quantiles[mask])
+            if cum_p.ndim == 1:
+                temp = torch.cat([torch.tensor([0.0], dtype=cum_p.dtype), cum_p])
+                ret[mask] = _linear_interpolation(temp, self.b, quantiles[mask])
             else:
-                zeros = torch.zeros((self.cum_p.shape[0], 1), dtype=self.cum_p.dtype)
-                temp = torch.cat([zeros, self.cum_p], dim=1)
+                zeros = torch.zeros((cum_p.shape[0], 1), dtype=cum_p.dtype)
+                temp = torch.cat([zeros, cum_p], dim=1)
                 ret[mask] = _linear_interpolation(temp, self.b, quantiles)[mask]
             return ret
         else:
             # step function implementation
             ret = torch.zeros_like(quantiles)
-            idx = torch.searchsorted(self.cum_p, quantiles, side="left")
-            if self.cum_p[0] > 0.0:
+            idx = torch.searchsorted(cum_p, quantiles, side="left")
+            if cum_p[0] > 0.0:
                 mask_low = idx <= 0
             else:
                 idx = torch.maximum(idx, torch.tensor(1, dtype=idx.dtype))
                 mask_low = torch.full(idx.shape, False, dtype=torch.bool)
             ret[mask_low] = self.b[0]
-            if self.cum_p[-1] < 1.0:
-                mask_high = idx >= len(self.cum_p)
+            if cum_p[-1] < 1.0:
+                mask_high = idx >= len(cum_p)
             else:
-                idx = torch.minimum(idx, torch.tensor(len(self.cum_p) - 1, dtype=idx.dtype))
+                idx = torch.minimum(idx, torch.tensor(len(cum_p) - 1, dtype=idx.dtype))
                 mask_high = torch.full(idx.shape, False, dtype=torch.bool)
             ret[mask_high] = self.b[-1]
             mask = ~(mask_low | mask_high)
             ret[mask] = self.b[idx[mask]]
             return ret
 
-    def set_knot_values(self, p: torch.Tensor | None = None, cum_p: torch.Tensor | None = None):
+    def set_knot_values(
+        self,
+        p: torch.Tensor | None = None,
+        cum_p: torch.Tensor | None = None,
+        apply_cumsum: bool = True,
+    ):
         """
         Set CDF values.
 
@@ -715,12 +735,17 @@ class CumulativeDist:
         elif p is not None:
             if not isinstance(p, torch.Tensor):
                 p = torch.tensor(p)
-            if p.dim() == 1:
-                cum_p = torch.cumsum(p)
-                cum_p = torch.cat([torch.tensor([0.0]), cum_p], 0)
+            if apply_cumsum:
+                if p.dim() == 1:
+                    cum_p = torch.cumsum(p, dim=0)
+                    cum_p = torch.cat([torch.tensor([0.0], dtype=p.dtype), cum_p], 0)
+                else:
+                    cum_p = torch.cumsum(p, dim=1)
             else:
-                cum_p = torch.cumsum(p, dim=1)
+                cum_p = p
             self._validate_cum_p(cum_p, self.b)
+        else:
+            return
         self.cum_p = cum_p
 
     def survival_function(self, y: float | torch.Tensor) -> torch.Tensor:

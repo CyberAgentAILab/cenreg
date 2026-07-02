@@ -56,6 +56,8 @@ class NegativeLogLikelihoodSurvival:
         F_t: torch.Tensor,
         events: torch.Tensor | None = None,
     ) -> torch.Tensor:
+        if events is None:
+            raise ValueError("events must be provided")
         if len(F_t.shape) != 1:
             raise ValueError(f"F_t must be 1D tensor, got {F_t.shape}")
         if F_t.shape[0] != events.shape[0]:

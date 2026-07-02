@@ -164,7 +164,7 @@ def _negative_log_likelihood(
 def negative_log_likelihood_survival(
     dist,
     y: np.ndarray,
-    uncensored: np.ndarray = None,
+    uncensored: np.ndarray | None = None,
     proportional: bool = True,
     eps: float = 0.0001,
 ) -> np.ndarray:
@@ -195,6 +195,8 @@ def negative_log_likelihood_survival(
 
     if len(y.shape) != 1:
         raise ValueError("y must be of shape [batch_size]")
+    if uncensored is None:
+        uncensored = np.ones(y.shape, dtype=bool)
     if dist.interpolate != "linear":
         raise Warning("dist must be an instance of cenreg.distribution.cdf.CumulativeDist with linear interpolation.")
 

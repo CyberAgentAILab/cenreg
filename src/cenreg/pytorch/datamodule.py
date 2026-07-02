@@ -108,11 +108,11 @@ class IntervalCensoredDataset(torch.utils.data.Dataset):
     def __len__(self):
         return self.features.shape[0]
 
-    def __getitem__(self, idx):
+    def __getitem__(self, index):
         if self.features.shape[0] == 0:
             return torch.empty(0, 0), torch.empty(0), torch.empty(0)
         else:
-            return self.features[idx], self.lb[idx], self.ub[idx]
+            return self.features[index], self.lb[index], self.ub[index]
 
     def len_feature(self):
         return self.features.shape[1]

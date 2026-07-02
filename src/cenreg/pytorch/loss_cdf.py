@@ -82,6 +82,8 @@ class NegativeLogLikelihoodSurvival:
             raise ValueError("y must be of shape [batch_size]")
         if len(pred) != len(y):
             raise ValueError("pred and y must have the same length")
+        if uncensored is None:
+            raise ValueError("uncensored must be provided")
 
         self.distribution.set_knot_values(pred, apply_cumsum=self.apply_cumsum)
         lb = y
