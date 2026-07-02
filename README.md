@@ -5,6 +5,8 @@ The Python package `cenreg` is a repository for probabilistic forecasts such as 
 Features:
 + **Tree-based models** run fast and output accurate predictions.
 + **Neural network models** are implemented both for structured data (e.g., tabular data) and non-structured data (e.g., image data).
++ Both models can handle **competing risks**.
++ Both models are based on the (conditional) independence assumption or the non-informative assuption, but they can also handle **dependent censoring** based on assumed copula.
 + **Strictly proper scoring rules** are implemented to evaluate the discrimination performances of prediction models.  The scoring rules can handle right-censored and interval-censored data.
 + **Binning-free calibration metrics** are implemented to evaluate the calibration performances of prediction models.  The calibration metrics can handle right-censored and interval-censored data.
 
