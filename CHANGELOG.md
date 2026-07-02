@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
-## [0.1.1] - 2026-07-??
+## [0.1.1] - 2026-07-03
 ### Added
 - Tutorials for Li-Watkins-Yu estimator and NN-IC-Log model
 - New calibration metric (ic-calibration)
