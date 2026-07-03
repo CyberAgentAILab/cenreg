@@ -6,20 +6,20 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CumulativeDist class &mdash; cenreg 0.0.7 documentation</title>
+  <title>CumulativeDist class &mdash; cenreg 0.1.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=bbaf98b3"></script>
+      <script src="_static/documentation_options.js?v=a58bc63e"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="API Reference" href="references.html" />
+    <link rel="next" title="QuantileDist class" href="class_quantile_dist.html" />
     <link rel="prev" title="SC-Net Model" href="sc_net.html" /> 
 </head>
 
@@ -50,6 +50,7 @@
 <p class="caption" role="heading"><span class="caption-text">Additional Documentation</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">CumulativeDist class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_quantile_dist.html">QuantileDist class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="references.html">API Reference</a></li>
 </ul>
 
@@ -80,7 +81,7 @@
   <section id="cumulativedist-class">
 <h1>CumulativeDist class<a class="headerlink" href="#cumulativedist-class" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">cenreg.distribution.cdf.CumulativeDist</span></code> class is a representation of a cumulative distribution function (CDF) that is defined on a set of bins.</p>
-<p>The parameter <code class="docutils literal notranslate"><span class="pre">b</span></code> represents the bins used to define the discrete distribution. The parameter <code class="docutils literal notranslate"><span class="pre">p</span></code> represents the probabilities corresponding to each bin, and the <code class="docutils literal notranslate"><span class="pre">cum_p</span></code> parameter represents the cumulative probabilities of <code class="docutils literal notranslate"><span class="pre">p</span></code>.</p>
+<p>The parameter <code class="docutils literal notranslate"><span class="pre">b</span></code> represents the bins used to define the discrete distribution. The parameter <code class="docutils literal notranslate"><span class="pre">p</span></code> represents the probabilities corresponding to each bin, and the <code class="docutils literal notranslate"><span class="pre">cum_p</span></code> parameter represents the cumulative probabilities of <code class="docutils literal notranslate"><span class="pre">p</span></code> (i.e., <code class="docutils literal notranslate"><span class="pre">cum_p[i]</span> <span class="pre">=</span> <span class="pre">sum(p[:i+1])</span></code>).</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">interpolate</span></code> parameter determines how the CDF is interpolated between the bins, with options for ‘right’, ‘left’, and ‘linear’.</p>
 <figure class="align-center" id="id1">
 <a class="reference internal image-reference" href="_images/CumulativeDist_right.png"><img alt="_images/CumulativeDist_right.png" src="_images/CumulativeDist_right.png" style="width: 80%;" />
@@ -110,7 +111,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="sc_net.html" class="btn btn-neutral float-left" title="SC-Net Model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="references.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="class_quantile_dist.html" class="btn btn-neutral float-right" title="QuantileDist class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

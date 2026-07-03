@@ -26,7 +26,9 @@ Installation
 Citation
 ------------------------------
 
-H. Yanagisawa and S. Akiyama, `"Survival Analysis via Density Estimation," <https://icml.cc/virtual/2025/poster/43491>`_ in *Proceedings of ICML 2025*.
+H. Yanagisawa and S. Akiyama, `"A Strictly Proper Scoring Rule and a Calibration Metric for Interval-Censored Data Analysis," <https://icml.cc/virtual/2026/poster/65937>`_ ICML 2026.
+
+H. Yanagisawa and S. Akiyama, `"Survival Analysis via Density Estimation," <https://icml.cc/virtual/2025/poster/43491>`_ ICML 2025.
 
 
 .. toctree::
