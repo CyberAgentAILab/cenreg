@@ -32,6 +32,17 @@ def _set_ymin_ymax(
     return temp_min, temp_max
 
 
+def _validate_weights(weights: np.ndarray, y: np.ndarray) -> np.ndarray:
+    if weights is None:
+        return np.ones_like(y)
+    if len(weights.shape) != 1:
+        raise ValueError("weight must be one-dimensional array.")
+    if weights.shape[0] != y.shape[0]:
+        raise ValueError("weight and y must have the same length.")
+    if np.any(weights < 0.0):
+        raise ValueError("weight must be non-negative.")
+
+
 def _validate_cdf_inputs(
     y: np.ndarray,
     weights: np.ndarray | None = None,
@@ -42,17 +53,14 @@ def _validate_cdf_inputs(
         raise ValueError("y must be one-dimensional array.")
     if y.size == 0:
         raise ValueError("y must not be empty.")
-    if weights is not None:
-        if len(weights.shape) != 1:
-            raise ValueError("weight must be one-dimensional array.")
-        if weights.shape[0] != y.shape[0]:
-            raise ValueError("weight and y must have the same length.")
-        if np.any(weights < 0.0):
-            raise ValueError("weight must be non-negative.")
     if y_min is not None:
-        assert y_min <= np.min(y), "y_min must be less than or equal to min(y)."
+        if y_min > np.min(y):
+            raise ValueError("y_min must be less than or equal to min(y).")
     if y_max is not None:
-        assert y_max >= np.max(y), "y_max must be greater than or equal to max(y)."
+        if y_max < np.max(y):
+            raise ValueError("y_max must be greater than or equal to max(y).")
+    if weights is not None:
+        _validate_weights(weights, y)
 
 
 def _adjust_bins(bins: np.ndarray, y_min: float, y_max: float) -> np.ndarray:
@@ -122,6 +130,36 @@ def empirical_cdf_estimator(
     return CumulativeDist(b=bins, cum_p=cum_p, interpolate="right")
 
 
+def _validate_kaplan_meier_inputs_weights(weights: np.ndarray, observed_times: np.ndarray):
+    if len(weights.shape) != 1:
+        raise ValueError("weights must be one-dimensional array.")
+    if observed_times.shape[0] != weights.shape[0]:
+        raise ValueError("observed_times and weights must have the same length.")
+
+
+def _validate_kaplan_meier_inputs(
+    observed_times: np.ndarray,
+    uncensored: np.ndarray,
+    weights: np.ndarray | None = None,
+    y_min: float | None = None,
+    y_max: float | None = None,
+):
+    if len(observed_times.shape) != 1:
+        raise ValueError("observed_times must be one-dimensional array.")
+    if len(uncensored.shape) != 1:
+        raise ValueError("uncensored must be one-dimensional array.")
+    if observed_times.shape[0] != uncensored.shape[0]:
+        raise ValueError("observed_times and uncensored must have the same length.")
+    if y_min is not None:
+        if y_min > np.min(observed_times):
+            raise ValueError("y_min must be less than or equal to min(observed_times).")
+    if y_max is not None:
+        if y_max < np.max(observed_times):
+            raise ValueError("y_max must be greater than or equal to max(observed_times).")
+    if weights is not None:
+        _validate_kaplan_meier_inputs_weights(weights, observed_times)
+
+
 def kaplan_meier_estimator(
     observed_times: np.ndarray,
     uncensored: np.ndarray,
@@ -151,21 +189,13 @@ def kaplan_meier_estimator(
         Cumulative distribution function.
     """
 
-    assert len(observed_times.shape) == 1
-    assert len(uncensored.shape) == 1
-    assert observed_times.shape[0] == uncensored.shape[0]
+    _validate_kaplan_meier_inputs(observed_times, uncensored, weights, y_min, y_max)
+
     uncensored = uncensored.astype(int)
     if np.sum(uncensored) == 0:
         raise ValueError("At least one data point must be uncensored.")
     if weights is None:
         weights = np.ones_like(observed_times)
-    else:
-        assert len(weights.shape) == 1
-        assert observed_times.shape[0] == weights.shape[0]
-    if y_min is not None:
-        assert y_min <= np.min(observed_times), "y_min must be less than or equal to min(observed_times)."
-    if y_max is not None:
-        assert y_max >= np.max(observed_times), "y_max must be greater than or equal to max(observed_times)."
 
     # sort based on uncensored and observed_times
     temp = np.concatenate(
@@ -312,17 +342,23 @@ def zheng_klein_estimator(
         Cumulative distribution function.
     """
 
-    assert len(observed_times.shape) == 1
-    assert len(uncensored.shape) == 1
-    assert observed_times.shape[0] == uncensored.shape[0]
+    if len(observed_times.shape) != 1:
+        raise ValueError("observed_times must be one-dimensional array.")
+    if len(uncensored.shape) != 1:
+        raise ValueError("uncensored must be one-dimensional array.")
+    if observed_times.shape[0] != uncensored.shape[0]:
+        raise ValueError("observed_times and uncensored must have the same length.")
+
     uncensored = uncensored.astype(int)
     if np.sum(uncensored) == 0:
         raise ValueError("At least one data point must be uncensored.")
     if weights is None:
         weights = np.ones_like(observed_times)
     else:
-        assert len(weights.shape) == 1
-        assert observed_times.shape[0] == weights.shape[0]
+        if len(weights.shape) != 1:
+            raise ValueError("weights must be one-dimensional array.")
+        if observed_times.shape[0] != weights.shape[0]:
+            raise ValueError("observed_times and weights must have the same length.")
 
     # sort based on uncensored and observed_times
     temp = np.concatenate(

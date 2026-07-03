@@ -108,8 +108,13 @@ class CopulaNegativeLogLikelihood:
                 print("Warning: survival_copula is not None. copula is ignored.")
 
     def loss(self, F_pred: torch.Tensor, observed_times: torch.Tensor, events: torch.Tensor) -> torch.Tensor:
-        assert len(F_pred.shape) == 2
-        assert F_pred.shape[0] == observed_times.shape[0]
+        if len(F_pred.shape) != 2:
+            raise ValueError("F_pred must be of shape [batch_size, num_risks]")
+        if F_pred.shape[0] != observed_times.shape[0]:
+            raise ValueError(
+                f"F_pred and observed_times must have the same number of samples, "
+                f"got {F_pred.shape[0]} and {observed_times.shape[0]}"
+            )
 
         df = torch.zeros_like(observed_times)
         num_risks = F_pred.shape[1]

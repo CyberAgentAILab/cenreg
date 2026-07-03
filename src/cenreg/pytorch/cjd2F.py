@@ -21,8 +21,10 @@ class MseModel(nn.Module):
     ):
         super().__init__()
         if init_f is not None:
-            assert len(init_f.shape) == 3
-        assert len(jd_pred.shape) == 3
+            if len(init_f.shape) != 3:
+                raise ValueError("init_f must be a 3D array")
+        if len(jd_pred.shape) != 3:
+            raise ValueError("jd_pred must be a 3D array")
 
         self.jd_pred = torch.tensor(jd_pred, dtype=torch.float32).detach()
         self.focal_risk = focal_risk
@@ -188,7 +190,8 @@ def minimize_mse(model, num_epochs: int) -> np.ndarray:
     F_pred: estimated CDF.
         np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]
     """
-    assert num_epochs > 0
+    if num_epochs <= 0:
+        raise ValueError("num_epochs must be greater than 0")
 
     best_epoch = -1
     best_loss = float("inf")
@@ -237,7 +240,8 @@ def minimize_mse(model, num_epochs: int) -> np.ndarray:
             loss.backward()
             optimizer.step()
 
-    assert path is not None
+    if path is None:
+        raise ValueError("path must be set to a valid checkpoint path")
     checkpoint = torch.load(path)
     model.load_state_dict(checkpoint["model_state_dict"])
     model.eval()

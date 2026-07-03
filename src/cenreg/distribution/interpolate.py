@@ -25,7 +25,8 @@ def linear_interpolation(kx: np.ndarray, ky: np.ndarray, x: np.ndarray) -> np.nd
 
     if kx.ndim == 1:
         if ky.ndim == 2:
-            assert kx.shape[0] == ky.shape[1]
+            if kx.shape[0] != ky.shape[1]:
+                raise ValueError("kx and ky must have compatible shapes")
 
     # compute idx and ratio
     if kx.ndim == 1:

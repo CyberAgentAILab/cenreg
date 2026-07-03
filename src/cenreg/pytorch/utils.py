@@ -20,7 +20,8 @@ def normalize_y(y: torch.Tensor, min_y: float, max_y: float) -> torch.Tensor:
             The normalized tensor.
     """
 
-    assert min_y < max_y
+    if min_y >= max_y:
+        raise ValueError("min_y must be strictly less than max_y")
 
     return (y - min_y) / (max_y - min_y)
 
@@ -44,10 +45,14 @@ def denormalize_pred(pred: torch.Tensor, min_y: float, max_y: float) -> torch.Te
             The denormalized predictions.
     """
 
-    assert pred.dim() == 2
-    assert pred.shape[1] > 0
-    assert min_y < max_y
-    assert (pred.min() >= 0) and (pred.max() <= 1)
+    if pred.dim() != 2:
+        raise ValueError("pred must be of shape [batch_size, num_features]")
+    if pred.shape[1] <= 0:
+        raise ValueError("pred must have at least one feature")
+    if min_y >= max_y:
+        raise ValueError("min_y must be strictly less than max_y")
+    if (pred.min() < 0) or (pred.max() > 1):
+        raise ValueError("pred values must be in the range [0, 1]")
 
     pred_cumsum = torch.cumsum(pred, dim=1)
     pred_cumsum = torch.cat([torch.zeros(pred.shape[0], 1, device=pred.device), pred_cumsum], dim=1)

@@ -21,8 +21,10 @@ def create_bins(max_y: float, min_y: float = 0.0, num_bins=10, algorithm: str = 
     bins : np.ndarray
         Array of bin edges.
     """
-    assert num_bins > 1, "Number of bins must be greater than 1."
-    assert max_y > min_y, "Maximum value must be greater than minimum value."
+    if num_bins <= 1:
+        raise ValueError("Number of bins must be greater than 1.")
+    if max_y <= min_y:
+        raise ValueError("Maximum value must be strictly greater than minimum value.")
 
     if algorithm != "even":
         raise ValueError(f"Unknown algorithm: {algorithm}. Supported: 'even'.")

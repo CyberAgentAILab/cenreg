@@ -141,8 +141,10 @@ class SMMMultiHead(nn.Module):
         self.list_smm = nn.ModuleList(list_smm)
 
     def forward(self, x: torch.Tensor, t: torch.Tensor) -> torch.Tensor:
-        assert len(x.shape) == 2
-        assert len(t.shape) == 2
+        if len(x.shape) != 2:
+            raise ValueError("x must be of shape [batch_size, num_features]")
+        if len(t.shape) != 2:
+            raise ValueError("t must be of shape [batch_size, num_monotone_features]")
 
         x = F.relu(self.fc1(x))
         list_out = []

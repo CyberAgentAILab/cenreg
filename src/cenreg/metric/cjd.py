@@ -162,11 +162,16 @@ def kolmogorov_smirnov_calibration_error(
         Sum of Kolmogorov-Sminov calibration error.
     """
 
-    assert len(observed_times.shape) == 1
-    assert len(events.shape) == 1
-    assert len(f_pred.shape) == 2
-    assert len(boundaries.shape) == 1
-    assert f_pred.shape[0] == observed_times.shape[0]
+    if len(observed_times.shape) != 1:
+        raise ValueError("observed_times must be of shape [batch_size]")
+    if len(events.shape) != 1:
+        raise ValueError("events must be of shape [batch_size]")
+    if len(f_pred.shape) != 2:
+        raise ValueError("f_pred must be of shape [batch_size, num_bin*num_risks]")
+    if len(boundaries.shape) != 1:
+        raise ValueError("boundaries must be of shape [num_bin+1]")
+    if f_pred.shape[0] != observed_times.shape[0]:
+        raise ValueError("f_pred and observed_times must have the same length")
 
     events = events.astype(int).reshape(-1, 1)
     idx = np.searchsorted(boundaries, observed_times.reshape(-1, 1), side="right")
