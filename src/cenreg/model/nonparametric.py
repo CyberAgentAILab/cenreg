@@ -34,7 +34,7 @@ def _set_ymin_ymax(
     return temp_min, temp_max
 
 
-def _validate_weights(weights: np.ndarray, y: np.ndarray) -> np.ndarray:
+def _validate_weights(weights: np.ndarray, y: np.ndarray):
     if weights is None:
         return np.ones_like(y)
     if len(weights.shape) != 1:
