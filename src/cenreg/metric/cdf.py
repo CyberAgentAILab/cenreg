@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 
 from cenreg.model.nonparametric import kaplan_meier_estimator
@@ -339,6 +341,9 @@ def nll_sc(
         raise ValueError("events must be of shape [batch_size]")
     if observed_times.shape[0] != events.shape[0]:
         raise ValueError("observed_times and events must have the same length")
+    if not np.issubdtype(observed_times.dtype, np.floating):
+        warnings.warn("observed_times is not float, converting to float.", stacklevel=2)
+        observed_times = observed_times.astype(float)
 
     Sl_list = []
     Sr_list = []

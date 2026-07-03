@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 
 from cenreg.distribution.cdf import CumulativeDist
@@ -189,6 +191,9 @@ def kaplan_meier_estimator(
         Cumulative distribution function.
     """
 
+    if not np.issubdtype(observed_times.dtype, np.floating):
+        warnings.warn("observed_times is not float, converting to float.", stacklevel=2)
+        observed_times = observed_times.astype(float)
     _validate_kaplan_meier_inputs(observed_times, uncensored, weights, y_min, y_max)
 
     uncensored = uncensored.astype(int)
@@ -348,6 +353,9 @@ def zheng_klein_estimator(
         raise ValueError("uncensored must be one-dimensional array.")
     if observed_times.shape[0] != uncensored.shape[0]:
         raise ValueError("observed_times and uncensored must have the same length.")
+    if not np.issubdtype(observed_times.dtype, np.floating):
+        warnings.warn("observed_times is not float, converting to float.", stacklevel=2)
+        observed_times = observed_times.astype(float)
 
     uncensored = uncensored.astype(int)
     if np.sum(uncensored) == 0:
@@ -359,6 +367,9 @@ def zheng_klein_estimator(
             raise ValueError("weights must be one-dimensional array.")
         if observed_times.shape[0] != weights.shape[0]:
             raise ValueError("observed_times and weights must have the same length.")
+        if not np.issubdtype(weights.dtype, np.floating):
+            warnings.warn("weights is not float, converting to float.", stacklevel=2)
+            weights = weights.astype(float)
 
     # sort based on uncensored and observed_times
     temp = np.concatenate(
