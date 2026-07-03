@@ -42,6 +42,6 @@ Read the [documentation](https://cyberagentailab.github.io/cenreg/) to get start
 
 ## Citation
 
-+ [H. Yanagisawa and S. Akiyama, A Strictly Proper Scoring Rule and a Calibration Metric for Interval-Censored Data Analysis, ICML 2026](https://icml.cc/virtual/2026/poster/65937) (Paper in [OpenReview](https://openreview.net/forum?id=8jViL8YrB1))
-+ [H. Yanagisawa and S. Akiyama, Survival Analysis via Density Estimation, ICML 2025](https://icml.cc/virtual/2025/poster/43491) (Paper in [OpenReview](https://openreview.net/forum?id=z9SRjXPf8T))
-+ [H. Yanagisawa, Proper Scoring Rules for Survival Analysis, ICML 2023](https://proceedings.mlr.press/v202/yanagisawa23a/yanagisawa23a.pdf)
++ H. Yanagisawa and S. Akiyama, [A Strictly Proper Scoring Rule and a Calibration Metric for Interval-Censored Data Analysis](https://icml.cc/virtual/2026/poster/65937), ICML 2026 (Paper in [OpenReview](https://openreview.net/forum?id=8jViL8YrB1))
++ H. Yanagisawa and S. Akiyama, [Survival Analysis via Density Estimation](https://icml.cc/virtual/2025/poster/43491), ICML 2025 (Paper in [OpenReview](https://openreview.net/forum?id=z9SRjXPf8T))
++ H. Yanagisawa, [Proper Scoring Rules for Survival Analysis](https://proceedings.mlr.press/v202/yanagisawa23a/yanagisawa23a.pdf), ICML 2023
