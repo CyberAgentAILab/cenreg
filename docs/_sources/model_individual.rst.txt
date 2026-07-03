@@ -7,3 +7,4 @@ Models for Individual Survival Functions
 
     two_step_algorithm
     sc_net
+    nn_ic_log
