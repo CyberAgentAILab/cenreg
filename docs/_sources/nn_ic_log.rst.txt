@@ -1,5 +1,5 @@
 NN-IC-Log Model for Interval-Censored Data
-==================================
+===========================================
 
 This section describes the NN-IC-Log model for interval-censored data analysis using the `cenreg` package.
 
