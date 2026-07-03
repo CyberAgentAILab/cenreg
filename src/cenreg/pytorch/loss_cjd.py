@@ -14,11 +14,16 @@ class NegativeLogLikelihood:
         observed_times: torch.Tensor,
         events: torch.Tensor,
     ) -> torch.Tensor:
-        assert len(pred.shape) == 2
-        assert len(observed_times.shape) == 1
-        assert len(events.shape) == 1
-        assert observed_times.max() < self.y_bins[-1], "Observed times exceed y_bins range."
-        assert observed_times.min() >= self.y_bins[0], "Observed times below y_bins range."
+        if len(pred.shape) != 2:
+            raise ValueError("pred must be of shape [batch_size, num_bins]")
+        if len(observed_times.shape) != 1:
+            raise ValueError("observed_times must be of shape [batch_size]")
+        if len(events.shape) != 1:
+            raise ValueError("events must be of shape [batch_size]")
+        if observed_times.max() >= self.y_bins[-1]:
+            raise ValueError("Observed times exceed y_bins range.")
+        if observed_times.min() < self.y_bins[0]:
+            raise ValueError("Observed times below y_bins range.")
 
         events = events.long().view(-1, 1)
         idx = torch.searchsorted(self.y_bins, observed_times.view(-1, 1), right=True)
@@ -39,11 +44,16 @@ class Brier:
         observed_times: torch.Tensor,
         events: torch.Tensor,
     ) -> torch.Tensor:
-        assert len(pred.shape) == 2
-        assert len(observed_times.shape) == 1
-        assert len(events.shape) == 1
-        assert observed_times.max() < self.y_bins[-1], "Observed times exceed y_bins range."
-        assert observed_times.min() >= self.y_bins[0], "Observed times below y_bins range."
+        if len(pred.shape) != 2:
+            raise ValueError("pred must be of shape [batch_size, num_bins]")
+        if len(observed_times.shape) != 1:
+            raise ValueError("observed_times must be of shape [batch_size]")
+        if len(events.shape) != 1:
+            raise ValueError("events must be of shape [batch_size]")
+        if observed_times.max() >= self.y_bins[-1]:
+            raise ValueError("Observed times exceed y_bins range.")
+        if observed_times.min() < self.y_bins[0]:
+            raise ValueError("Observed times below y_bins range.")
 
         events = events.long().view(-1, 1)
         idx = torch.searchsorted(self.y_bins, observed_times.view(-1, 1), right=True)

@@ -16,7 +16,8 @@ def _integral(jd_pred: np.ndarray) -> np.ndarray:
     F_pred: estimated CDF.
         np.ndarray of shape [batch_size, num_risks, num_bin_predictions+1]
     """
-    assert len(jd_pred.shape) == 3
+    if len(jd_pred.shape) != 3:
+        raise ValueError(f"Expected jd_pred to have 3 dimensions, but got {len(jd_pred.shape)} dimensions.")
 
     # w = boundaries[1:] - boundaries[:-1]
     Q = np.cumsum(jd_pred, axis=2)

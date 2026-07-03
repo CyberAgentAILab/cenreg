@@ -216,11 +216,13 @@ def brier(
     loss : Tensor of shape [batch_size]
     """
 
-    assert len(y.shape) == 1
+    if len(y.shape) != 1:
+        raise ValueError("y should be a 1D tensor")
 
     if y_bins is None:
-        y_bins = dist.boundaries
-    assert len(y_bins.shape) == 1
+        y_bins = dist.b
+    if len(y_bins.shape) != 1:
+        raise ValueError("y_bins should be a 1D tensor")
 
     idx = torch.searchsorted(y_bins, y.view(-1, 1), right=True)
     F_pred = dist.cdf(y_bins)
@@ -248,8 +250,10 @@ class Brier:
         pred: torch.Tensor,
         y: torch.Tensor,
     ) -> torch.Tensor:
-        assert len(pred.shape) == 2
-        assert len(y.shape) == 1
+        if len(pred.shape) != 2:
+            raise ValueError("pred must be of shape [batch_size, num_bins]")
+        if len(y.shape) != 1:
+            raise ValueError("y must be of shape [batch_size]")
 
         self.distribution.set_knot_values(pred, apply_cumsum=self.apply_cumsum)
         return brier(self.distribution, y, self.y_bins)
@@ -276,11 +280,13 @@ def ranked_probability_score(
     loss : Tensor of shape [batch_size]
     """
 
-    assert len(y.shape) == 1
+    if len(y.shape) != 1:
+        raise ValueError("y should be a 1D tensor")
 
     if y_bins is None:
-        y_bins = dist.boundaries
-    assert len(y_bins.shape) == 1
+        y_bins = dist.b
+    if len(y_bins.shape) != 1:
+        raise ValueError("y_bins should be a 1D tensor")
 
     F_pred = dist.cdf(y_bins[1:-1])
     idx = torch.searchsorted(y_bins, y.view(-1, 1), right=True) - 1
@@ -308,8 +314,10 @@ class RankedProbabilityScore:
         pred: torch.Tensor,
         y: torch.Tensor,
     ) -> torch.Tensor:
-        assert len(pred.shape) == 2
-        assert len(y.shape) == 1
+        if len(pred.shape) != 2:
+            raise ValueError("pred must be of shape [batch_size, num_bins]")
+        if len(y.shape) != 1:
+            raise ValueError("y must be of shape [batch_size]")
 
         self.distribution.set_knot_values(pred, apply_cumsum=self.apply_cumsum)
         return ranked_probability_score(self.distribution, y, self.y_bins)

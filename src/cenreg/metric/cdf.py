@@ -1,3 +1,5 @@
+import warnings
+
 import numpy as np
 
 from cenreg.model.nonparametric import kaplan_meier_estimator
@@ -271,8 +273,10 @@ def brier(
     loss : Array of shape [batch_size]
     """
 
-    assert len(y.shape) == 1
-    assert len(y_bins.shape) == 1
+    if len(y.shape) != 1:
+        raise ValueError("y must be of shape [batch_size]")
+    if len(y_bins.shape) != 1:
+        raise ValueError("y_bins must be of shape [num_bins+1]")
 
     F_pred = dist.cdf(y_bins)
     if len(F_pred.shape) == 1:
@@ -306,8 +310,10 @@ def ranked_probability_score(
     loss : Array of shape [batch_size]
     """
 
-    assert len(y.shape) == 1
-    assert len(y_bins.shape) == 1
+    if len(y.shape) != 1:
+        raise ValueError("y must be of shape [batch_size]")
+    if len(y_bins.shape) != 1:
+        raise ValueError("y_bins must be of shape [num_col]")
 
     F_pred = dist.cdf(y_bins[1:-1])
     y = y.reshape(-1, 1)
@@ -329,9 +335,15 @@ def nll_sc(
     Compute Negative Log-Likelihood based on Survival Copula (NLL-SC).
     """
 
-    assert len(observed_times.shape) == 1
-    assert len(events.shape) == 1
-    assert observed_times.shape[0] == events.shape[0]
+    if len(observed_times.shape) != 1:
+        raise ValueError("observed_times must be of shape [batch_size]")
+    if len(events.shape) != 1:
+        raise ValueError("events must be of shape [batch_size]")
+    if observed_times.shape[0] != events.shape[0]:
+        raise ValueError("observed_times and events must have the same length")
+    if not np.issubdtype(observed_times.dtype, np.floating):
+        warnings.warn("observed_times is not float, converting to float.", stacklevel=2)
+        observed_times = observed_times.astype(float)
 
     Sl_list = []
     Sr_list = []

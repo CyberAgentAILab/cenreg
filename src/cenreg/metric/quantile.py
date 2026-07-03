@@ -95,9 +95,12 @@ def ic_calibration(
         Value of IC-Cal.
     """
 
-    assert len(lb.shape) == 1
-    assert len(ub.shape) == 1
-    assert lb.shape[0] == ub.shape[0]
+    if len(lb.shape) != 1:
+        raise ValueError("lb must be of shape [batch_size]")
+    if len(ub.shape) != 1:
+        raise ValueError("ub must be of shape [batch_size]")
+    if lb.shape[0] != ub.shape[0]:
+        raise ValueError("lb and ub must have the same length")
 
     if p != 2.0:
         raise NotImplementedError("Only p=2 is implemented.")

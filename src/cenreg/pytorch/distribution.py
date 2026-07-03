@@ -404,7 +404,8 @@ def _linear_interpolation(kx: torch.Tensor, ky: torch.Tensor, x: torch.Tensor) -
 
     if kx.ndim == 1:
         if ky.ndim == 2:
-            assert kx.shape[0] == ky.shape[1]
+            if kx.shape[0] != ky.shape[1]:
+                raise ValueError("kx.shape[0] != ky.shape[1]")
 
     # compute idx and ratio
     if kx.ndim == 1:
